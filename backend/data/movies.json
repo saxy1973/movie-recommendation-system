@@ -1,0 +1,32 @@
+[
+  {
+    "Title": "Batman Begins",
+    "Genre": "Action, Crime, Drama",
+    "Director": "Christopher Nolan",
+    "Actors": "Christian Bale, Michael Caine"
+  },
+  {
+    "Title": "The Dark Knight",
+    "Genre": "Action, Crime, Drama",
+    "Director": "Christopher Nolan",
+    "Actors": "Christian Bale, Heath Ledger"
+  },
+  {
+    "Title": "The Dark Knight Rises",
+    "Genre": "Action, Thriller",
+    "Director": "Christopher Nolan",
+    "Actors": "Christian Bale, Tom Hardy"
+  },
+  {
+    "Title": "Inception",
+    "Genre": "Action, Sci-Fi, Thriller",
+    "Director": "Christopher Nolan",
+    "Actors": "Leonardo DiCaprio, Tom Hardy"
+  },
+  {
+    "Title": "Interstellar",
+    "Genre": "Adventure, Drama, Sci-Fi",
+    "Director": "Christopher Nolan",
+    "Actors": "Matthew McConaughey, Anne Hathaway"
+  }
+]

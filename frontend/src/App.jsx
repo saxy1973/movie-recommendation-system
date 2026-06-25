@@ -1,9 +1,7 @@
+import Dashboard from "./pages/Dashboard";
+
 function App() {
-  return (
-    <div>
-      <h1>Movie Recommendation System 🎬</h1>
-    </div>
-  );
+  return <Dashboard />;
 }
 
 export default App;

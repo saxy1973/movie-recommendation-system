@@ -1,15 +1,13 @@
+import Navbar from "../features/navbar";
 import Hero from "../features/hero";
-import Navbar from "../features/navbar/Navbar";
 
 const Dashboard = () => {
-
-    return(
-        <>
-            <Navbar />
-            <Hero />
-        </>
-    )
-
-}
+  return (
+    <>
+      <Navbar />
+      <Hero />
+    </>
+  );
+};
 
 export default Dashboard;

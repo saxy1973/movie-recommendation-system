@@ -5,7 +5,16 @@ const MovieCard = ({ movie }) => {
   const navigate = useNavigate();
 
   return (
-    <div className="movie-card">
+    <div
+      className="movie-card"
+      onClick={() => navigate(`/movie/${movie.imdbID}`)}
+    >
+      {/* Badge */}
+      <div className="movie-badge">
+        {movie.Type === "series" ? "TV SERIES" : "MOVIE"}
+      </div>
+
+      {/* Poster */}
       <img
         src={
           movie.Poster !== "N/A"
@@ -16,21 +25,13 @@ const MovieCard = ({ movie }) => {
         className="movie-poster"
       />
 
-      <div className="movie-info">
-        <h3>{movie.Title}</h3>
+      {/* Overlay */}
+      <div className="movie-overlay">
+        <h3 className="movie-title">{movie.Title}</h3>
 
-        <p>📅 {movie.Year}</p>
-
-        <span className="movie-type">
-          {movie.Type}
-        </span>
-
-        <button
-  className="details-btn"
-  onClick={() => navigate(`/movie/${movie.imdbID}`)}
->
-  View Details
-</button>
+        <p className="movie-subtitle">
+          {movie.Year} • {movie.Type}
+        </p>
       </div>
     </div>
   );

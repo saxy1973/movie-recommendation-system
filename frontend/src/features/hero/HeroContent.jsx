@@ -72,7 +72,7 @@ const HeroContent = () => {
         <div className="search-box">
           <input
             type="text"
-            placeholder="🔍 Search movies..."
+            placeholder=" Search movies..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
           />

@@ -41,19 +41,16 @@ const HeroContent = () => {
 
       {/* Heading */}
       <h1 className="hero-title">
-        Discover Your Next Favorite
-        <br />
-        Movie with
-        <br />
-        Smart Recommendations
+        Your Ultimate Movies 
+        <br/>
+        & Web Series 
+        <br/>Explorer
+   
       </h1>
 
       {/* Description */}
       <p className="hero-description">
-        From trending blockbusters to hidden gems,
-        discover movies based on your interests with
-        smart recommendations and comprehensive
-        movie details.
+        From trending blockbusters to hidden gems, explore movies and web series with smart recommendations, detailed information, and everything you need to discover your next favorite title.
       </p>
 
       {/* Buttons */}

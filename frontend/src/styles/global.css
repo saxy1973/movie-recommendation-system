@@ -1,0 +1,35 @@
+:root{
+
+  /* Colors */
+  --bg-color:#0d1117;
+  --card-bg:#181b25;
+  --primary:#ff4d6d;
+  --text:#ffffff;
+  --text-secondary:#bdbdbd;
+
+  /* Layout */
+  --container-width:1400px;
+
+--page-padding-x:50px;
+--page-padding-top:105px;
+--page-padding-bottom:50px;
+
+  /* Sections */
+  --section-gap:70px;
+
+  /* Radius */
+  --radius:18px;
+
+}
+/* ==========================
+   COMMON PAGE CONTAINER
+========================== */
+
+.page-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding:
+    var(--page-padding-top)
+    var(--page-padding-x)
+    var(--page-padding-bottom);
+}

@@ -12,6 +12,8 @@ import ReviewList from "../features/movie-details/ReviewList";
 
 import TheaterSection from "../features/movie-details/TheaterSection";
 
+import Loading from "../features/loading";
+
 const MovieDetails = () => {
   const { id } = useParams();
 
@@ -31,33 +33,20 @@ const MovieDetails = () => {
   }, [id]);
 
   if (!movie) {
-    return (
-      <div
-        style={{
-          background: "#0d1117",
-          color: "#fff",
-
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          fontSize: "28px",
-          fontWeight: "600",
-        }}
-      >
-        Loading Movie Details...
-      </div>
-    );
-  }
+  return (
+    <Loading text="Loading Movie Details..." />
+  );
+}
 
   return (
   <div
-    style={{
-      background: "#0d1117",
-      color: "#fff",
-      minHeight: "100vh",
-      padding: "120px 80px 60px",
-    }}
-  >
+  className="page-container"
+  style={{
+    background: "#0d1117",
+    color: "#fff",
+    minHeight: "100vh",
+  }}
+>
     {/* Movie Information */}
     <MovieInfo movie={movie} />
 

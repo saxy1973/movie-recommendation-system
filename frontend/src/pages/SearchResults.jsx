@@ -1,5 +1,6 @@
 import { useLocation } from "react-router-dom";
 import { MovieGrid } from "../features/movies";
+import "./SearchResults.css";
 
 const SearchResults = () => {
   const { state } = useLocation();
@@ -8,29 +9,21 @@ const SearchResults = () => {
   const query = state?.query || "";
 
   return (
-    <div
-      style={{
-        background: "#0d1117",
-        color: "white",
-        minHeight: "100vh",
-        padding: "120px 80px",
-      }}
-    >
-      <h1>Search Results</h1>
+    <section className="search-results-page">
 
-      <h3 style={{ margin: "20px 0 40px" }}>
-        Results for:{" "}
-        <span style={{ color: "#ff4d6d" }}>
-          {query}
-        </span>
-      </h3>
+      <div className="search-results-container">
 
-      {movies.length === 0 ? (
-        <p>No movies found.</p>
-      ) : (
-        <MovieGrid movies={movies} />
-      )}
-    </div>
+        {movies.length === 0 ? (
+          <p className="no-results">
+            No movies found.
+          </p>
+        ) : (
+          <MovieGrid movies={movies} />
+        )}
+
+      </div>
+
+    </section>
   );
 };
 

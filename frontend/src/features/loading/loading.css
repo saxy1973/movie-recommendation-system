@@ -1,0 +1,14 @@
+.loading-container {
+    min-height: calc(100vh - 90px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #0d1117;
+    color: #fff;
+}
+
+.loading-container h2 {
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}

@@ -9,3 +9,8 @@ export const getMovieDetails = async (id) => {
   const response = await api.get(`/movie/${id}`);
   return response.data;
 };
+
+export const getTopRatedMovies = async () => {
+  const response = await api.get("/top-rated");
+  return response.data;
+};

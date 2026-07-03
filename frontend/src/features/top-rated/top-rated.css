@@ -1,0 +1,27 @@
+.top-rated{
+    padding:80px;
+}
+
+.section-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:40px;
+}
+
+.section-header h2{
+    color:#fff;
+    font-size:45px;
+}
+
+.view-all-btn{
+    background:none;
+    border:none;
+    color:#ff4d6d;
+    font-size:22px;
+    cursor:pointer;
+}
+
+.view-all-btn:hover{
+    color:#fff;
+}

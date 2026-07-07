@@ -4,8 +4,8 @@
 
 .movie-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 32px;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 24px;
     align-items: start;
 }
 
@@ -45,7 +45,7 @@
 
     width: 100%;
 
-    height: 370px;
+    height: 310px;
 
     object-fit: cover;
 

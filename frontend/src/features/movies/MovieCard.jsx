@@ -4,33 +4,38 @@ import "./movie.css";
 const MovieCard = ({ movie }) => {
   const navigate = useNavigate();
 
+  // Support both OMDb and TMDB
+  const id = movie.imdbID || movie.id;
+  const title = movie.Title || movie.title;
+  const poster = movie.Poster || movie.poster;
+  const year = movie.Year || movie.year || movie.releaseDate;
+  const type = movie.Type || "Movie";
+
   return (
     <div
       className="movie-card"
-      onClick={() => navigate(`/movie/${movie.imdbID}`)}
+      onClick={() => navigate(`/movie/${id}`)}
     >
-      {/* Badge */}
       <div className="movie-badge">
-        {movie.Type === "series" ? "TV SERIES" : "MOVIE"}
+        {type === "series" ? "TV SERIES" : "MOVIE"}
       </div>
 
-      {/* Poster */}
       <img
         src={
-          movie.Poster !== "N/A"
-            ? movie.Poster
+          poster && poster !== "N/A"
+            ? poster
             : "https://placehold.co/300x450?text=No+Image"
         }
-        alt={movie.Title}
+        alt={title}
         className="movie-poster"
       />
 
-      {/* Overlay */}
       <div className="movie-overlay">
-        <h3 className="movie-title">{movie.Title}</h3>
+        <h3 className="movie-title">{title}</h3>
 
         <p className="movie-subtitle">
-          {movie.Year} • {movie.Type}
+          {year}
+          {movie.rating && ` • ⭐ ${movie.rating.toFixed(1)}`}
         </p>
       </div>
     </div>

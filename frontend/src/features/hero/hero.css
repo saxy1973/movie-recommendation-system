@@ -23,19 +23,27 @@ body {
   background: #0d1117;
   color: #fff;
   overflow: hidden;
-  padding: 95px 60px 50px;
+  padding: 95px 60px 0px;
   
 }
-
-.hero-container {
-  width: 100%;
-  max-width: 1400px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 60% 40%;
-  gap: 40px;
-  align-items: center;
+.hero-content{
+    position:relative;
+    z-index:2;
+    width:42%;
+    padding-left:10px;
 }
+.hero-container{
+    position:relative;
+    width:100%;
+    max-width:1700px;
+    height:620px;
+
+    margin:auto;
+
+    overflow:hidden;
+    border-radius:30px;
+}
+
 
 /* =========================
    LEFT SIDE
@@ -63,21 +71,18 @@ body {
     display: flex;
     align-items: center;
     gap: 10px;
-    margin-bottom: 25px;
+    margin-bottom: 15px;
 }
 
 .tag {
     display: flex;
     align-items: center;
     gap: 6px;
-
     padding: 8px 14px;
-
     background: rgba(255,255,255,.05);
     border: 1px solid rgba(255,255,255,.08);
     border-radius: 50px;
-
-    font-size: 12px;
+    font-size: 14px;
     white-space: nowrap;
 
     transition: .3s;
@@ -122,7 +127,7 @@ body {
 /* TITLE */
 
 .hero-title {
-  font-size: 48px;
+  font-size: 46px;
   line-height: 1.2;
   margin-bottom: 15px;
   max-width: 650px;
@@ -133,9 +138,61 @@ body {
 .hero-description {
   color: #bfbfbf;
   line-height: 1.8;
-  font-size: 17px;
+  font-size: 16px;
   max-width: 580px;
   margin-bottom: 20px;
+}
+
+/* backgroounf api */
+.hero-banner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.featured-movie{
+    position:absolute;
+    top:0;
+    right:-120px;   /* push image slightly outside */
+    bottom:0;
+    left:22%;       /* start image earlier */
+    background-size:115%;
+    background-position:right center;
+    background-repeat:no-repeat;
+    mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 18%,
+    black 100%
+);
+
+-webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 18%,
+    black 100%
+);
+    z-index:0;
+}
+.featured-poster {
+  width: 100%;
+  height: 520px;
+  object-fit: cover;
+  display: block;
+}
+
+.featured-content {
+  padding: 18px;
+}
+
+.featured-content h2 {
+  margin-bottom: 10px;
+  font-size: 24px;
+}
+
+.rating {
+  color: gold;
+  font-size: 18px;
 }
 
 /* BUTTONS */
@@ -250,54 +307,6 @@ body {
     }
 }
 
-/* =========================
-   RIGHT SIDE
-========================= */
-
-.hero-banner {
-  display: flex;
-  justify-content: center;
-  animation:rightFade 1s ease forwards;
-
-}
-
-@keyframes rightFade{
-    from{
-        opacity:0;
-        transform:translateX(70px);
-    }
-    to{
-        opacity:1;
-        transform:translateX(0);
-    }
-}
-
-
-.featured-movie {
-  width: 360px;
-  height: 190px;
-  border-radius: 20px;
-  background: linear-gradient(135deg,#232946,#181b25);
-  border: 1px solid rgba(255,255,255,.08);
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  text-align: center;
-  padding: 30px;
-}
-
-.featured-movie h2 {
-  margin-bottom: 15px;
-  font-size: 32px;
-}
-
-.featured-movie p {
-  color: #bfbfbf;
-  line-height: 1.7;
-}
 
 /* =========================
    RESPONSIVE

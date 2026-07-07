@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 
 import Hero from "../features/hero";
 import TopRated from "../features/top-rated/TopRatedMovies";
+import Trending from "../features/trending/Trending";
+import ComingSoon from "../features/comingsoon/ComingSoon";
 
 import { getTopRatedMovies } from "../services/movieService";
 
@@ -27,6 +29,10 @@ return (
   <>
     <Hero />
     <TopRated movies={topRatedMovies} />
+
+<Trending />
+
+<ComingSoon />
   </>
 );
 };

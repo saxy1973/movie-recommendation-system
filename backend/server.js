@@ -138,30 +138,34 @@ app.get("/api/movie/:id", async (req, res) => {
     });
   }
 });
-
 app.get("/api/top-rated", async (req, res) => {
   try {
-    const response = await fetch(
-      `https://api.themoviedb.org/3/movie/top_rated?api_key=${tmdbApiKey}&language=en-US&page=1`
+    const response = await axios.get(
+      "https://api.themoviedb.org/3/movie/top_rated",
+      {
+        params: {
+          api_key: tmdbApiKey,
+          language: "en-US",
+          page: 1,
+        },
+        timeout: 10000, // 10 seconds
+      }
     );
 
-    if (!response.ok) {
-      return res.status(response.status).json({
-        success: false,
-        message: "TMDb request failed",
-      });
-    }
-
-    const data = await response.json();
-
-    const movies = data.results.map(normalizeMovie);
+    const movies = response.data.results.map(normalizeMovie);
 
     res.json({
       success: true,
       movies,
     });
+
   } catch (error) {
-    console.error(error);
+    console.error("========== TOP RATED ERROR ==========");
+    console.error("Message:", error.message);
+    console.error("Code:", error.code);
+    console.error("Status:", error.response?.status);
+    console.error("Data:", error.response?.data);
+    console.error("=====================================");
 
     res.status(500).json({
       success: false,
@@ -169,55 +173,114 @@ app.get("/api/top-rated", async (req, res) => {
     });
   }
 });
-  const recommendations = movies
-    .filter(movie => movie.Title !== selectedMovie.Title)
-    .map(movie => {
-      let score = 0;
 
-      // Genre Match
-      const selectedGenres = selectedMovie.Genre.split(", ");
-      const movieGenres = movie.Genre.split(", ");
-
-      if (selectedGenres.some(g => movieGenres.includes(g))) {
-        score += 3;
+app.get("/api/featured", async (req, res) => {
+  try {
+    const response = await axios.get(
+      "https://api.themoviedb.org/3/trending/movie/day",
+      {
+        params: {
+          api_key: tmdbApiKey,
+        },
       }
+    );
 
-      // Director Match
-      if (movie.Director === selectedMovie.Director) {
-        score += 2;
+    const movie = response.data.results.find(
+      (m) => m.backdrop_path && m.poster_path
+    );
+
+    res.json({
+      success: true,
+      movie: {
+        id: movie.id,
+        title: movie.title,
+        overview: movie.overview,
+        rating: movie.vote_average,
+        poster: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
+        backdrop: `https://image.tmdb.org/t/p/original${movie.backdrop_path}`,
+      },
+    });
+
+  } catch (error) {
+    console.log(error);
+
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+});
+
+app.get("/api/trending", async (req, res) => {
+  try {
+    const response = await axios.get(
+      "https://api.themoviedb.org/3/trending/movie/day",
+      {
+        params: {
+          api_key: tmdbApiKey,
+        },
       }
+    );
 
-      // Actor Match
-      const selectedActors = selectedMovie.Actors.split(", ");
-      const movieActors = movie.Actors.split(", ");
+    const movies = response.data.results.map((movie) => ({
+      id: movie.id,
+      title: movie.title,
+      year: movie.release_date?.split("-")[0],
+      rating: movie.vote_average,
+      poster: movie.poster_path
+        ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+        : null,
+    }));
 
-      if (selectedActors.some(a => movieActors.includes(a))) {
-        score += 1;
+    res.json({
+      success: true,
+      movies,
+    });
+
+  } catch (error) {
+    console.log("Trending Error:", error.response?.data || error.message);
+
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+});
+
+app.get("/api/coming-soon", async (req, res) => {
+  try {
+    const response = await axios.get(
+      "https://api.themoviedb.org/3/movie/upcoming",
+      {
+        params: {
+          api_key: tmdbApiKey,
+        },
       }
+    );
 
-      // Title Match
-      const selectedWords = selectedMovie.Title.toLowerCase().split(" ");
-      const movieWords = movie.Title.toLowerCase().split(" ");
+    const movies = response.data.results.map((movie) => ({
+      id: movie.id,
+      title: movie.title,
+      year: movie.release_date?.split("-")[0],
+      rating: movie.vote_average,
+      poster: movie.poster_path
+        ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+        : "https://placehold.co/300x450?text=No+Image",
+    }));
 
-      if (selectedWords.some(word => movieWords.includes(word))) {
-        score += 1;
-      }
+    res.json({
+      success: true,
+      movies,
+    });
+  } catch (error) {
+    console.log("Coming Soon Error:", error.message);
 
-      return {
-        ...movie,
-        score
-      };
-    })
-    .sort((a, b) => b.score - a.score);
-
-  res.json({
-    selectedMovie,
-    recommendations
-  });
-
-
-
-
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+});
 
 const PORT = 5000;
 

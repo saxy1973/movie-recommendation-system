@@ -3,21 +3,17 @@ import "./top-rated.css";
 
 const TopRated = ({ movies }) => {
   return (
-    <section className="top-rated">
-
-      <div className="section-header">
-        <h2>Top Rated Movies</h2>
-      </div>
+    <section className="movie-section">
+      <h2>Top Rated Movies</h2>
 
       <div className="movie-grid">
-        {movies.slice(0, 6).map((movie) => (
+        {movies.map((movie) => (
           <MovieCard
-            key={movie.imdbID}
+            key={movie.id}
             movie={movie}
           />
         ))}
       </div>
-
     </section>
   );
 };

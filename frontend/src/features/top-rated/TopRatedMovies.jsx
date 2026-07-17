@@ -3,7 +3,7 @@ import "./top-rated.css";
 
 const TopRated = ({ movies }) => {
   return (
-    <section className="movie-section">
+    <section id="top-rated" className="top-rated">
       <h2>Top Rated Movies</h2>
 
       <div className="movie-grid">

@@ -46,6 +46,16 @@
     color:#ff4d6d;
 }
 
+.nav-links li a {
+    color: white;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.nav-links li a:hover {
+    color: #ff4d6d;
+}
+
 .nav-right{
     display:flex;
     align-items:center;

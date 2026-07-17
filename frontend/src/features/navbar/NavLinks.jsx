@@ -1,10 +1,75 @@
+import { useNavigate, useLocation } from "react-router-dom";
+
 const NavLinks = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const goToHome = () => {
+    if (location.pathname === "/") {
+      document.getElementById("home")?.scrollIntoView({
+        behavior: "smooth",
+      });
+    } else {
+      navigate("/", {
+  state: {
+    scrollTo: "home",
+  },
+});
+    }
+  };
+
+  const goToTopRated = () => {
+    if (location.pathname === "/") {
+      document.getElementById("top-rated")?.scrollIntoView({
+        behavior: "smooth",
+      });
+    } else {
+     navigate("/", {
+  state: {
+    scrollTo: "top-rated",
+  },
+});
+    }
+  };
+
+  const goToComingSoon = () => {
+  if (location.pathname === "/") {
+    document.getElementById("coming-soon")?.scrollIntoView({
+      behavior: "smooth",
+    });
+  } else {
+    navigate("/", {
+  state: {
+    scrollTo: "coming-soon",
+  },
+});
+  }
+};
+
+const goToTrending = () => {
+  if (location.pathname === "/") {
+    document.getElementById("trending")?.scrollIntoView({
+      behavior: "smooth",
+    });
+  } else {
+    navigate("/", {
+      state: {
+        scrollTo: "trending",
+      },
+    });
+  }
+};
+
   return (
     <ul className="nav-links">
-      <li>Home</li>
-      <li>Top-Rated</li>
-      <li>Coming Soon</li>
-      <li>Trending</li>
+      <li onClick={goToHome}>Home</li>
+
+      <li onClick={goToTopRated}>Top Rated</li>
+
+      <li onClick={goToComingSoon}>Coming Soon</li>
+
+      <li onClick={goToTrending}>Trending</li>
+      
       <li>Theaters</li>
       <li>Contact Us</li>
     </ul>

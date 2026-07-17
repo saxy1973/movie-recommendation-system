@@ -20,19 +20,26 @@ const buildPosterUrl = (posterPath) =>
   posterPath ? `https://image.tmdb.org/t/p/w500${posterPath}` : fallbackPoster;
 
 const normalizeMovie = (item) => {
+  console.log("TMDB Item:", item);
+
   const title = item.title || item.name || "Untitled";
   const year =
     (item.release_date || item.first_air_date || "").split("-")[0] || "N/A";
   const type = item.media_type === "tv" ? "series" : "movie";
 
-  return {
+  const movie = {
     imdbID: String(item.id),
     Title: title,
     Year: year,
     Poster: buildPosterUrl(item.poster_path),
     Type: type,
-    Overview: item.overview || "No overview available"
+    Rating: item.vote_average,
+    Overview: item.overview || "No overview available",
   };
+
+  console.log("Normalized:", movie);
+
+  return movie;
 };
 
 app.get("/", (req, res) => {
@@ -138,6 +145,7 @@ app.get("/api/movie/:id", async (req, res) => {
     });
   }
 });
+
 app.get("/api/top-rated", async (req, res) => {
   try {
     const response = await axios.get(
@@ -281,6 +289,10 @@ app.get("/api/coming-soon", async (req, res) => {
     });
   }
 });
+
+const theaterRoutes = require("./routes/theaters");
+
+app.use("/api/theaters", theaterRoutes);
 
 const PORT = 5000;
 

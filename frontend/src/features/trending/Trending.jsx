@@ -23,7 +23,7 @@ const Trending = () => {
   };
 
   return (
-    <section className="movie-section">
+    <section id="trending"  className="movie-section">
       <h2>Trending Movies</h2>
 
       <div className="movie-grid">

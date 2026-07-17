@@ -3,8 +3,12 @@ import { Routes, Route } from "react-router-dom";
 import Layout from "./layout/Layout";
 
 import Dashboard from "./pages/Dashboard";
+
 import SearchResults from "./pages/SearchResults";
+
 import MovieDetails from "./pages/MovieDetails";
+
+import Theaters from "./features/theaters";
 
 function App() {
   return (
@@ -24,6 +28,10 @@ function App() {
           path="/movie/:id"
           element={<MovieDetails />}
         />
+        <Route
+  path="/theaters"
+  element={<Theaters />}
+/>
       </Route>
     </Routes>
   );

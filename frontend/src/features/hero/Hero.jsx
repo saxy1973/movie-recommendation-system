@@ -4,7 +4,7 @@ import HeroBanner from "./HeroBanner";
 
 const Hero = () => {
   return (
-    <section className="hero">
+    <section id="home" className="hero">
       <div className="hero-container">
 
         <HeroContent />

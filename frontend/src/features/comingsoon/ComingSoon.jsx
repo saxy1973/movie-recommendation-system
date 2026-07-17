@@ -24,7 +24,7 @@ const loadMovies = async () => {
 };
 
   return (
-    <section className="movie-section">
+    <section id="coming-soon" className="movie-section">
       <h2>Coming Soon</h2>
 
       <div className="movie-grid">

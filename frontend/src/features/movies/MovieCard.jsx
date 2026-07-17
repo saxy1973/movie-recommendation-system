@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import "./movie.css";
 
 const MovieCard = ({ movie }) => {
+  console.log(movie);
   const navigate = useNavigate();
 
   // Support both OMDb and TMDB
@@ -10,7 +11,7 @@ const MovieCard = ({ movie }) => {
   const poster = movie.Poster || movie.poster;
   const year = movie.Year || movie.year || movie.releaseDate;
   const type = movie.Type || "Movie";
-
+  const rating = movie.rating || movie.Rating;
   return (
     <div
       className="movie-card"
@@ -33,10 +34,10 @@ const MovieCard = ({ movie }) => {
       <div className="movie-overlay">
         <h3 className="movie-title">{title}</h3>
 
-        <p className="movie-subtitle">
-          {year}
-          {movie.rating && ` • ⭐ ${movie.rating.toFixed(1)}`}
-        </p>
+       <p className="movie-subtitle">
+  {year}
+  {rating ? ` • ⭐ ${Number(rating).toFixed(1)}` : ""}
+</p>
       </div>
     </div>
   );

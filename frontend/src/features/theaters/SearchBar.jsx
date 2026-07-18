@@ -1,12 +1,15 @@
+import { Search } from "lucide-react";
 const SearchBar = () => {
   return (
     <div className="search-container">
-      <input
-        type="text"
-        placeholder="Search location..."
-        className="search-input"
-      />
-    </div>
+  <Search />
+
+  <input
+    type="text"
+    placeholder="Search City"
+    className="search-input"
+  />
+</div>
   );
 };
 

@@ -3,141 +3,150 @@ const axios = require("axios");
 
 const router = express.Router();
 
+const API_KEY = process.env.GEOAPIFY_API_KEY;
+const BASE_URL = "https://api.geoapify.com/v2/places";
+
+// ============================
+// Nearby Theaters
+// GET /api/theaters/nearby?lat=28.6139&lon=77.2090
+// ============================
 router.get("/nearby", async (req, res) => {
-  try {
     const { lat, lon } = req.query;
 
     if (!lat || !lon) {
-      return res.status(400).json({
-        success: false,
-        message: "Latitude and Longitude are required",
-      });
+        return res.status(400).json({
+            success: false,
+            message: "Latitude and Longitude are required."
+        });
     }
 
-    const query = `
-      [out:json];
-      (
-        node["amenity"="cinema"](around:5000,${lat},${lon});
-        way["amenity"="cinema"](around:5000,${lat},${lon});
-        relation["amenity"="cinema"](around:5000,${lat},${lon});
-      );
-      out center;
-    `;
+    try {
+        const response = await axios.get(BASE_URL, {
+            params: {
+                categories: "entertainment.cinema",
+                filter: `circle:${lon},${lat},5000`,
+                bias: `proximity:${lon},${lat}`,
+                limit: 20,
+                apiKey: API_KEY
+            }
+        });
 
-    const response = await axios.post(
-  "https://overpass-api.de/api/interpreter",
-  `data=${encodeURIComponent(query)}`,
-  {
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
-      "Accept": "application/json",
-      "User-Agent": "MovieRecommendationSystem/1.0"
-    },
-    timeout: 15000
-  }
-);
+        const theaters = response.data.features.map(place => ({
+            id: place.properties.place_id,
+            name: place.properties.name || "Unknown Theater",
+            address: place.properties.formatted,
+            latitude: place.properties.lat,
+            longitude: place.properties.lon
+        }));
 
-const theaters = response.data.elements
-  .filter((item) => item.tags?.abandoned !== "yes")
-  .map((item) => ({
-    id: item.id,
-    name:
-      item.tags?.name ||
-      item.tags?.["name:en"] ||
-      "Unknown Theater",
+        res.json({
+            success: true,
+            count: theaters.length,
+            theaters
+        });
 
-    latitude: item.lat || item.center?.lat,
-    longitude: item.lon || item.center?.lon,
+    } catch (error) {
+        console.error(error.response?.data || error.message);
 
-    brand: item.tags?.brand || "",
-    city: item.tags?.["addr:city"] || "",
-    postcode: item.tags?.["addr:postcode"] || "",
-
-    wheelchair: item.tags?.wheelchair || "unknown",
-
-    type: item.type,
-
-    mapUrl: `https://www.openstreetmap.org/?mlat=${
-  item.lat || item.center?.lat
-}&mlon=${
-  item.lon || item.center?.lon
-}#map=18/${
-  item.lat || item.center?.lat
-}/${
-  item.lon || item.center?.lon
-}`,
-  }));
-
-res.json({
-  success: true,
-  count: theaters.length,
-  theaters,
+        res.status(500).json({
+            success: false,
+            message: "Failed to fetch nearby theaters."
+        });
+    }
 });
 
-  } catch (error) {
-  console.log("========== OVERPASS ERROR ==========");
-  console.log("Message:", error.message);
-  console.log("Code:", error.code);
-  console.log("Status:", error.response?.status);
-  console.log("Data:", error.response?.data);
-  console.log("===================================");
 
-  res.status(500).json({
-    success: false,
-    message: error.message,
-  });
+// ============================
+// Search Theaters By City
+// GET /api/theaters/city?city=Mumbai
+// ============================
+router.get("/city", async (req, res) => {
+    const { city } = req.query;
+
+    if (!city) {
+        return res.status(400).json({
+            success: false,
+            message: "City is required."
+        });
+    }
+
+    try {
+
+        // STEP 1: Get city coordinates
+        const geoResponse = await axios.get(
+            "https://api.geoapify.com/v1/geocode/search",
+            {
+                params: {
+                    text: city,
+                    apiKey: API_KEY
+                }
+            }
+        );
+
+        if (geoResponse.data.features.length === 0) {
+            return res.status(404).json({
+                success: false,
+                message: "City not found"
+            });
+        }
+
+        const { lat, lon } = geoResponse.data.features[0].properties;
+
+        console.log("Lat:", lat);
+        console.log("Lon:", lon);
+
+        // STEP 2: Search theaters around the city
+      const theaterResponse = await axios.get(BASE_URL, {
+    params: {
+        categories: "entertainment.cinema",
+        filter: `circle:${lon},${lat},30000`,
+        bias: `proximity:${lon},${lat}`,
+        limit: 50,
+        apiKey: API_KEY
+    }
+});
+console.log("Status:", theaterResponse.status);
+console.log("Features:", theaterResponse.data.features?.length);
+
+console.log(theaterResponse.data);
+
+console.log("Geoapify Response:");
+console.log(JSON.stringify(theaterResponse.data, null, 2));
+
+if (!theaterResponse.data.features || !Array.isArray(theaterResponse.data.features)) {
+    return res.status(500).json({
+        success: false,
+        message: "Invalid response from Geoapify",
+        data: theaterResponse.data
+    });
+}
+
+const theaters = theaterResponse.data.features.map(place => ({
+    id: place.properties.place_id || "",
+    name: place.properties.name || "Unknown Theater",
+    address: place.properties.formatted || "",
+    latitude: place.properties.lat,
+    longitude: place.properties.lon
+}));
+
+        res.json({
+            success: true,
+            city,
+            latitude: lat,
+            longitude: lon,
+            count: theaters.length,
+            theaters
+        });
+
+    } catch (error) {
+    console.error(error);
+
+    res.status(500).json({
+        success: false,
+        message: error.message,
+        stack: error.stack
+    });
 }
 });
 
 module.exports = router;
-
-router.get("/city", async (req, res) => {
-  try {
-    const { city } = req.query;
-
-    if (!city) {
-      return res.status(400).json({
-        success: false,
-        message: "City is required",
-      });
-    }
-
-    const response = await axios.get(
-      "https://nominatim.openstreetmap.org/search",
-      {
-        params: {
-          q: city,
-          format: "json",
-          limit: 1,
-        },
-        headers: {
-          "User-Agent": "MovieRecommendationSystem/1.0",
-        },
-      }
-    );
-
-    if (response.data.length === 0) {
-      return res.status(404).json({
-        success: false,
-        message: "City not found",
-      });
-    }
-
-    const place = response.data[0];
-
-    res.json({
-      success: true,
-      city: place.display_name,
-      latitude: place.lat,
-      longitude: place.lon,
-    });
-
-  } catch (error) {
-    console.log(error.message);
-
-    res.status(500).json({
-      success: false,
-      message: error.message,
-    });
-  }
-});

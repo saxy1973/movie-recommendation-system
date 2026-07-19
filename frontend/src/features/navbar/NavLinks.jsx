@@ -59,6 +59,9 @@ const goToTrending = () => {
     });
   }
 };
+const goToTheaters = () => {
+  navigate("/theaters");
+};
 
   return (
     <ul className="nav-links">
@@ -70,7 +73,8 @@ const goToTrending = () => {
 
       <li onClick={goToTrending}>Trending</li>
       
-      <li>Theaters</li>
+      <li onClick={goToTheaters}>Theaters</li>
+      
       <li>Contact Us</li>
     </ul>
   );

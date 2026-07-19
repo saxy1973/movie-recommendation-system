@@ -82,7 +82,7 @@ body {
     background: rgba(255,255,255,.05);
     border: 1px solid rgba(255,255,255,.08);
     border-radius: 50px;
-    font-size: 14px;
+    font-size: 12px;
     white-space: nowrap;
 
     transition: .3s;
@@ -127,7 +127,7 @@ body {
 /* TITLE */
 
 .hero-title {
-  font-size: 46px;
+  font-size: 43px;
   line-height: 1.2;
   margin-bottom: 15px;
   max-width: 650px;

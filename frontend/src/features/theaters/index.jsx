@@ -4,7 +4,13 @@ import SearchBar from "./SearchBar";
 import RegionCard from "./RegionCard";
 import regions from "./data";
 
+import { useState } from "react";
+import { getNearbyTheaters, getCityTheaters } from "../../services/theaterService";
+
 const Theaters = () => {
+  const [theaters, setTheaters] = useState([]);
+const [loading, setLoading] = useState(false);
+const [error, setError] = useState("");
   return (
     <main className="theaters-page">
 
@@ -32,7 +38,11 @@ location to explore theaters instantly.
 
 <div className="search-card">
 
-    <CurrentLocation />
+    <CurrentLocation
+  setTheaters={setTheaters}
+  setLoading={setLoading}
+  setError={setError}
+/>
 
     <div className="divider">
         <span>OR</span>
@@ -74,5 +84,6 @@ location to explore theaters instantly.
     </main>
   );
 };
+
 
 export default Theaters;

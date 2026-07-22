@@ -24,13 +24,14 @@ router.get("/nearby", async (req, res) => {
         const response = await axios.get(BASE_URL, {
             params: {
                 categories: "entertainment.cinema",
-                filter: `circle:${lon},${lat},5000`,
+                filter: `circle:${lon},${lat},30000`,
                 bias: `proximity:${lon},${lat}`,
                 limit: 20,
                 apiKey: API_KEY
             }
         });
-
+        console.log("Geoapify raw response:");
+console.log(response.data);
         const theaters = response.data.features.map(place => ({
             id: place.properties.place_id,
             name: place.properties.name || "Unknown Theater",

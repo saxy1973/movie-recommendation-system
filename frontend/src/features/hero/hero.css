@@ -84,6 +84,7 @@ body {
     border-radius: 50px;
     font-size: 12px;
     white-space: nowrap;
+    margin: 10px 0 0 0;
 
     transition: .3s;
     opacity:0;
@@ -127,7 +128,7 @@ body {
 /* TITLE */
 
 .hero-title {
-  font-size: 43px;
+  font-size: 40px;
   line-height: 1.2;
   margin-bottom: 15px;
   max-width: 650px;
@@ -138,7 +139,7 @@ body {
 .hero-description {
   color: #bfbfbf;
   line-height: 1.8;
-  font-size: 16px;
+  font-size: 4px;
   max-width: 580px;
   margin-bottom: 20px;
 }

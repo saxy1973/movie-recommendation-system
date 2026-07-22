@@ -5,6 +5,7 @@ const CurrentLocation = ({
   setTheaters,
   setLoading,
   setError,
+  setShowResults,
 }) => {
 
 const handleCurrentLocation = () => {
@@ -20,10 +21,13 @@ const handleCurrentLocation = () => {
     async (position) => {
       try {
         const { latitude, longitude } = position.coords;
+        console.log(latitude, longitude);
 
         const data = await getNearbyTheaters(latitude, longitude);
+        console.log("API Response:", data);
 
-        setTheaters(data);
+        setTheaters(data.theaters);
+        setShowResults(true);
       } catch (err) {
         setError("Failed to fetch nearby theaters.");
       } finally {

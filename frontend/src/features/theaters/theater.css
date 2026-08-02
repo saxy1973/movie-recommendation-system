@@ -3,12 +3,10 @@
 =========================== */
 
 .theaters-page{
-     height: calc(100vh - 0px);
-    overflow: hidden;
+    min-height: 100vh;
     background:#0b0f19;
     padding:25px 0 50px;
 }
-
 .theaters-container{
     width:90%;
     max-width:1400px;
@@ -329,4 +327,241 @@ rgba(8,10,18,.12) 100%
 .cities-panel{
     width: 440px;
     margin-left: auto;
+}
+
+/* ===========================
+   THEATER GRID
+=========================== */
+
+.theater-grid{
+    display:grid;
+    grid-template-columns:repeat(4,250px);
+    justify-content:center;
+    gap:24px;
+    margin-top:35px;
+}
+
+
+/* ===========================
+   THEATER CARD
+=========================== */
+
+.theater-card{
+
+    position:relative;
+
+      width:250px;
+    height:280px;
+
+    min-height:300px;
+box-sizing:border-box;
+
+
+    overflow:hidden;
+
+    border-radius:18px;
+
+    background:
+        radial-gradient(circle at top left,
+            rgba(255,77,109,.20),
+            transparent 45%),
+
+        radial-gradient(circle at bottom right,
+            rgba(124,58,237,.18),
+            transparent 45%),
+
+        linear-gradient(
+            160deg,
+            #252b39 0%,
+            #1c2230 40%,
+            #131823 100%
+        );
+
+    border:1px solid rgba(255,255,255,.06);
+
+    box-shadow:
+        0 15px 35px rgba(0,0,0,.45);
+
+    padding:18px;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+
+    transition:.35s;
+}
+
+.theater-card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:
+        0 25px 50px rgba(0,0,0,.55),
+        0 0 40px rgba(255,77,109,.18);
+
+    border-color:rgba(255,77,109,.4);
+}
+
+.theater-card::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:180px;
+    height:180px;
+
+    right:-70px;
+    top:-70px;
+
+    background:#ff4d6d;
+
+    opacity:.12;
+
+    filter:blur(70px);
+
+    border-radius:50%;
+
+    pointer-events:none;
+}
+
+.theater-card::before{
+
+    content:"";
+
+    position:absolute;
+    left:0;
+    top:0;
+
+    width:100%;
+    height:3px;
+
+    background:linear-gradient(
+        90deg,
+        #ff4d6d,
+        #ff7b54,
+        #7c3aed
+    );
+}
+
+
+/* ===========================
+   CONTENT
+=========================== */
+
+.theater-content{
+    display:flex;
+    flex-direction:column;
+    height:100%;
+}
+
+.theater-content h3{
+
+    color:#ffffff;
+
+    font-size:18px;
+    font-weight:700;
+
+    line-height:1.3;
+
+    margin-bottom:12px;
+}
+
+
+/* ===========================
+   ADDRESS
+=========================== */
+.theater-address{
+    display:flex;
+    align-items:flex-start;
+    gap:8px;
+
+    color:#b7c0d2;
+    font-size:13px;
+    line-height:1.5;
+
+    margin-bottom:14px;
+
+    overflow:hidden;
+}
+
+.theater-address svg{
+    color:#ff4d6d;
+    min-width:15px;
+    margin-top:2px;
+    flex-shrink:0;
+}
+.theater-address span{
+    flex:1;
+    white-space:normal;
+    word-break:break-word;
+}
+
+/* ===========================
+   DISTANCE
+=========================== */
+
+.theater-distance{
+
+    color:#ffffff;
+
+    font-size:15px;
+    font-weight:600;
+
+    margin-bottom:18px;
+}
+
+
+/* ===========================
+   BUTTON
+=========================== */
+
+.direction-btn{
+
+    width:100%;
+    height:46px;
+
+    border:none;
+    outline:none;
+
+    border-radius:12px;
+
+    background:linear-gradient(
+        135deg,
+        #ff4d6d,
+        #ff2d55
+    );
+
+    color:#fff;
+
+    font-size:15px;
+    font-weight:600;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:8px;
+
+    cursor:pointer;
+
+    transition:.3s ease;
+}
+
+.direction-btn svg{
+    width:17px;
+    height:17px;
+}
+
+.direction-btn:hover{
+
+    transform:translateY(-2px);
+
+    background:linear-gradient(
+        135deg,
+        #ff6283,
+        #ff3b63
+    );
+
+    box-shadow:
+        0 10px 25px rgba(255,77,109,.35);
 }

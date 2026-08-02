@@ -2,8 +2,10 @@ import "./theater.css";
 
 const RegionCard = ({ city, image, onClick }) => {
   return (
-    <div className="region-card" onClick={onClick}>
-
+    <div
+      className="region-card"
+      onClick={() => onClick(city)}
+    >
       <img
         src={image}
         alt={city}
@@ -15,7 +17,6 @@ const RegionCard = ({ city, image, onClick }) => {
       <div className="region-content">
         <h4>{city}</h4>
       </div>
-
     </div>
   );
 };

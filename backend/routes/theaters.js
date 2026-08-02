@@ -6,6 +6,24 @@ const router = express.Router();
 const API_KEY = process.env.GEOAPIFY_API_KEY;
 const BASE_URL = "https://api.geoapify.com/v2/places";
 
+function calculateDistance(lat1, lon1, lat2, lon2) {
+    const R = 6371; // Earth radius (km)
+
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+
+    const a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(lat1 * Math.PI / 180) *
+        Math.cos(lat2 * Math.PI / 180) *
+        Math.sin(dLon / 2) *
+        Math.sin(dLon / 2);
+
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+    return (R * c).toFixed(1);
+}
+
 // ============================
 // Nearby Theaters
 // GET /api/theaters/nearby?lat=28.6139&lon=77.2090
@@ -30,16 +48,24 @@ router.get("/nearby", async (req, res) => {
                 apiKey: API_KEY
             }
         });
+        
         console.log("Geoapify raw response:");
 console.log(response.data);
-        const theaters = response.data.features.map(place => ({
-            id: place.properties.place_id,
-            name: place.properties.name || "Unknown Theater",
-            address: place.properties.formatted,
-            latitude: place.properties.lat,
-            longitude: place.properties.lon
-        }));
+       const theaters = response.data.features.map(place => ({
+    id: place.properties.place_id,
+    name: place.properties.name || "Unknown Theater",
+    address: place.properties.formatted,
+    latitude: place.properties.lat,
+    longitude: place.properties.lon,
 
+    distance: calculateDistance(
+        Number(lat),
+        Number(lon),
+        place.properties.lat,
+        place.properties.lon
+    )
+}));
+console.log(theaters[0]);
         res.json({
             success: true,
             count: theaters.length,
@@ -121,13 +147,19 @@ if (!theaterResponse.data.features || !Array.isArray(theaterResponse.data.featur
         data: theaterResponse.data
     });
 }
-
 const theaters = theaterResponse.data.features.map(place => ({
     id: place.properties.place_id || "",
     name: place.properties.name || "Unknown Theater",
     address: place.properties.formatted || "",
     latitude: place.properties.lat,
-    longitude: place.properties.lon
+    longitude: place.properties.lon,
+
+    distance: calculateDistance(
+        Number(lat),
+        Number(lon),
+        place.properties.lat,
+        place.properties.lon
+    )
 }));
 
         res.json({

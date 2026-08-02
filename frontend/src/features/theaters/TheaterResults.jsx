@@ -5,12 +5,15 @@ const TheaterResults = ({ theaters }) => {
     <section className="theater-results">
       <h1>Nearby Theaters</h1>
 
-      {theaters.map((theater) => (
-        <TheaterCard
-          key={theater.id}
-          theater={theater}
-        />
-      ))}
+     <div className="theater-grid">
+  {theaters.map((theater, index) => (
+    <TheaterCard
+        key={theater.id}
+        theater={theater}
+        index={index}
+    />
+))}
+</div>
     </section>
   );
 };

@@ -25,6 +25,7 @@ const handleCurrentLocation = () => {
 
         const data = await getNearbyTheaters(latitude, longitude);
         console.log("API Response:", data);
+        console.log("Theater Data:", data.theaters);
 
         setTheaters(data.theaters);
         setShowResults(true);

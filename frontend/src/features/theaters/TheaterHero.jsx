@@ -2,41 +2,51 @@ import CurrentLocation from "./CurrentLocation";
 import SearchBar from "./SearchBar";
 import RegionCard from "./RegionCard";
 import regions from "./data";
+
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const TheaterHero = ({
-  setTheaters,
   setLoading,
   setError,
-  setShowResults,
 }) => {
+
+  const navigate = useNavigate();
+
   const handleCityClick = async (city) => {
 
-  try {
+    try {
 
-    setLoading(true);
-    setError("");
+      setLoading(true);
+      setError("");
 
-    const res = await axios.get(
-      `http://localhost:5000/api/theaters/city?city=${city}`
-    );
+      const res = await axios.get(
+        `http://localhost:5000/api/theaters/city?city=${city}`
+      );
 
-    setTheaters(res.data.theaters);
-    setShowResults(true);
+      navigate("/theaters/results", {
+        state: {
+          theaters: res.data.theaters,
+          city: city,
+        },
+      });
 
-  } catch (err) {
+    } catch (err) {
 
-    setError("Failed to fetch theaters.");
+      setError("Failed to fetch theaters.");
 
-  } finally {
+    } finally {
 
-    setLoading(false);
+      setLoading(false);
 
-  }
+    }
 
-};
+  };
+
   return (
+
     <section className="theater-hero">
+
       <div className="hero-overlay">
 
         <div className="hero-left">
@@ -60,17 +70,18 @@ const TheaterHero = ({
           <div className="search-card">
 
             <CurrentLocation
-              setTheaters={setTheaters}
               setLoading={setLoading}
               setError={setError}
-              setShowResults={setShowResults}
             />
 
             <div className="divider">
               <span>OR</span>
             </div>
 
-            <SearchBar />
+            <SearchBar
+              setLoading={setLoading}
+              setError={setError}
+            />
 
           </div>
 
@@ -85,14 +96,18 @@ const TheaterHero = ({
             </h3>
 
             <div className="cities-grid">
+
               {regions.map((region) => (
-              <RegionCard
-  key={region.id}
-  city={region.city}
-  image={region.image}
-  onClick={handleCityClick}
-/>
+
+                <RegionCard
+                  key={region.id}
+                  city={region.city}
+                  image={region.image}
+                  onClick={handleCityClick}
+                />
+
               ))}
+
             </div>
 
           </div>
@@ -100,7 +115,9 @@ const TheaterHero = ({
         </div>
 
       </div>
+
     </section>
+
   );
 };
 

@@ -565,3 +565,14 @@ box-sizing:border-box;
     box-shadow:
         0 10px 25px rgba(255,77,109,.35);
 }
+
+
+
+/* ===========================
+   RESULTS PAGE
+=========================== */
+
+.theater-results-page{
+    padding-top:100px;
+}
+

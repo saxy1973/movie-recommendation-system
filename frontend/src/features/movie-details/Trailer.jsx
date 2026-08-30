@@ -1,32 +1,71 @@
 import "./details.css";
 
-const Trailer = () => {
+const Trailer = ({ trailer }) => {
+
+  const openTrailer = () => {
+
+    if (!trailer) return;
+
+    window.open(
+      `https://www.youtube.com/watch?v=${trailer.key}`,
+      "_blank"
+    );
+
+  };
+
+
   return (
+
     <section className="trailer-section">
 
       <h2>🎥 Official Trailer</h2>
 
-      <div
-        className="trailer-card"
-        onClick={() =>
-          window.open(
-            "https://www.youtube.com/results?search_query=Batman+Begins+Official+Trailer",
-            "_blank"
-          )
-        }
-      >
-        <div className="play-button">
-          ▶
+
+      {trailer ? (
+
+        <div
+          className="trailer-card"
+          onClick={openTrailer}
+        >
+
+          <div className="play-button">
+            ▶
+          </div>
+
+          
+            <h3>Official Trailer</h3>
+          
+
+          <p>
+            Click to watch on YouTube
+          </p>
+
         </div>
 
-        <h3>Watch Official Trailer</h3>
+      ) : (
 
-        <p>Click to watch on YouTube</p>
+        <div className="trailer-card">
 
-      </div>
+          <div className="play-button">
+            ▶
+          </div>
+
+          <h3>
+            Trailer Not Available
+          </h3>
+
+          <p>
+            No official trailer found for this movie.
+          </p>
+
+        </div>
+
+      )}
 
     </section>
+
   );
+
 };
 
 export default Trailer;

@@ -1,6 +1,8 @@
 require("dotenv").config();
 const fs = require("fs");
 
+const connectDB = require("./config/db");
+
 const tmdbApiKey = process.env.TMDB_API_KEY;
 console.log("TMDB API Key loaded:", Boolean(tmdbApiKey));
 
@@ -41,6 +43,8 @@ const normalizeMovie = (item) => {
 
   return movie;
 };
+
+
 
 app.get("/", (req, res) => {
   res.json({
@@ -294,8 +298,20 @@ const theaterRoutes = require("./routes/theaters");
 
 app.use("/api/theaters", theaterRoutes);
 
+const trailerRoutes = require("./routes/trailer");
+
+app.use("/api/trailer", trailerRoutes);
+
 const PORT = 5000;
+
+const authRoutes = require("./routes/auth");
+const wishlistRoutes = require("./routes/wishlist");
+
+app.use("/api/auth", authRoutes);
+app.use("/api/wishlist", wishlistRoutes);
+connectDB();
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+

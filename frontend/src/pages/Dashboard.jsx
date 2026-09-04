@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 
 import Hero from "../features/hero";
 import TopRated from "../features/top-rated/TopRatedMovies";
-import Trending from "../features/trending/Trending";
+import Trending from "../features/wishlist/trending/Trending";
 import ComingSoon from "../features/comingsoon/ComingSoon";
 
 import { getTopRatedMovies } from "../services/movieService";

@@ -1,0 +1,71 @@
+.wishlist-icon {
+  position: absolute;
+
+  top: 12px;
+  right: 12px;
+    background: none;
+  border: none;
+
+  width: 38px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  border-radius: 8px;
+
+  cursor: pointer;
+
+  z-index: 10;
+
+  backdrop-filter: blur(5px);
+
+  transition: 0.25s;
+}
+
+.bookmark-svg {
+  width: 21px;
+  height: 24px;
+
+  fill: transparent;
+
+  stroke: #ffffff;
+
+  stroke-width: 1.8;
+
+  transition: 0.25s;
+}
+
+.wishlist-icon:hover {
+  background: rgba(255, 63, 104, 0.15);
+
+  border-color: #ff3f68;
+}
+
+.wishlist-icon:hover .bookmark-svg {
+  stroke: #ff3f68;
+}
+
+.wishlist-icon.wishlisted {
+  background: rgba(255, 63, 104, 0.15);
+
+  border-color: #ff3f68;
+}
+
+.wishlist-icon.wishlisted .bookmark-svg {
+  fill: #ff3f68;
+
+  stroke: #ff3f68;
+}
+
+.details-wishlist-icon {
+  position: static;
+  width: 32px;
+  height: 32px;
+  margin-left: 5px;
+  background: transparent;
+  border: none;
+}

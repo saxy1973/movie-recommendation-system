@@ -1,22 +1,15 @@
 import { useEffect, useState } from "react";
-
 import { useParams } from "react-router-dom";
 
 import MovieInfo from "../features/movie-details/MovieInfo";
-
 import Trailer from "../features/movie-details/Trailer";
-
 import Cast from "../features/movie-details/Cast";
-
 import ReviewForm from "../features/movie-details/ReviewForm";
-
 import ReviewList from "../features/movie-details/ReviewList";
-
 
 import Loading from "../features/loading";
 
 import { getMovieDetails } from "../services/movieService";
-
 import { getMovieTrailer } from "../services/trailerService";
 
 const MovieDetails = () => {
@@ -25,14 +18,17 @@ const MovieDetails = () => {
   const [movie, setMovie] = useState(null);
   const [trailer, setTrailer] = useState(null);
 
+  // Reviews ko yahan store karenge
+  const [reviews, setReviews] = useState([]);
+
   useEffect(() => {
     const fetchMovieDetails = async () => {
       try {
         const movieData = await getMovieDetails(id);
-setMovie(movieData);
+        setMovie(movieData);
 
-const trailerData = await getMovieTrailer(id);
-setTrailer(trailerData);
+        const trailerData = await getMovieTrailer(id);
+        setTrailer(trailerData);
       } catch (error) {
         console.error("Error fetching movie details:", error);
       }
@@ -42,34 +38,44 @@ setTrailer(trailerData);
   }, [id]);
 
   if (!movie) {
+    return <Loading text="Loading Movie Details..." />;
+  }
+
+  const movieId = movie.imdbID || movie.id;
+
   return (
-    <Loading text="Loading Movie Details..." />
+    <div
+      className="page-container"
+      style={{
+        background: "#0d1117",
+        color: "#fff",
+        minHeight: "100vh",
+      }}
+    >
+
+      {/* Movie Information */}
+      <MovieInfo movie={movie} />
+
+      {/* Top Cast */}
+      <Cast actors={movie.Actors} />
+
+      {/* Trailer */}
+      <Trailer trailer={trailer} />
+
+      {/* Review Form */}
+   <ReviewForm
+  movieId={movie.imdbID || movie.id}
+/>
+
+      {/* Review List */}
+     <ReviewList
+  movieId={movie.imdbID || movie.id}
+  reviews={reviews}
+  setReviews={setReviews}
+/>
+
+    </div>
   );
-}
-
-  return (
-  <div
-  className="page-container"
-  style={{
-    background: "#0d1117",
-    color: "#fff",
-    minHeight: "100vh",
-  }}
->
-    {/* Movie Information */}
-    <MovieInfo movie={movie} />
-
-    {/* Top Cast */}
-    <Cast actors={movie.Actors} />
-    {/* Trailer */}
-    <Trailer trailer={trailer} />
-   
-    {/* Review Form */}
-    <ReviewForm />
-    {/* Review List */}
-    <ReviewList />
-  </div>
-);
 };
 
 export default MovieDetails;

@@ -670,3 +670,162 @@
 
 }
 
+.details-wishlist-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.details-wishlist-wrapper .wishlist-icon {
+  position: static;
+  width: 32px;
+  height: 32px;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  border: none;
+}
+
+.details-wishlist-wrapper .bookmark-svg {
+  width: 20px;
+  height: 23px;
+}
+
+/* =========================
+   REVIEW ACTIONS
+========================= */
+
+.review-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.review-footer button {
+  border: none;
+  border-radius: 7px;
+  padding: 7px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: #1c2430;
+  color: #d8dee9;
+}
+
+.review-footer button:hover {
+  background: #273242;
+  transform: translateY(-1px);
+}
+
+.review-footer button:first-child {
+  color: #8ab4f8;
+}
+
+.review-footer button:last-child {
+  color: #ff7b7b;
+}
+
+
+/* =========================
+   EDIT REVIEW
+========================= */
+
+.edit-review {
+  margin-top: 15px;
+}
+
+.edit-review textarea {
+  width: 100%;
+  min-height: 100px;
+  resize: vertical;
+
+  padding: 12px;
+  margin-top: 10px;
+
+  border: 1px solid #303947;
+  border-radius: 8px;
+
+  background: #111821;
+  color: #fff;
+
+  font-size: 14px;
+  font-family: inherit;
+
+  outline: none;
+  box-sizing: border-box;
+}
+
+.edit-review textarea:focus {
+  border-color: #6c8cff;
+}
+
+
+/* =========================
+   EDIT BUTTONS
+========================= */
+
+.review-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.review-actions button {
+  border: none;
+  border-radius: 7px;
+  padding: 8px 16px;
+
+  font-size: 13px;
+  font-weight: 500;
+
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.review-actions button:first-child {
+  background: #6c8cff;
+  color: white;
+}
+
+.review-actions button:first-child:hover {
+  background: #5878e8;
+}
+
+.review-actions button:last-child {
+  background: #1c2430;
+  color: #c7ced9;
+}
+
+.review-actions button:last-child:hover {
+  background: #293443;
+}
+
+
+/* =========================
+   STAR RATING
+========================= */
+
+.edit-review .rating {
+  margin: 5px 0;
+}
+
+.edit-review .rating span {
+  font-size: 22px;
+  cursor: pointer;
+  color: #4b5563;
+  transition: 0.15s ease;
+}
+
+.edit-review .rating span:hover {
+  transform: scale(1.1);
+}
+
+.edit-review .rating span.active-star {
+  color: #f5c518;
+}
+

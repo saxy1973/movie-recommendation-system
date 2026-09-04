@@ -306,11 +306,13 @@ const PORT = 5000;
 
 const authRoutes = require("./routes/auth");
 const wishlistRoutes = require("./routes/wishlist");
+const reviewRoutes = require("./routes/reviews");
 
 app.use("/api/auth", authRoutes);
 app.use("/api/wishlist", wishlistRoutes);
-connectDB();
+app.use("/api/reviews", reviewRoutes);
 
+connectDB();
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });

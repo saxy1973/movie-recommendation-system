@@ -94,3 +94,81 @@
         transform:translateY(0);
     }
 }
+
+/* =========================================
+   USER NAVBAR
+========================================= */
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+   transform: translateY(-2px);
+}
+
+
+/* =========================================
+   WISHLIST
+========================================= */
+
+.wishlist-btn {
+  background: transparent;
+
+  border: none;
+
+  color: #ffffff;
+
+  font-size: 17px;
+
+  font-weight: 500;
+
+  cursor: pointer;
+
+  padding: 10px 5px;
+
+  transition: color 0.2s;
+}
+
+.wishlist-btn:hover {
+  color: #ff3f68;
+}
+
+
+/* =========================================
+   ACCOUNT
+========================================= */
+
+.account-btn {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  background: transparent;
+
+  border: none;
+
+  color: #ffffff;
+
+  font-size: 17px;
+
+  font-weight: 500;
+
+  cursor: pointer;
+
+  padding: 10px 5px;
+
+  transition: color 0.2s;
+}
+
+.account-btn:hover {
+  color: #ff3f68;
+}
+
+
+/* Account icon */
+
+.account-icon {
+  font-size: 18px;
+}

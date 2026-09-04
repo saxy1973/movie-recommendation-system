@@ -1,4 +1,5 @@
 import "./details.css";
+import WishlistButton from "../wishlist/WishlistButton";
 
 const MovieInfo = ({ movie }) => {
   return (
@@ -16,15 +17,21 @@ const MovieInfo = ({ movie }) => {
 
         <h1>{movie.Title}</h1>
 
-        <div className="movie-meta">
+      <div className="movie-meta">
 
-          <span>⭐ {movie.imdbRating}</span>
+  <span>⭐ {movie.imdbRating}</span>
 
-          <span>📅 {movie.Year}</span>
+  <span>📅 {movie.Year}</span>
 
-          <span>⏱ {movie.Runtime}</span>
+  <span>⏱ {movie.Runtime}</span>
 
-        </div>
+  <div className="details-wishlist-wrapper">
+    <WishlistButton
+      movieId={movie.imdbID || movie.id}
+    />
+  </div>
+
+</div>
 
         <div className="movie-genre">
           {movie.Genre}

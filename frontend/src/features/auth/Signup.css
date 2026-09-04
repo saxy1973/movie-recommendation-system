@@ -1,0 +1,597 @@
+/* =========================================
+   SIGNUP PAGE
+========================================= */
+
+.signup-page {
+  width: 100%;
+  height: 100vh;
+
+  display: flex;
+
+  background: #05070b;
+  color: #ffffff;
+
+  overflow: hidden;
+}
+
+
+/* =========================================
+   LEFT IMAGE
+========================================= */
+
+.signup-image {
+  width: 55%;
+  height: 100vh;
+
+  position: relative;
+
+  overflow: hidden;
+
+  background: #05070b;
+
+  display: flex;
+  align-items: flex-end;
+}
+
+.signup-image img {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  object-position: center;
+
+  display: block;
+}
+
+
+/* =========================================
+   IMAGE RIGHT FADE
+========================================= */
+
+.signup-image::after {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  right: 0;
+  bottom: 0;
+
+  width: 35%;
+
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(5, 7, 11, 0.2) 25%,
+    rgba(5, 7, 11, 0.55) 55%,
+    #05070b 100%
+  );
+
+  z-index: 1;
+
+  pointer-events: none;
+}
+
+
+/* =========================================
+   IMAGE TEXT
+========================================= */
+
+.signup-image-overlay {
+  position: absolute;
+
+  left: 0;
+  bottom: 0;
+
+  z-index: 2;
+
+  padding: 45px 60px;
+
+  max-width: 620px;
+
+  box-sizing: border-box;
+}
+
+.signup-image-overlay h1 {
+  margin: 0 0 15px;
+
+  font-size: 44px;
+
+  line-height: 1.05;
+
+  font-weight: 700;
+
+  color: #ffffff;
+}
+
+.signup-image-overlay p {
+  margin: 0;
+
+  max-width: 550px;
+
+  font-size: 16px;
+
+  line-height: 1.5;
+
+  color: #eeeeee;
+}
+
+
+/* =========================================
+   RIGHT FORM SECTION
+========================================= */
+
+.signup-form-section {
+  width: 45%;
+  height: 100vh;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  background: #05070b;
+
+  overflow-y: auto;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================
+   SIGNUP BOX
+========================================= */
+
+.signup-box {
+  width: 100%;
+
+  max-width: 480px;
+
+  padding: 25px 45px;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================
+   MOVIRA LOGO
+========================================= */
+
+.signup-logo {
+  margin-bottom: 20px;
+
+  font-size: 32px;
+
+  font-weight: 700;
+
+  letter-spacing: 4px;
+
+  color: #ffffff;
+}
+
+.signup-logo span {
+  color: #ff3f68;
+}
+
+
+/* =========================================
+   HEADING
+========================================= */
+
+.signup-box h2 {
+  margin: 0 0 6px;
+
+  font-size: 30px;
+
+  line-height: 1.2;
+
+  font-weight: 700;
+
+  color: #ffffff;
+}
+
+.signup-subtitle {
+  margin: 0 0 22px;
+
+  font-size: 14px;
+
+  line-height: 1.4;
+
+  color: #9aa0aa;
+}
+
+
+/* =========================================
+   FIRST + LAST NAME
+========================================= */
+
+.signup-name-row {
+  display: flex;
+
+  gap: 15px;
+
+  width: 100%;
+}
+
+.signup-name-row .signup-input-group {
+  width: 50%;
+}
+
+
+/* =========================================
+   INPUT GROUP
+========================================= */
+
+.signup-input-group {
+  margin-bottom: 15px;
+}
+
+.signup-input-group label {
+  display: block;
+
+  margin-bottom: 6px;
+
+  font-size: 13px;
+
+  font-weight: 500;
+
+  color: #ffffff;
+}
+
+
+/* =========================================
+   INPUT
+========================================= */
+
+.signup-input-group input {
+  width: 100%;
+
+  height: 48px;
+
+  box-sizing: border-box;
+
+  padding: 0 14px;
+
+  background: #11151c;
+
+  border: 1px solid #292e37;
+
+  border-radius: 8px;
+
+  color: #ffffff;
+
+  font-size: 14px;
+
+  outline: none;
+
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+.signup-input-group input::placeholder {
+  color: #737b89;
+}
+
+.signup-input-group input:focus {
+  border-color: #ff3f68;
+
+  box-shadow:
+    0 0 0 2px rgba(255, 63, 104, 0.1);
+}
+
+
+/* =========================================
+   DATE INPUT
+========================================= */
+
+.signup-input-group input[type="date"] {
+  color-scheme: dark;
+
+  cursor: pointer;
+}
+
+
+/* =========================================
+   PASSWORD HINT
+========================================= */
+
+.signup-password-hint {
+  display: block;
+
+  margin-top: 5px;
+
+  font-size: 10px;
+
+  line-height: 1.3;
+
+  color: #737b89;
+}
+
+
+/* =========================================
+   SIGN UP BUTTON
+========================================= */
+
+.signup-button {
+  width: 100%;
+
+  height: 50px;
+
+  margin-top: 3px;
+
+  border: none;
+
+  border-radius: 8px;
+
+  background: #ff3f68;
+
+  color: #ffffff;
+
+  font-size: 16px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s,
+    transform 0.2s;
+}
+
+.signup-button:hover {
+  background: #ff2856;
+
+  transform: translateY(-1px);
+}
+
+.signup-button:active {
+  transform: translateY(0);
+}
+
+
+/* =========================================
+   SIGN IN
+========================================= */
+
+.signup-signin-text {
+  margin: 16px 0 0;
+
+  text-align: center;
+
+  font-size: 13px;
+
+  color: #9299a5;
+}
+
+.signup-signin-text span {
+  margin-left: 6px;
+
+  color: #ff3f68;
+
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.signup-signin-text span:hover {
+  text-decoration: underline;
+}
+
+
+/* =========================================
+   SMALL HEIGHT SCREEN
+========================================= */
+
+@media (max-height: 800px) {
+
+  .signup-box {
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+
+  .signup-logo {
+    margin-bottom: 13px;
+
+    font-size: 30px;
+  }
+
+  .signup-box h2 {
+    font-size: 28px;
+  }
+
+  .signup-subtitle {
+    margin-bottom: 15px;
+
+    font-size: 13px;
+  }
+
+  .signup-input-group {
+    margin-bottom: 10px;
+  }
+
+  .signup-input-group label {
+    margin-bottom: 5px;
+
+    font-size: 12px;
+  }
+
+  .signup-input-group input {
+    height: 44px;
+
+    font-size: 13px;
+  }
+
+  .signup-password-hint {
+    font-size: 9px;
+  }
+
+  .signup-button {
+    height: 47px;
+
+    font-size: 15px;
+  }
+
+  .signup-signin-text {
+    margin-top: 11px;
+
+    font-size: 12px;
+  }
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 1000px) {
+
+  .signup-image {
+    width: 50%;
+  }
+
+  .signup-form-section {
+    width: 50%;
+  }
+
+  .signup-box {
+    padding: 25px 30px;
+  }
+
+  .signup-image-overlay {
+    padding: 35px;
+  }
+
+  .signup-image-overlay h1 {
+    font-size: 38px;
+  }
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 768px) {
+
+  .signup-page {
+    min-height: 100vh;
+
+    height: auto;
+
+    overflow: auto;
+  }
+
+  .signup-image {
+    display: none;
+  }
+
+  .signup-form-section {
+    width: 100%;
+
+    height: auto;
+
+    min-height: 100vh;
+
+    overflow: visible;
+  }
+
+  .signup-box {
+    width: 100%;
+
+    max-width: 500px;
+
+    padding: 30px 25px;
+  }
+
+  .signup-name-row {
+    flex-direction: column;
+
+    gap: 0;
+  }
+
+  .signup-name-row .signup-input-group {
+    width: 100%;
+  }
+}
+
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 450px) {
+
+  .signup-box {
+    padding: 25px 20px;
+  }
+
+  .signup-logo {
+    font-size: 30px;
+  }
+
+  .signup-box h2 {
+    font-size: 28px;
+  }
+
+  .signup-subtitle {
+    font-size: 13px;
+  }
+
+  .signup-input-group input {
+    height: 48px;
+  }
+
+  .signup-button {
+    height: 50px;
+  }
+}
+
+.signup-password-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.signup-password-wrapper input {
+  width: 100%;
+  padding-right: 55px;
+  box-sizing: border-box;
+}
+
+.signup-password-toggle {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  width: 30px;
+  height: 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+  margin: 0;
+
+  background: transparent;
+  border: none;
+
+  color: white;
+  cursor: pointer;
+}
+
+.signup-password-toggle:hover {
+  background: transparent;
+}
+
+.signup-eye-icon {
+  width: 22px;
+  height: 22px;
+  color: white;
+  display: block;
+}

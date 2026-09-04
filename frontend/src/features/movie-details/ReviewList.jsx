@@ -1,49 +1,124 @@
+import { useEffect } from "react";
+import api from "../../services/api";
 import ReviewCard from "./ReviewCard";
 import "./details.css";
 
-const reviews = [
-  {
-    name: "Rahul Sharma",
-    rating: 5,
-    comment:
-      "One of Christopher Nolan's best movies. Amazing cinematography and acting.",
-    time: "2 days ago",
-    helpful: 24,
-  },
+const ReviewList = ({
+  movieId,
+  reviews,
+  setReviews,
+}) => {
 
-  {
-    name: "Priya Singh",
-    rating: 4,
-    comment:
-      "Loved every moment. The soundtrack and visuals were outstanding.",
-    time: "5 days ago",
-    helpful: 12,
-  },
+  useEffect(() => {
 
-  {
-    name: "Aman Verma",
-    rating: 5,
-    comment:
-      "Definitely worth watching again. One of the best Batman movies.",
-    time: "1 week ago",
-    helpful: 31,
-  },
-];
+    const fetchReviews = async () => {
 
-const ReviewList = () => {
+      try {
+
+        const response = await api.get(
+          `/reviews/${movieId}`
+        );
+
+        if (response.data.success) {
+          setReviews(response.data.reviews);
+        }
+
+      } catch (error) {
+
+        console.error(
+          "Fetch Reviews Error:",
+          error.response?.data ||
+          error.message
+        );
+
+      }
+
+    };
+
+    if (movieId) {
+      fetchReviews();
+    }
+
+  }, [movieId, setReviews]);
+
+
+  // =========================
+  // DELETE FROM UI
+  // =========================
+
+  const handleDelete = (reviewId) => {
+
+    setReviews((prev) =>
+      prev.filter(
+        (review) =>
+          review._id !== reviewId
+      )
+    );
+
+  };
+
+
+  // =========================
+  // UPDATE IN UI
+  // =========================
+
+  const handleUpdate = (updatedReview) => {
+
+    setReviews((prev) =>
+      prev.map((review) =>
+        review._id === updatedReview._id
+          ? {
+              ...review,
+              ...updatedReview,
+            }
+          : review
+      )
+    );
+
+  };
+
+
+  // Get logged-in user
+  const storedUser =
+    localStorage.getItem("user");
+
+  const currentUserId = storedUser
+    ? JSON.parse(storedUser).id
+    : null;
+
+
   return (
+
     <section className="review-list-section">
 
       <h2>⭐ Community Reviews</h2>
 
-      {reviews.map((review, index) => (
-        <ReviewCard
-          key={index}
-          review={review}
-        />
-      ))}
+
+      {reviews.length === 0 ? (
+
+        <p>
+          No reviews yet. Be the first
+          to review this movie!
+        </p>
+
+      ) : (
+
+        reviews.map((review) => (
+
+          <ReviewCard
+            key={review._id}
+            review={review}
+            currentUserId={currentUserId}
+            onDelete={handleDelete}
+            onUpdate={handleUpdate}
+          />
+
+        ))
+
+      )}
 
     </section>
+
   );
 };
 

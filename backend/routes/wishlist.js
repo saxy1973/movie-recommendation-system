@@ -105,4 +105,59 @@ router.delete("/:userId/:movieId", async (req, res) => {
   }
 });
 
+// Toggle movie in wishlist
+router.post("/toggle", async (req, res) => {
+  try {
+    const { userId, movieId } = req.body;
+
+    if (!userId || !movieId) {
+      return res.status(400).json({
+        success: false,
+        message: "userId and movieId are required",
+      });
+    }
+
+    // Check if movie already exists
+    const existingMovie = await Wishlist.findOne({
+      user: userId,
+      movieId: movieId,
+    });
+
+    // Already exists → remove
+    if (existingMovie) {
+      await Wishlist.findOneAndDelete({
+        user: userId,
+        movieId: movieId,
+      });
+
+      return res.status(200).json({
+        success: true,
+        isWishlisted: false,
+        message: "Movie removed from wishlist",
+      });
+    }
+
+    // Doesn't exist → add
+    const wishlist = await Wishlist.create({
+      user: userId,
+      movieId: movieId,
+    });
+
+    return res.status(201).json({
+      success: true,
+      isWishlisted: true,
+      message: "Movie added to wishlist",
+      wishlist,
+    });
+
+  } catch (error) {
+    console.error("Wishlist Toggle Error:", error.message);
+
+    return res.status(500).json({
+      success: false,
+      message: "Server error",
+    });
+  }
+});
+
 module.exports = router;

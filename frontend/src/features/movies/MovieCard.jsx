@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
+import WishlistButton from "../wishlist/WishlistButton";
 import "./movie.css";
 
 const MovieCard = ({ movie }) => {
-  console.log(movie);
   const navigate = useNavigate();
 
   // Support both OMDb and TMDB
@@ -12,15 +12,18 @@ const MovieCard = ({ movie }) => {
   const year = movie.Year || movie.year || movie.releaseDate;
   const type = movie.Type || "Movie";
   const rating = movie.rating || movie.Rating;
+
   return (
     <div
       className="movie-card"
       onClick={() => navigate(`/movie/${id}`)}
     >
+      {/* Movie badge */}
       <div className="movie-badge">
         {type === "series" ? "TV SERIES" : "MOVIE"}
       </div>
 
+      {/* Movie poster */}
       <img
         src={
           poster && poster !== "N/A"
@@ -31,13 +34,21 @@ const MovieCard = ({ movie }) => {
         className="movie-poster"
       />
 
-      <div className="movie-overlay">
-        <h3 className="movie-title">{title}</h3>
+      {/* Wishlist bookmark */}
+      <WishlistButton movieId={id} />
 
-       <p className="movie-subtitle">
-  {year}
-  {rating ? ` • ⭐ ${Number(rating).toFixed(1)}` : ""}
-</p>
+      {/* Movie information */}
+      <div className="movie-overlay">
+        <h3 className="movie-title">
+          {title}
+        </h3>
+
+        <p className="movie-subtitle">
+          {year}
+          {rating
+            ? ` • ⭐ ${Number(rating).toFixed(1)}`
+            : ""}
+        </p>
       </div>
     </div>
   );

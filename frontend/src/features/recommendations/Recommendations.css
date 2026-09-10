@@ -1,0 +1,829 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap");
+
+
+/* =========================================
+   PAGE
+========================================= */
+
+.recommendations-page {
+  min-height: 100vh;
+  padding: 100px 60px 70px;
+
+  background:
+    radial-gradient(
+      circle at 10% 10%,
+      rgba(135, 50, 255, 0.16),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 90% 20%,
+      rgba(255, 35, 130, 0.12),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 50% 100%,
+      rgba(95, 30, 190, 0.10),
+      transparent 35%
+    ),
+    #080910;
+
+  color: #fff;
+
+  font-family: "Poppins", sans-serif;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================
+   CONTAINER
+========================================= */
+
+.recommendations-container {
+  width: min(1400px, 100%);
+  margin: auto;
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.recommendations-header {
+  margin-bottom: 35px;
+}
+
+.recommendations-label {
+  display: inline-block;
+
+  margin-bottom: 8px;
+
+  color: #d44dff;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  letter-spacing: 2px;
+}
+
+.recommendations-header h1 {
+  margin: 0;
+
+  font-size: 42px;
+  font-weight: 700;
+
+  letter-spacing: -1px;
+}
+
+.recommendations-header h1 span {
+  background: linear-gradient(
+    90deg,
+    #ff3d8d,
+    #a855f7
+  );
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.recommendations-header p {
+  margin: 9px 0 0;
+
+  color: #9295a4;
+
+  font-size: 15px;
+}
+
+
+/* =========================================
+   PREFERENCE SUMMARY
+========================================= */
+
+.preference-summary {
+  margin-bottom: 48px;
+
+  padding: 25px 28px;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  border-radius: 20px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(39, 20, 59, 0.72),
+      rgba(20, 16, 31, 0.82)
+    );
+
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.25),
+    inset 0 1px rgba(255, 255, 255, 0.04);
+
+  backdrop-filter: blur(16px);
+}
+
+
+/* =========================================
+   SUMMARY HEADING
+========================================= */
+
+.summary-heading {
+  display: flex;
+  align-items: center;
+
+  gap: 13px;
+
+  margin-bottom: 23px;
+}
+
+.summary-heading > span {
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 12px;
+
+  background: linear-gradient(
+    135deg,
+    rgba(255, 55, 135, 0.18),
+    rgba(150, 70, 255, 0.18)
+  );
+
+  font-size: 20px;
+}
+
+.summary-heading h3 {
+  margin: 0;
+
+  font-size: 16px;
+}
+
+.summary-heading p {
+  margin: 2px 0 0;
+
+  color: #777b89;
+
+  font-size: 11px;
+}
+
+
+/* =========================================
+   SUMMARY ITEMS
+========================================= */
+
+.summary-items {
+  display: grid;
+
+  grid-template-columns:
+    2fr
+    1fr
+    1fr
+    1fr;
+
+  gap: 15px;
+}
+
+.summary-item {
+  min-height: 70px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 13px 15px;
+
+  border: 1px solid rgba(255, 255, 255, 0.055);
+
+  border-radius: 13px;
+
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.summary-icon {
+  font-size: 19px;
+}
+
+.summary-item small {
+  display: block;
+
+  margin-bottom: 4px;
+
+  color: #727684;
+
+  font-size: 10px;
+}
+
+.summary-item strong {
+  color: #eeeef2;
+
+  font-size: 13px;
+  font-weight: 600;
+}
+
+
+/* GENRE TAGS */
+
+.summary-genres {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 5px;
+}
+
+.summary-genres span {
+  padding: 3px 8px;
+
+  border-radius: 20px;
+
+  background: rgba(168, 85, 247, 0.13);
+
+  border: 1px solid rgba(168, 85, 247, 0.18);
+
+  color: #d6a7ff;
+
+  font-size: 10px;
+}
+
+
+/* =========================================
+   SECTION TITLE
+========================================= */
+
+.movies-section {
+  margin-top: 10px;
+}
+
+.section-title {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  margin-bottom: 23px;
+}
+
+.section-title h2 {
+  margin: 0;
+
+  font-size: 25px;
+  font-weight: 600;
+}
+
+.section-title h2 span {
+  color: #ff4b9b;
+}
+
+.section-title p {
+  margin: 3px 0 0;
+
+  color: #737785;
+
+  font-size: 12px;
+}
+
+.movie-count {
+  padding: 7px 13px;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  border-radius: 20px;
+
+  color: #9a9daa;
+
+  background: rgba(255, 255, 255, 0.035);
+
+  font-size: 11px;
+}
+
+
+/* =========================================
+   MOVIE GRID
+========================================= */
+
+.recommendation-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(5, minmax(0, 1fr));
+
+  gap: 22px;
+}
+
+
+/* =========================================
+   MOVIE CARD
+========================================= */
+
+.recommendation-card {
+  overflow: hidden;
+
+  border: 1px solid rgba(255, 255, 255, 0.07);
+
+  border-radius: 16px;
+
+  background: #11121a;
+
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.25);
+
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.recommendation-card:hover {
+  transform: translateY(-7px);
+
+  border-color: rgba(255, 67, 151, 0.4);
+
+  box-shadow:
+    0 20px 45px rgba(0, 0, 0, 0.42),
+    0 0 25px rgba(188, 47, 255, 0.09);
+}
+
+
+/* =========================================
+   POSTER
+========================================= */
+
+.movie-poster-wrapper {
+  position: relative;
+
+  width: 100%;
+
+  aspect-ratio: 2 / 3;
+
+  overflow: hidden;
+
+  background: #191a23;
+}
+
+.movie-poster {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+
+  transition:
+    transform 0.45s ease,
+    filter 0.45s ease;
+}
+
+.recommendation-card:hover .movie-poster {
+  transform: scale(1.06);
+
+  filter: brightness(0.72);
+}
+
+
+/* =========================================
+   POSTER OVERLAY
+========================================= */
+
+.poster-overlay {
+  position: absolute;
+
+  inset: 0;
+
+  display: flex;
+  align-items: flex-end;
+
+  padding: 14px;
+
+  opacity: 0;
+
+  background:
+    linear-gradient(
+      transparent 55%,
+      rgba(0, 0, 0, 0.8)
+    );
+
+  transition: opacity 0.3s ease;
+}
+
+.recommendation-card:hover .poster-overlay {
+  opacity: 1;
+}
+
+.watch-text {
+  padding: 6px 10px;
+
+  border-radius: 20px;
+
+  background: rgba(168, 85, 247, 0.85);
+
+  font-size: 9px;
+  font-weight: 600;
+}
+
+
+/* =========================================
+   MOVIE INFO
+========================================= */
+
+.movie-info {
+  padding: 15px;
+}
+
+.movie-info h3 {
+  overflow: hidden;
+
+  margin: 0 0 5px;
+
+  color: #f5f5f7;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.movie-meta {
+  display: flex;
+  align-items: center;
+
+  gap: 7px;
+
+  margin-bottom: 12px;
+
+  color: #777b88;
+
+  font-size: 10px;
+}
+
+.movie-meta .dot {
+  color: #484b55;
+}
+
+
+/* =========================================
+   RATINGS
+========================================= */
+
+.rating-row {
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  margin-bottom: 8px;
+}
+
+.tmdb-rating,
+.user-rating {
+  display: flex;
+  align-items: center;
+
+  gap: 3px;
+
+  padding: 5px 7px;
+
+  border-radius: 6px;
+
+  font-size: 11px;
+}
+
+.tmdb-rating {
+  background: rgba(255, 190, 40, 0.08);
+
+  border: 1px solid rgba(255, 190, 40, 0.12);
+}
+
+.tmdb-rating span {
+  font-size: 10px;
+}
+
+.tmdb-rating strong {
+  color: #ffd34e;
+}
+
+.tmdb-rating small {
+  color: #81796b;
+}
+
+
+.user-rating {
+  background: rgba(255, 66, 137, 0.08);
+
+  border: 1px solid rgba(255, 66, 137, 0.13);
+}
+
+.user-rating span {
+  color: #ff4d91;
+}
+
+.user-rating strong {
+  color: #ff82b2;
+}
+
+.user-rating small {
+  color: #81616f;
+}
+
+
+/* =========================================
+   USER REVIEW
+========================================= */
+
+.your-review {
+  display: inline-block;
+
+  margin-bottom: 9px;
+
+  color: #72dfaa;
+
+  font-size: 9px;
+  font-weight: 500;
+}
+
+
+/* =========================================
+   OVERVIEW
+========================================= */
+
+.movie-overview {
+  display: -webkit-box;
+
+  overflow: hidden;
+
+  margin: 3px 0 0;
+
+  color: #777b88;
+
+  font-size: 10px;
+  line-height: 1.55;
+
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+
+/* =========================================
+   EMPTY
+========================================= */
+
+.no-movies,
+.recommendations-empty {
+  padding: 65px 20px;
+
+  text-align: center;
+
+  border: 1px solid rgba(255, 255, 255, 0.06);
+
+  border-radius: 18px;
+
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.no-movies > div,
+.empty-icon {
+  margin-bottom: 13px;
+
+  font-size: 42px;
+}
+
+.no-movies h3,
+.recommendations-empty h2 {
+  margin: 0;
+
+  font-size: 18px;
+}
+
+.no-movies p,
+.recommendations-empty p {
+  max-width: 450px;
+
+  margin: 8px auto 0;
+
+  color: #777b88;
+
+  font-size: 12px;
+}
+
+
+/* =========================================
+   LOADING
+========================================= */
+
+.recommendations-loading {
+  min-height: 70vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  text-align: center;
+}
+
+.recommendations-loading h2 {
+  margin: 18px 0 5px;
+
+  font-size: 20px;
+}
+
+.recommendations-loading p {
+  margin: 0;
+
+  color: #777b88;
+
+  font-size: 12px;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+
+  border: 3px solid rgba(255, 255, 255, 0.08);
+
+  border-top-color: #ff3f91;
+
+  border-right-color: #a855f7;
+
+  border-radius: 50%;
+
+  animation: recommendationSpin 0.8s linear infinite;
+}
+
+@keyframes recommendationSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 1200px) {
+
+  .recommendation-grid {
+    grid-template-columns:
+      repeat(4, minmax(0, 1fr));
+  }
+
+  .summary-items {
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+}
+
+
+@media (max-width: 850px) {
+
+  .recommendations-page {
+    padding: 110px 30px 50px;
+  }
+
+  .recommendations-header h1 {
+    font-size: 34px;
+  }
+
+  .recommendation-grid {
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
+  }
+}
+
+
+@media (max-width: 600px) {
+
+  .recommendations-page {
+    padding: 100px 17px 40px;
+  }
+
+  .recommendations-header h1 {
+    font-size: 28px;
+  }
+
+  .recommendations-header p {
+    font-size: 12px;
+  }
+
+  .preference-summary {
+    padding: 20px;
+  }
+
+  .summary-items {
+    grid-template-columns: 1fr;
+  }
+
+  .recommendation-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+    gap: 13px;
+  }
+
+  .movie-info {
+    padding: 11px;
+  }
+
+  .movie-info h3 {
+    font-size: 12px;
+  }
+
+  .rating-row {
+    flex-wrap: wrap;
+  }
+
+  .tmdb-rating,
+  .user-rating {
+    font-size: 9px;
+  }
+
+  .section-title h2 {
+    font-size: 20px;
+  }
+}
+
+
+@media (max-width: 400px) {
+
+  .recommendation-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .movie-poster-wrapper {
+    aspect-ratio: 16 / 10;
+  }
+}
+
+/* =========================================
+   RECOMMENDATION FILTERS
+========================================= */
+
+.recommendation-filters {
+  width: 100%;
+  display: flex;
+  align-items: end;
+  gap: 16px;
+  margin: 25px 0 35px;
+  padding: 18px 20px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  overflow-x: auto;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  min-width: 150px;
+  flex: 1;
+}
+
+.filter-group label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #aaa;
+}
+
+.filter-group select {
+  width: 100%;
+  padding: 11px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: #151a22;
+  color: white;
+  font-size: 14px;
+  outline: none;
+  cursor: pointer;
+}
+
+.filter-group select:focus {
+  border-color: #777;
+}
+
+.filter-group select option {
+  background: #151a22;
+  color: white;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 800px) {
+
+  .recommendation-filters {
+    gap: 12px;
+    padding: 15px;
+  }
+
+  .filter-group {
+    min-width: 135px;
+  }
+
+}

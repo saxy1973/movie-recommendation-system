@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 
 import MovieInfo from "../features/movie-details/MovieInfo";
 import Trailer from "../features/movie-details/Trailer";
@@ -15,30 +15,49 @@ import { getMovieTrailer } from "../services/trailerService";
 const MovieDetails = () => {
   const { id } = useParams();
 
+  const [searchParams] = useSearchParams();
+
+  const type = searchParams.get("type") || "movie";
+
   const [movie, setMovie] = useState(null);
   const [trailer, setTrailer] = useState(null);
-
-  // Reviews ko yahan store karenge
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
       try {
-        const movieData = await getMovieDetails(id);
+        setMovie(null);
+
+        const movieData = await getMovieDetails(
+          id,
+          type
+        );
+
         setMovie(movieData);
 
-        const trailerData = await getMovieTrailer(id);
+        const trailerData = await getMovieTrailer(
+          id,
+          type
+        );
+
         setTrailer(trailerData);
+
       } catch (error) {
-        console.error("Error fetching movie details:", error);
+        console.error(
+          "Error fetching movie details:",
+          error
+        );
       }
     };
 
     fetchMovieDetails();
-  }, [id]);
+
+  }, [id, type]);
 
   if (!movie) {
-    return <Loading text="Loading Movie Details..." />;
+    return (
+      <Loading text="Loading Movie Details..." />
+    );
   }
 
   const movieId = movie.imdbID || movie.id;
@@ -53,26 +72,21 @@ const MovieDetails = () => {
       }}
     >
 
-      {/* Movie Information */}
       <MovieInfo movie={movie} />
 
-      {/* Top Cast */}
       <Cast actors={movie.Actors} />
 
-      {/* Trailer */}
       <Trailer trailer={trailer} />
 
-      {/* Review Form */}
-   <ReviewForm
-  movieId={movie.imdbID || movie.id}
-/>
+      <ReviewForm
+        movieId={movieId}
+      />
 
-      {/* Review List */}
-     <ReviewList
-  movieId={movie.imdbID || movie.id}
-  reviews={reviews}
-  setReviews={setReviews}
-/>
+      <ReviewList
+        movieId={movieId}
+        reviews={reviews}
+        setReviews={setReviews}
+      />
 
     </div>
   );

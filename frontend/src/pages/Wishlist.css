@@ -1,77 +1,262 @@
+/* =========================================
+   WISHLIST PAGE
+========================================= */
+
 .wishlist-page {
   min-height: 100vh;
-  padding: 110px 70px 50px;
-  background: #05070b;
+  box-sizing: border-box;
+  padding: 110px 7% 70px;
+
   color: white;
   font-family: "Poppins", sans-serif;
+
+  background:
+    radial-gradient(
+      circle at 10% 10%,
+      rgba(125, 60, 255, 0.18),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 90% 20%,
+      rgba(236, 0, 140, 0.13),
+      transparent 30%
+    ),
+    linear-gradient(
+      135deg,
+      #050509 0%,
+      #0b0712 50%,
+      #05070b 100%
+    );
 }
 
+
+/* =========================================
+   HEADER
+========================================= */
+
 .wishlist-header {
-  margin-bottom: 30px;
+  max-width: 1400px;
+  margin: 0 auto 40px;
 }
 
 .wishlist-header h1 {
   margin: 0;
-  font-size: 32px;
-  font-weight: 600;
+
+  font-size: 40px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+
+  background: linear-gradient(
+    90deg,
+    #ffffff,
+    #c084fc,
+    #ec4899
+  );
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .wishlist-header p {
-  margin-top: 8px;
+  margin: 8px 0 0;
+
   color: #9299a5;
   font-size: 15px;
 }
 
-.wishlist-grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 25px;
+
+/* small purple/pink line */
+
+.wishlist-header::after {
+  content: "";
+
+  display: block;
+
+  width: 65px;
+  height: 3px;
+
+  margin-top: 16px;
+
+  border-radius: 20px;
+
+  background: linear-gradient(
+    90deg,
+    #7d3cff,
+    #ec008c
+  );
+
+  box-shadow:
+    0 0 15px rgba(125, 60, 255, 0.55);
 }
+
+
+/* =========================================
+   MOVIE GRID
+   MovieGrid already creates the grid,
+   so don't force another grid here.
+========================================= */
+
+.wishlist-page .movie-grid {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+
+/* =========================================
+   EMPTY WISHLIST
+========================================= */
 
 .empty-wishlist {
-  min-height: 400px;
+  max-width: 700px;
+  min-height: 380px;
+
+  margin: 30px auto 0;
+  padding: 40px;
+
+  box-sizing: border-box;
+
   display: flex;
   flex-direction: column;
+
   align-items: center;
   justify-content: center;
+
   text-align: center;
+
+  border-radius: 24px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.055),
+      rgba(255, 255, 255, 0.015)
+    );
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.4);
+
+  backdrop-filter: blur(12px);
 }
 
+
+/* =========================================
+   EMPTY ICON
+========================================= */
+
 .empty-icon {
-  font-size: 55px;
+  width: 90px;
+  height: 90px;
+
+  margin-bottom: 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  font-size: 50px;
+
   color: #ff3f68;
-  margin-bottom: 15px;
+
+  background: rgba(255, 63, 104, 0.08);
+
+  border: 1px solid rgba(255, 63, 104, 0.2);
+
+  box-shadow:
+    0 0 35px rgba(255, 63, 104, 0.15);
 }
+
 
 .empty-wishlist h2 {
   margin: 0;
-  font-size: 24px;
+
+  font-size: 25px;
+  font-weight: 700;
 }
 
 .empty-wishlist p {
+  margin: 10px 0 0;
+
   color: #9299a5;
-  margin-top: 8px;
+
+  font-size: 14px;
 }
+
+
+/* =========================================
+   LOADING
+========================================= */
+
+.wishlist-page > p {
+  color: #9299a5;
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
 
 @media (max-width: 1200px) {
-  .wishlist-grid {
-    grid-template-columns: repeat(4, 1fr);
+
+  .wishlist-page {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+
+  .wishlist-header h1 {
+    font-size: 36px;
   }
 }
+
 
 @media (max-width: 900px) {
-  .wishlist-grid {
-    grid-template-columns: repeat(3, 1fr);
+
+  .wishlist-page {
+    padding-top: 100px;
+  }
+
+  .wishlist-header {
+    margin-bottom: 30px;
+  }
+
+  .wishlist-header h1 {
+    font-size: 34px;
   }
 }
 
+
 @media (max-width: 600px) {
+
   .wishlist-page {
-    padding: 100px 25px 40px;
+    padding:
+      95px
+      18px
+      45px;
   }
 
-  .wishlist-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
+  .wishlist-header h1 {
+    font-size: 30px;
+  }
+
+  .wishlist-header p {
+    font-size: 13px;
+  }
+
+  .empty-wishlist {
+    min-height: 330px;
+    padding: 25px;
+  }
+
+  .empty-icon {
+    width: 75px;
+    height: 75px;
+    font-size: 40px;
+  }
+
+  .empty-wishlist h2 {
+    font-size: 21px;
   }
 }

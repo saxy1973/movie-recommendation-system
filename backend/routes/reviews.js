@@ -3,6 +3,7 @@ const Review = require("../models/Review");
 
 const router = express.Router();
 
+
 // =========================
 // ADD REVIEW
 // =========================
@@ -18,7 +19,6 @@ router.post("/", async (req, res) => {
       });
     }
 
-    // Check if this user already reviewed this movie
     const existingReview = await Review.findOne({
       user: userId,
       movieId: movieId,
@@ -31,7 +31,6 @@ router.post("/", async (req, res) => {
       });
     }
 
-    // Create new review
     const review = await Review.create({
       user: userId,
       movieId: movieId,
@@ -72,7 +71,6 @@ router.put("/:reviewId", async (req, res) => {
       });
     }
 
-    // Find review belonging to this user
     const review = await Review.findOne({
       _id: reviewId,
       user: userId,
@@ -123,7 +121,6 @@ router.delete("/:reviewId", async (req, res) => {
       });
     }
 
-    // Delete only if review belongs to this user
     const deletedReview = await Review.findOneAndDelete({
       _id: reviewId,
       user: userId,
@@ -153,17 +150,18 @@ router.delete("/:reviewId", async (req, res) => {
 
 
 // =========================
-// GET REVIEWS FOR A MOVIE
+// GET REVIEWS BY USER
+// IMPORTANT: KEEP BEFORE /:movieId
 // =========================
 
-router.get("/:movieId", async (req, res) => {
+router.get("/user/:userId", async (req, res) => {
   try {
-    const { movieId } = req.params;
+    const { userId } = req.params;
 
     const reviews = await Review.find({
-      movieId: movieId,
+      user: userId,
     })
-      .populate("user", "name")
+      .populate("user", "firstName lastName")
       .sort({ createdAt: -1 });
 
     res.status(200).json({
@@ -172,7 +170,68 @@ router.get("/:movieId", async (req, res) => {
     });
 
   } catch (error) {
-    console.error("Get Reviews Error:", error.message);
+    console.error(
+      "Get User Reviews Error:",
+      error.message
+    );
+
+    res.status(500).json({
+      success: false,
+      message: "Server error",
+    });
+  }
+});
+
+
+// =========================
+// GET REVIEWS FOR A MOVIE
+// =========================
+
+router.get("/:movieId", async (req, res) => {
+  try {
+    const { movieId } = req.params;
+    const { userId } = req.query;
+
+    const reviews = await Review.find({
+      movieId: movieId,
+    })
+      .populate("user", "firstName lastName")
+      .sort({ createdAt: -1 });
+
+
+    // Current user's review first
+    if (userId) {
+      reviews.sort((a, b) => {
+
+        const aIsCurrentUser =
+          String(a.user?._id) === String(userId);
+
+        const bIsCurrentUser =
+          String(b.user?._id) === String(userId);
+
+        if (aIsCurrentUser && !bIsCurrentUser) {
+          return -1;
+        }
+
+        if (!aIsCurrentUser && bIsCurrentUser) {
+          return 1;
+        }
+
+        return 0;
+      });
+    }
+
+
+    res.status(200).json({
+      success: true,
+      reviews,
+    });
+
+  } catch (error) {
+    console.error(
+      "Get Reviews Error:",
+      error.message
+    );
 
     res.status(500).json({
       success: false,

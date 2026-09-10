@@ -10,7 +10,10 @@ const ReviewForm = ({ movieId, onReviewAdded }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const storedUser = localStorage.getItem("user");
+    const storedUser =
+  localStorage.getItem("user") ||
+  sessionStorage.getItem("user");
+    
 
     if (!storedUser) {
       alert("Please login to submit a review");

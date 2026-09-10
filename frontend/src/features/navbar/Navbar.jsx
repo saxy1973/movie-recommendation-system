@@ -2,13 +2,19 @@ import "./navbar.css";
 import Logo from "./Logo";
 import NavLinks from "./NavLinks";
 import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
 
 const Navbar = () => {
   const navigate = useNavigate();
 
-  const user = JSON.parse(
-    localStorage.getItem("user") || "null"
-  );
+  const storedUser =
+    localStorage.getItem("user") ||
+    sessionStorage.getItem("user");
+
+  const user = storedUser
+    ? JSON.parse(storedUser)
+    : null;
 
   return (
     <nav className="navbar">
@@ -19,22 +25,22 @@ const Navbar = () => {
 
       <div className="nav-right">
 
-        {/* Wishlist */}
+        {/* Recommendations */}
         <button
-          className="wishlist-btn"
-          onClick={() => navigate("/wishlist")}
+          className="recommendations-btn"
+          onClick={() => navigate("/recommendations")}
         >
-          ♡ Wishlist
+          Recommendations
         </button>
 
 
-        {/* User */}
+        {/* Account */}
         <button
           className="account-btn"
-          onClick={() => navigate("/profile")}
+          onClick={() => navigate("/account")}
         >
-          <span className="account-icon"  >
-            👤
+          <span className="account-icon">
+            <FontAwesomeIcon icon={faUser} />
           </span>
 
           <span>

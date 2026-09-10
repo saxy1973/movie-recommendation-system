@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { getTrendingMovies } from "../../../services/movieService";
-import MovieCard from "../../movies/MovieCard";
+import { getTrendingMovies } from "../../services/movieService";
+import MovieCard from "../movies/MovieCard";
 import "./trending.css";
 
 const Trending = () => {

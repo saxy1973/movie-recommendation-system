@@ -1,8 +1,17 @@
 /* ===========================
    PAGE
 =========================== */
-
+/* Theater page scrollbar hide */
+.theaters-page {
+    height: 100vh;
+    overflow: hidden;
+}
+.theaters-page::-webkit-scrollbar {
+  display: none;
+}
 .theaters-page{
+     scrollbar-width: none;
+  -ms-overflow-style: none;
     min-height: 100vh;
     background:#0b0f19;
     padding:25px 0 50px;

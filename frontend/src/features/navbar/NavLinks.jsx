@@ -63,6 +63,10 @@ const goToTheaters = () => {
   navigate("/theaters");
 };
 
+const goToContact = () => {
+  navigate("/contact");
+};
+
   return (
     <ul className="nav-links">
       <li onClick={goToHome}>Home</li>
@@ -75,7 +79,7 @@ const goToTheaters = () => {
       
       <li onClick={goToTheaters}>Theaters</li>
       
-      <li>Contact Us</li>
+      <li onClick={goToContact}>Contact Us</li>
     </ul>
   );
 };

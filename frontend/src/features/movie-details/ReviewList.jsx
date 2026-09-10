@@ -9,6 +9,20 @@ const ReviewList = ({
   setReviews,
 }) => {
 
+  // Get logged-in user
+  const storedUser =
+    localStorage.getItem("user") ||
+    sessionStorage.getItem("user");
+
+  const currentUserId = storedUser
+    ? JSON.parse(storedUser).id
+    : null;
+
+
+  // =========================
+  // FETCH REVIEWS
+  // =========================
+
   useEffect(() => {
 
     const fetchReviews = async () => {
@@ -16,7 +30,12 @@ const ReviewList = ({
       try {
 
         const response = await api.get(
-          `/reviews/${movieId}`
+          `/reviews/${movieId}`,
+          {
+            params: {
+              userId: currentUserId,
+            },
+          }
         );
 
         if (response.data.success) {
@@ -35,11 +54,22 @@ const ReviewList = ({
 
     };
 
+
     if (movieId) {
+
+      // Load immediately
       fetchReviews();
+
+      // Check every 5 seconds
+      const interval = setInterval(() => {
+        fetchReviews();
+      }, 5000);
+
+      // Stop when leaving page
+      return () => clearInterval(interval);
     }
 
-  }, [movieId, setReviews]);
+  }, [movieId, currentUserId, setReviews]);
 
 
   // =========================
@@ -76,15 +106,6 @@ const ReviewList = ({
     );
 
   };
-
-
-  // Get logged-in user
-  const storedUser =
-    localStorage.getItem("user");
-
-  const currentUserId = storedUser
-    ? JSON.parse(storedUser).id
-    : null;
 
 
   return (

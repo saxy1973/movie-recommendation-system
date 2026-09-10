@@ -5,25 +5,81 @@ import "./movie.css";
 const MovieCard = ({ movie }) => {
   const navigate = useNavigate();
 
-  // Support both OMDb and TMDB
+  // =========================
+  // MOVIE DATA
+  // =========================
+
   const id = movie.imdbID || movie.id;
-  const title = movie.Title || movie.title;
-  const poster = movie.Poster || movie.poster;
-  const year = movie.Year || movie.year || movie.releaseDate;
-  const type = movie.Type || "Movie";
-  const rating = movie.rating || movie.Rating;
+
+  const title =
+    movie.Title ||
+    movie.title ||
+    movie.name ||
+    "Untitled";
+
+  const poster =
+    movie.Poster ||
+    movie.poster;
+
+  const year =
+    movie.Year ||
+    movie.year ||
+    movie.releaseDate ||
+    movie.release_date ||
+    movie.first_air_date ||
+    "N/A";
+
+  const rating =
+    movie.rating ??
+    movie.Rating ??
+    movie.vote_average;
+
+  // =========================
+  // MOVIE / SERIES TYPE
+  // =========================
+
+  const type =
+    movie.Type ||
+    movie.type ||
+    (movie.media_type === "tv" ? "series" : "movie");
+
+  const normalizedType =
+    String(type).toLowerCase() === "series" ||
+    String(type).toLowerCase() === "tv"
+      ? "series"
+      : "movie";
+
+  // =========================
+  // OPEN DETAILS
+  // =========================
+
+  const handleMovieClick = () => {
+    navigate(
+      `/movie/${id}?type=${normalizedType}`
+    );
+  };
 
   return (
     <div
       className="movie-card"
-      onClick={() => navigate(`/movie/${id}`)}
+      onClick={handleMovieClick}
     >
-      {/* Movie badge */}
+
+      {/* =========================
+          MOVIE / SERIES BADGE
+      ========================= */}
+
       <div className="movie-badge">
-        {type === "series" ? "TV SERIES" : "MOVIE"}
+        {normalizedType === "series"
+          ? "TV SERIES"
+          : "MOVIE"}
       </div>
 
-      {/* Movie poster */}
+
+      {/* =========================
+          POSTER
+      ========================= */}
+
       <img
         src={
           poster && poster !== "N/A"
@@ -34,22 +90,44 @@ const MovieCard = ({ movie }) => {
         className="movie-poster"
       />
 
-      {/* Wishlist bookmark */}
-      <WishlistButton movieId={id} />
 
-      {/* Movie information */}
+      {/* =========================
+          WISHLIST
+      ========================= */}
+
+      <div
+        onClick={(e) => e.stopPropagation()}
+      >
+        <WishlistButton movieId={id} />
+      </div>
+
+
+      {/* =========================
+          MOVIE INFORMATION
+      ========================= */}
+
       <div className="movie-overlay">
+
         <h3 className="movie-title">
           {title}
         </h3>
 
         <p className="movie-subtitle">
+
           {year}
-          {rating
-            ? ` • ⭐ ${Number(rating).toFixed(1)}`
-            : ""}
+
+          {rating !== undefined &&
+            rating !== null && (
+              <>
+                {" • "}
+                ⭐ {Number(rating).toFixed(1)}
+              </>
+            )}
+
         </p>
+
       </div>
+
     </div>
   );
 };

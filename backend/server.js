@@ -102,50 +102,165 @@ app.get("/api/search", async (req, res) => {
 app.get("/api/movie/:id", async (req, res) => {
   try {
     const movieId = req.params.id;
+    const type = req.query.type || "movie";
 
     if (!tmdbApiKey) {
       return res.status(500).json({
         success: false,
-        message: "TMDB API key is not configured"
+        message: "TMDB API key is not configured",
       });
     }
 
-    const [movieResponse, creditsResponse] = await Promise.all([
-      axios.get(`https://api.themoviedb.org/3/movie/${movieId}`, {
-        params: { api_key: tmdbApiKey, language: "en-US" }
-      }),
-      axios.get(`https://api.themoviedb.org/3/movie/${movieId}/credits`, {
-        params: { api_key: tmdbApiKey, language: "en-US" }
-      })
-    ]);
+    const endpoint =
+      type === "series"
+        ? `https://api.themoviedb.org/3/tv/${movieId}`
+        : `https://api.themoviedb.org/3/movie/${movieId}`;
 
-    const movie = movieResponse.data;
+    const creditsEndpoint =
+      type === "series"
+        ? `https://api.themoviedb.org/3/tv/${movieId}/credits`
+        : `https://api.themoviedb.org/3/movie/${movieId}/credits`;
+
+    const [detailsResponse, creditsResponse] =
+      await Promise.all([
+        axios.get(endpoint, {
+          params: {
+            api_key: tmdbApiKey,
+            language: "en-US",
+          },
+        }),
+
+        axios.get(creditsEndpoint, {
+          params: {
+            api_key: tmdbApiKey,
+            language: "en-US",
+          },
+        }),
+      ]);
+
+    const item = detailsResponse.data;
     const credits = creditsResponse.data;
 
-    const director =
-      credits.crew?.find((person) => person.job === "Director")?.name || "N/A";
+    // =========================================
+    // COMMON DATA
+    // =========================================
+
+    const title =
+      item.title ||
+      item.name ||
+      "Untitled";
+
+    const year =
+      (
+        item.release_date ||
+        item.first_air_date ||
+        ""
+      ).split("-")[0] || "N/A";
+
+    const genres =
+      item.genres
+        ?.map((genre) => genre.name)
+        .join(", ") || "N/A";
+
     const actors =
-      credits.cast?.slice(0, 10).map((person) => person.name).join(", ") || "N/A";
-    const genres = movie.genres?.map((genre) => genre.name).join(", ") || "N/A";
+      credits.cast
+        ?.slice(0, 10)
+        .map((person) => person.name)
+        .join(", ") || "N/A";
+
+    const director =
+      type === "movie"
+        ? credits.crew?.find(
+            (person) =>
+              person.job === "Director"
+          )?.name || "N/A"
+        : "N/A";
+
+    // =========================================
+    // SERIES SPECIFIC
+    // =========================================
+
+    const seasons =
+      type === "series"
+        ? item.number_of_seasons || 0
+        : null;
+
+    const episodes =
+      type === "series"
+        ? item.number_of_episodes || 0
+        : null;
+
+    const runtime =
+      type === "movie"
+        ? item.runtime
+          ? `${item.runtime} min`
+          : "N/A"
+        : item.episode_run_time?.length
+        ? `${item.episode_run_time[0]} min/episode`
+        : "N/A";
+
+    // =========================================
+    // RESPONSE
+    // =========================================
 
     res.json({
-      imdbID: String(movie.id),
-      Title: movie.title,
-      Year: movie.release_date ? movie.release_date.split("-")[0] : "N/A",
-      Poster: buildPosterUrl(movie.poster_path),
-      Type: "movie",
+      success: true,
+
+      imdbID: String(item.id),
+
+      Title: title,
+
+      Year: year,
+
+      Poster: buildPosterUrl(
+        item.poster_path
+      ),
+
+      // IMPORTANT
+      Type: type,
+
+      Rating: item.vote_average,
+
       Genre: genres,
+
+      Language:
+        item.spoken_languages
+          ?.map((lang) => lang.english_name)
+          .join(", ") || "N/A",
+
+      Country:
+        item.production_countries
+          ?.map((country) => country.name)
+          .join(", ") || "N/A",
+
       Director: director,
+
       Actors: actors,
-      Plot: movie.overview || "No overview available",
-      Runtime: movie.runtime ? `${movie.runtime} min` : "N/A"
+
+      Plot:
+        item.overview ||
+        "No overview available",
+
+      Runtime: runtime,
+
+      Seasons: seasons,
+
+      Episodes: episodes,
+
+      Status: item.status || "N/A",
     });
+
   } catch (error) {
-    console.error(error.response?.data || error.message);
+    console.error(
+      "Movie/Series Details Error:",
+      error.response?.data ||
+        error.message
+    );
 
     res.status(500).json({
       success: false,
-      message: "Error fetching movie details"
+      message:
+        "Error fetching movie/series details",
     });
   }
 });
@@ -301,6 +416,23 @@ app.use("/api/theaters", theaterRoutes);
 const trailerRoutes = require("./routes/trailer");
 
 app.use("/api/trailer", trailerRoutes);
+
+const preferencesRoutes = require("./routes/preferences");
+
+app.use("/api/preferences", preferencesRoutes);
+
+const recentlyViewedRoutes =
+  require("./routes/recentlyViewed");
+
+  app.use(
+  "/api/recently-viewed",
+  recentlyViewedRoutes
+);
+
+const contactRoutes = require("./routes/contact");
+app.use("/api/contact", contactRoutes);
+
+
 
 const PORT = 5000;
 

@@ -1,7 +1,41 @@
+import { useEffect } from "react";
 import "./details.css";
 import WishlistButton from "../wishlist/WishlistButton";
 
+const saveRecentlyViewed = (movie) => {
+  const existing =
+    JSON.parse(localStorage.getItem("recentlyViewed")) || [];
+
+const movieData = {
+  id: movie.imdbID,
+  title: movie.Title,
+  poster: movie.Poster,
+  rating: movie.Rating,
+  genre: movie.Genre,
+  actors: movie.Actors,
+  viewedAt: new Date().toISOString(),
+};
+
+  const filtered = existing.filter(
+    (item) => String(item.id) !== String(movieData.id)
+  );
+
+  const updated = [movieData, ...filtered].slice(0, 20);
+
+  localStorage.setItem(
+    "recentlyViewed",
+    JSON.stringify(updated)
+  );
+};
+
+
+
 const MovieInfo = ({ movie }) => {
+  useEffect(() => {
+  if (movie) {
+    saveRecentlyViewed(movie);
+  }
+}, [movie]);
   return (
     <section className="movie-info-container">
 
@@ -17,13 +51,25 @@ const MovieInfo = ({ movie }) => {
 
         <h1>{movie.Title}</h1>
 
-      <div className="movie-meta">
+    <div className="movie-meta">
 
-  <span>⭐ {movie.imdbRating}</span>
+  <span className="movie-rating">
+    ⭐ {movie.Rating ? Number(movie.Rating).toFixed(1) : "N/A"}/10
+  </span>
 
-  <span>📅 {movie.Year}</span>
+  <span>
+    📅 {movie.Year || "N/A"}
+  </span>
 
-  <span>⏱ {movie.Runtime}</span>
+  <span>
+    ⏱ {movie.Runtime || "N/A"}
+  </span>
+
+  <span>
+    {movie.Type === "series"
+      ? "📺 Series"
+      : "🎬 Movie"}
+  </span>
 
   <div className="details-wishlist-wrapper">
     <WishlistButton
@@ -47,13 +93,13 @@ const MovieInfo = ({ movie }) => {
             <strong>Actors:</strong> {movie.Actors}
           </p>
 
-          <p>
-            <strong>Language:</strong> {movie.Language}
-          </p>
+         <p>
+  <strong>Language:</strong> {movie.Language || "N/A"}
+</p>
 
-          <p>
-            <strong>Country:</strong> {movie.Country}
-          </p>
+<p>
+  <strong>Country:</strong> {movie.Country || "N/A"}
+</p>
 
         </div>
 

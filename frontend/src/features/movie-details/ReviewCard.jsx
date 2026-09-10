@@ -148,9 +148,11 @@ const ReviewCard = ({
 
           <div>
 
-            <h3>
-              {review.user?.name || "User"}
-            </h3>
+          <h3>
+  {review.user
+    ? `${review.user.firstName} ${review.user.lastName}`
+    : "User"}
+</h3>
 
             <p className="verified">
               ✔ Verified Viewer

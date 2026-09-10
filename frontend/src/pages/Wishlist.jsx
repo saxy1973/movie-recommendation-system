@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import api from "../services/api";
 import MovieCard from "../features/movies/MovieCard";
-import "./wishlist.css";
+import "./Wishlist.css";
 import MovieGrid from "../features/movies/MovieGrid";
 
 const Wishlist = () => {

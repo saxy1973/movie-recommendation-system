@@ -1,40 +1,96 @@
-import { useEffect, useState } from "react";
-import { getComingSoonMovies } from "../../services/movieService";
 import MovieCard from "../movies/MovieCard";
+import MovieFilters from "../filters/MovieFilters";
 import "./comingsoon.css";
 
-const ComingSoon = () => {
-  const [movies, setMovies] = useState([]);
-
-  useEffect(() => {
-    loadMovies();
-  }, []);
-const loadMovies = async () => {
-  try {
-    const data = await getComingSoonMovies();
-
-    console.log(data); // <-- Add this
-
-    if (data.success) {
-      setMovies(data.movies);
-    }
-  } catch (err) {
-    console.log(err);
-  }
-};
-
+const ComingSoon = ({
+  movies = [],
+  filters,
+  onApplyFilters,
+  onClearFilters,
+}) => {
   return (
-    <section id="coming-soon" className="movie-section">
-      <h2>Coming Soon</h2>
+    <section className="coming-soon-page">
 
-      <div className="movie-grid">
-        {movies.map((movie) => (
-          <MovieCard
-            key={movie.id}
-            movie={movie}
-          />
-        ))}
+      {/* =========================
+          HEADER
+      ========================= */}
+      <div className="coming-soon-header">
+
+        <div>
+          <span className="section-label">
+            MOVIRA COLLECTION
+          </span>
+
+          <h1>
+            Coming Soon <span>Movies</span>
+          </h1>
+
+          <p>
+            Get ready for the most exciting movies
+            arriving soon. Keep an eye on what’s
+            next in the world of cinema.
+          </p>
+        </div>
+
+        <div className="movie-count">
+          <strong>{movies.length}</strong>
+          <span>Movies</span>
+        </div>
+
       </div>
+
+      {/* =========================
+          FILTERS
+      ========================= */}
+      <div className="coming-soon-filter-area">
+        <MovieFilters
+          initialFilters={filters}
+          showYear={false}
+          onApply={onApplyFilters}
+          onClear={onClearFilters}
+        />
+      </div>
+
+      {/* =========================
+          MOVIES
+      ========================= */}
+      {movies.length > 0 ? (
+
+        <div className="movie-grid">
+
+          {movies.map((movie, index) => (
+            <MovieCard
+              key={
+                movie.id ||
+                movie.imdbID ||
+                index
+              }
+              movie={movie}
+            />
+          ))}
+
+        </div>
+
+      ) : (
+
+        <div className="empty-movies">
+
+          <div className="empty-icon">
+            🎬
+          </div>
+
+          <h3>
+            No upcoming movies match your filters
+          </h3>
+
+          <p>
+            Try changing or clearing your filters.
+          </p>
+
+        </div>
+
+      )}
+
     </section>
   );
 };

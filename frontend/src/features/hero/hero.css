@@ -14,6 +14,19 @@ body {
   background: #0b0f19;
 }
 
+/* Hide main page scrollbar ONLY on Hero page */
+body.hero-page {
+  overflow: hidden;
+}
+
+.hero {
+  scrollbar-width: none;
+}
+
+.hero::-webkit-scrollbar {
+  display: none;
+}
+
 
 /* =========================
    HERO
@@ -23,13 +36,12 @@ body {
   width: 100%;
   min-height: calc(100vh - 90px);
 
-  background:black;
-
+  background: black;
   color: #fff;
 
   overflow: hidden;
 
-  padding: 72px 60px 40px;
+  padding: 68px 0 0 60px;
 }
 
 
@@ -41,15 +53,15 @@ body {
   position: relative;
 
   width: 100%;
-  max-width: 1700px;
+ max-width: 1700px;
 
-  height: 620px;
+  height: 650px;
 
   margin: auto;
 
   overflow: hidden;
 
-  border-radius: 30px;
+  border-radius: 0px;
 
   background: black;
 

@@ -805,3 +805,675 @@
   }
 
 }
+
+/* =====================================================
+   PREMIUM ACCOUNT PAGE ANIMATIONS
+===================================================== */
+
+
+/* =====================================================
+   PAGE ENTRY
+===================================================== */
+
+.account-page {
+  animation: accountPageEnter 0.8s ease both;
+}
+
+@keyframes accountPageEnter {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+
+/* =====================================================
+   BACKGROUND GLOW ANIMATION
+===================================================== */
+
+.account-page::before {
+  animation: purpleGlowMove 8s ease-in-out infinite alternate;
+}
+
+@keyframes purpleGlowMove {
+  from {
+    transform: translate(0, 0) scale(1);
+  }
+
+  to {
+    transform: translate(80px, 40px) scale(1.15);
+  }
+}
+
+
+.account-page::after {
+  animation: pinkGlowMove 9s ease-in-out infinite alternate;
+}
+
+@keyframes pinkGlowMove {
+  from {
+    transform: translate(0, 0) scale(1);
+  }
+
+  to {
+    transform: translate(-70px, -35px) scale(1.12);
+  }
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.account-title {
+  animation:
+    accountTitleEnter 0.9s cubic-bezier(.22, 1, .36, 1) both,
+    titleGlow 5s linear 0.9s infinite;
+}
+
+@keyframes accountTitleEnter {
+  from {
+    opacity: 0;
+    transform: translateY(-25px);
+    filter: blur(7px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+
+.account-subtitle {
+  animation: subtitleEnter 0.8s ease 0.25s both;
+}
+
+@keyframes subtitleEnter {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* =====================================================
+   MAIN LAYOUT
+===================================================== */
+
+.account-layout {
+  animation: layoutEnter 0.8s ease 0.3s both;
+}
+
+@keyframes layoutEnter {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* =====================================================
+   MENU CARD
+===================================================== */
+
+.account-menu {
+  animation: menuEnter 0.8s cubic-bezier(.22, 1, .36, 1) 0.35s both;
+
+  transition:
+    transform 0.4s ease,
+    box-shadow 0.4s ease,
+    border-color 0.4s ease;
+}
+
+@keyframes menuEnter {
+  from {
+    opacity: 0;
+    transform: translateX(-35px) scale(.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+
+.account-menu:hover {
+  border-color: rgba(125, 60, 255, .16);
+
+  box-shadow:
+    0 25px 65px rgba(0, 0, 0, .48),
+    0 0 45px rgba(125, 60, 255, .07);
+}
+
+
+/* =====================================================
+   MENU ITEMS STAGGER
+===================================================== */
+
+.account-menu-item {
+  animation: menuItemEnter 0.6s cubic-bezier(.22, 1, .36, 1) both;
+}
+
+@keyframes menuItemEnter {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+
+.account-menu-item:nth-child(1) {
+  animation-delay: .45s;
+}
+
+.account-menu-item:nth-child(2) {
+  animation-delay: .53s;
+}
+
+.account-menu-item:nth-child(3) {
+  animation-delay: .61s;
+}
+
+.account-menu-item:nth-child(4) {
+  animation-delay: .69s;
+}
+
+.account-menu-item:nth-child(5) {
+  animation-delay: .77s;
+}
+
+.account-menu-item:nth-child(6) {
+  animation-delay: .85s;
+}
+
+
+/* =====================================================
+   MENU ITEM HOVER
+===================================================== */
+
+.account-menu-item {
+  position: relative;
+  overflow: hidden;
+}
+
+
+.account-menu-item::before {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  top: 0;
+
+  width: 3px;
+  height: 100%;
+
+  background: linear-gradient(
+    180deg,
+    #7d3cff,
+    #ec008c
+  );
+
+  transform: scaleY(0);
+  transform-origin: center;
+
+  transition: transform .3s ease;
+}
+
+
+.account-menu-item:hover::before,
+.account-menu-item.active::before {
+  transform: scaleY(1);
+}
+
+
+.account-menu-item:hover {
+  box-shadow:
+    0 8px 25px rgba(125, 60, 255, .08);
+}
+
+
+/* =====================================================
+   MENU ICON
+===================================================== */
+
+.account-menu-icon {
+  transition:
+    transform .35s ease,
+    filter .35s ease;
+}
+
+
+.account-menu-item:hover .account-menu-icon {
+  transform: scale(1.12) rotate(-4deg);
+
+  filter:
+    drop-shadow(0 0 10px rgba(168, 85, 247, .45));
+}
+
+
+/* Active icon */
+
+.account-menu-item.active .account-menu-icon {
+  filter:
+    drop-shadow(0 0 10px rgba(125, 60, 255, .45));
+}
+
+
+/* =====================================================
+   MENU TEXT
+===================================================== */
+
+.account-menu-item h3,
+.account-menu-item p {
+  transition:
+    transform .3s ease,
+    color .3s ease;
+}
+
+
+.account-menu-item:hover h3 {
+  transform: translateX(3px);
+}
+
+
+.account-menu-item:hover p {
+  transform: translateX(3px);
+}
+
+
+/* =====================================================
+   ACTIVE MENU GLOW
+===================================================== */
+
+.account-menu-item.active {
+  animation: activeMenuGlow 3s ease-in-out infinite;
+}
+
+@keyframes activeMenuGlow {
+  0%,
+  100% {
+    box-shadow:
+      0 0 25px rgba(125, 60, 255, .12),
+      inset 0 0 20px rgba(125, 60, 255, .04);
+  }
+
+  50% {
+    box-shadow:
+      0 0 35px rgba(125, 60, 255, .20),
+      inset 0 0 25px rgba(125, 60, 255, .06);
+  }
+}
+
+
+/* =====================================================
+   LOGOUT HOVER
+===================================================== */
+
+.logout-item:hover {
+  box-shadow:
+    0 0 25px rgba(255, 77, 109, .13);
+
+  transform: translateX(7px);
+}
+
+
+.logout-item .account-menu-icon {
+  transition:
+    transform .35s ease,
+    filter .35s ease;
+}
+
+
+.logout-item:hover .account-menu-icon {
+  transform: scale(1.12);
+
+  filter:
+    drop-shadow(0 0 10px rgba(255, 77, 109, .5));
+}
+
+
+/* =====================================================
+   PROFILE CARD
+===================================================== */
+
+.account-profile {
+  animation: profileEnter 0.9s cubic-bezier(.22, 1, .36, 1) 0.45s both;
+
+  transition:
+    transform .4s ease,
+    box-shadow .4s ease,
+    border-color .4s ease;
+}
+
+@keyframes profileEnter {
+  from {
+    opacity: 0;
+    transform: translateX(35px) scale(.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+
+.account-profile:hover {
+  transform: translateY(-5px);
+
+  border-color: rgba(236, 0, 140, .16);
+
+  box-shadow:
+    0 28px 70px rgba(0, 0, 0, .48),
+    0 0 50px rgba(236, 0, 140, .07);
+}
+
+
+/* =====================================================
+   PROFILE GLOW
+===================================================== */
+
+.account-profile::before {
+  animation: profileGlow 6s ease-in-out infinite alternate;
+}
+
+@keyframes profileGlow {
+  from {
+    transform: translate(0, 0) scale(1);
+  }
+
+  to {
+    transform: translate(-25px, 25px) scale(1.18);
+  }
+}
+
+
+/* =====================================================
+   PROFILE AVATAR
+===================================================== */
+
+.profile-avatar {
+  animation:
+    avatarEnter 0.9s cubic-bezier(.22, 1, .36, 1) 0.65s both,
+    avatarGlow 3s ease-in-out 1.5s infinite;
+
+  transition:
+    transform .4s ease,
+    box-shadow .4s ease;
+}
+
+
+@keyframes avatarEnter {
+  from {
+    opacity: 0;
+    transform: scale(.5) rotate(-15deg);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(0);
+  }
+}
+
+
+@keyframes avatarGlow {
+  0%,
+  100% {
+    box-shadow:
+      0 0 25px rgba(160, 70, 255, .35),
+      0 0 60px rgba(236, 0, 140, .10);
+  }
+
+  50% {
+    box-shadow:
+      0 0 35px rgba(160, 70, 255, .55),
+      0 0 80px rgba(236, 0, 140, .18);
+  }
+}
+
+
+.profile-avatar:hover {
+  transform: scale(1.06) rotate(3deg);
+
+  box-shadow:
+    0 0 40px rgba(160, 70, 255, .55),
+    0 0 80px rgba(236, 0, 140, .20);
+}
+
+
+/* =====================================================
+   PROFILE NAME
+===================================================== */
+
+.account-profile h2 {
+  animation: profileNameEnter .7s ease .8s both;
+}
+
+@keyframes profileNameEnter {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+.profile-tagline {
+  animation: taglineEnter .7s ease .95s both;
+}
+
+@keyframes taglineEnter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* =====================================================
+   DIVIDER
+===================================================== */
+
+.profile-divider {
+  animation: dividerReveal 1s ease 1s both;
+}
+
+@keyframes dividerReveal {
+  from {
+    opacity: 0;
+    transform: scaleX(.3);
+  }
+
+  to {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+
+/* =====================================================
+   WELCOME BOX
+===================================================== */
+
+.profile-welcome {
+  animation: welcomeEnter .7s ease 1.05s both;
+
+  transition:
+    transform .35s ease,
+    border-color .35s ease,
+    background .35s ease;
+}
+
+
+@keyframes welcomeEnter {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+.profile-welcome:hover {
+  transform: translateY(-3px);
+
+  border-color: rgba(168, 85, 247, .16);
+
+  background:
+    rgba(168, 85, 247, .035);
+}
+
+
+.profile-welcome span {
+  transition:
+    transform .35s ease;
+}
+
+
+.profile-welcome:hover span {
+  transform: scale(1.12) rotate(-5deg);
+}
+
+
+/* =====================================================
+   PROFILE STATS
+===================================================== */
+
+.profile-stats {
+  animation: statsEnter .8s ease 1.15s both;
+}
+
+@keyframes statsEnter {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+
+/* =====================================================
+   STAT ITEMS
+===================================================== */
+
+.profile-stat {
+  transition:
+    background .3s ease,
+    transform .3s ease;
+}
+
+
+.profile-stat:hover {
+  background:
+    rgba(125, 60, 255, .06);
+
+  transform: translateY(-2px);
+}
+
+
+.profile-stat strong {
+  transition:
+    transform .3s ease,
+    color .3s ease;
+}
+
+
+.profile-stat:hover strong {
+  transform: scale(1.08);
+
+  color: #d8b4fe;
+}
+
+
+.stat-icon {
+  transition:
+    transform .3s ease,
+    filter .3s ease;
+}
+
+
+.profile-stat:hover .stat-icon {
+  transform: scale(1.15);
+
+  filter:
+    drop-shadow(0 0 7px rgba(236, 0, 140, .35));
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 600px) {
+
+  .account-menu:hover,
+  .account-profile:hover {
+    transform: none;
+  }
+
+  .account-menu-item:hover {
+    transform: translateX(3px);
+  }
+
+  .profile-avatar:hover {
+    transform: scale(1.03);
+  }
+
+}
+
+
+/* =====================================================
+   REDUCED MOTION
+===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+}

@@ -8,6 +8,9 @@ import Theaters from "./pages/Theaters";
 import TheaterSearchResults from "./pages/TheaterSearchResults";
 import Recommendation from "./features/recommendations/Recommendations";
 import Contact from "./features/contact/Contact";
+import TopRatedPage from "./pages/TopRatedPage";
+import ComingSoonPage from "./pages/ComingSoonPage";
+import TrendingPage from "./pages/TrendingPage";
 
 import Login from "./features/auth/Login";
 import Signup from "./features/auth/Signup";
@@ -43,6 +46,9 @@ function App() {
         <Route path="/" element={<Dashboard />} />
         <Route path="/search-results" element={<SearchResults />} />
         <Route path="/movie/:id" element={<MovieDetails />} />
+        <Route path="/top-rated" element={<TopRatedPage />} />
+        <Route path="/coming-soon" element={<ComingSoonPage />} />
+        <Route path="/trending" element={<TrendingPage />} />
         <Route path="/theaters" element={<Theaters />} />
         <Route path="/wishlist" element={<Wishlist />} />
         <Route path="/account" element={<Account />} />        

@@ -1,78 +1,752 @@
-/* ==========================
+/* =========================
    SEARCH RESULTS PAGE
-========================== */
+========================= */
 
 .search-results-page {
-    background: #0d1117;
-    color: #fff;
-    min-height: 100vh;
+  min-height: calc(100vh - 70px);
+  padding: 110px 60px 60px;
+
+  background:
+    radial-gradient(
+      circle at 10% 10%,
+      rgba(124, 58, 237, 0.12),
+      transparent 32%
+    ),
+    radial-gradient(
+      circle at 90% 20%,
+      rgba(236, 0, 140, 0.10),
+      transparent 30%
+    ),
+    #0b0f19;
+
+  color: #fff;
 }
+
+
+/* =========================
+   CONTAINER
+========================= */
 
 .search-results-container {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 100px 60px 60px;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
-/* ==========================
-   HEADING
-========================== */
 
-.search-title {
-    font-size: 42px;
-    font-weight: 700;
-    margin-bottom: 12px;
+/* =========================
+   HEADER
+========================= */
+
+.search-results-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 30px;
+
+  margin-bottom: 25px;
 }
 
-.search-query {
-    font-size: 22px;
-    color: #cfcfcf;
-    margin-bottom: 45px;
+.search-header-content {
+  min-width: 0;
 }
 
-.search-query span {
-    color: #ff4d6d;
-    font-weight: 600;
+.search-results-header .section-label {
+  display: inline-block;
+  margin-bottom: 10px;
+
+  color: #a78bfa;
+
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2px;
 }
 
-.no-results {
-    font-size: 18px;
-    color: #999;
-    margin-top: 40px;
-    text-align: center;
+.search-results-header h1 {
+  margin: 0;
+
+  font-size: clamp(38px, 4vw, 56px);
+  line-height: 1.05;
+  font-weight: 700;
+  letter-spacing: -1.5px;
 }
 
-/* ==========================
+.search-results-header h1 span {
+  background:
+    linear-gradient(
+      90deg,
+      #a855f7,
+      #ec008c
+    );
+
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.search-description {
+  margin-top: 14px;
+
+  color: #9ea3b2;
+
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.search-description strong {
+  color: #ddd;
+}
+
+
+/* =========================
+   HEADER RIGHT
+========================= */
+
+.search-header-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  flex-shrink: 0;
+}
+
+
+/* =========================
+   SEARCH BAR
+========================= */
+
+.search-box {
+  width: 420px;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 6px;
+
+  border: 1px solid
+    rgba(139, 92, 246, 0.22);
+
+  border-radius: 14px;
+
+  background:
+    rgba(255, 255, 255, 0.035);
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  box-shadow:
+    0 10px 30px
+    rgba(0, 0, 0, 0.20);
+}
+
+.search-box input {
+  flex: 1;
+
+  width: 100%;
+  height: 42px;
+
+  padding: 0 14px;
+
+  border: none;
+  outline: none;
+
+  background: transparent;
+
+  color: #fff;
+
+  font-family: inherit;
+  font-size: 13px;
+}
+
+.search-box input::placeholder {
+  color: #777b88;
+}
+
+.search-box input:focus {
+  outline: none;
+}
+
+.search-box button {
+  height: 42px;
+
+  padding: 0 18px;
+
+  border: none;
+  border-radius: 10px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #a855f7,
+      #ec008c
+    );
+
+  color: #fff;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.search-box button:hover:not(:disabled) {
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 8px 20px
+    rgba(168, 85, 247, 0.25);
+}
+
+.search-box button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+
+/* =========================
+   MOVIE COUNT
+========================= */
+
+.search-results-page .movie-count {
+  min-width: 110px;
+
+  padding: 14px 20px;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid
+    rgba(139, 92, 246, 0.22);
+
+  border-radius: 16px;
+
+  background:
+    rgba(255, 255, 255, 0.035);
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  box-shadow:
+    0 10px 30px
+    rgba(0, 0, 0, 0.20);
+}
+
+.search-results-page .movie-count strong {
+  font-size: 28px;
+  line-height: 1;
+
+  color: #fff;
+}
+
+.search-results-page .movie-count span {
+  margin-top: 6px;
+
+  color: #8f94a3;
+
+  font-size: 12px;
+
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+
+/* =========================
+   FILTER AREA
+========================= */
+
+.search-filter-area {
+  width: 100%;
+  max-width: 1400px;
+
+  margin: 0 auto 35px;
+}
+
+
+/* =========================
+   MOVIE GRID
+========================= */
+
+.search-results-container .movie-grid {
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(5, minmax(0, 1fr));
+
+  gap: 24px;
+}
+
+
+/* =========================
+   MOVIE ANIMATION
+========================= */
+
+.search-results-container .movie-grid > * {
+  animation:
+    searchMovieAppear
+    0.55s ease both;
+}
+
+.search-results-container
+  .movie-grid > *:nth-child(2) {
+  animation-delay: 0.05s;
+}
+
+.search-results-container
+  .movie-grid > *:nth-child(3) {
+  animation-delay: 0.10s;
+}
+
+.search-results-container
+  .movie-grid > *:nth-child(4) {
+  animation-delay: 0.15s;
+}
+
+.search-results-container
+  .movie-grid > *:nth-child(5) {
+  animation-delay: 0.20s;
+}
+
+@keyframes searchMovieAppear {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* =========================
+   EMPTY STATE
+========================= */
+
+.search-empty {
+  min-height: 400px;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  color: #fff;
+}
+
+.search-empty .empty-icon {
+  margin-bottom: 14px;
+  font-size: 46px;
+}
+
+.search-empty h3 {
+  margin: 0;
+  font-size: 22px;
+}
+
+.search-empty p {
+  margin-top: 8px;
+
+  color: #8f94a3;
+  font-size: 14px;
+}
+
+
+/* =========================
    RESPONSIVE
-========================== */
+========================= */
 
-@media (max-width: 992px) {
+@media (max-width: 1250px) {
 
-    .search-results-container {
-        padding: 95px 35px 50px;
-    }
+  .search-header-right {
+    gap: 10px;
+  }
 
-    .search-title {
-        font-size: 34px;
-    }
+  .search-box {
+    width: 360px;
+  }
 
-    .search-query {
-        font-size: 20px;
-    }
+  .search-results-container .movie-grid {
+    grid-template-columns:
+      repeat(4, minmax(0, 1fr));
+  }
 }
 
-@media (max-width: 768px) {
 
-    .search-results-container {
-        padding: 90px 20px 40px;
-    }
+@media (max-width: 1050px) {
 
-    .search-title {
-        font-size: 30px;
-    }
+  .search-results-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
 
-    .search-query {
-        font-size: 18px;
-        margin-bottom: 30px;
-    }
+  .search-header-right {
+    width: 100%;
+    align-items: center;
+  }
+
+  .search-box {
+    flex: 1;
+    width: auto;
+  }
+
+  .search-results-page .movie-count {
+    flex-shrink: 0;
+  }
+}
+
+
+@media (max-width: 900px) {
+
+  .search-results-page {
+    padding: 100px 25px 40px;
+  }
+
+  .search-results-container .movie-grid {
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
+  }
+}
+
+
+@media (max-width: 650px) {
+
+  .search-results-page {
+    padding: 95px 18px 35px;
+  }
+
+  .search-results-header h1 {
+    font-size: 36px;
+  }
+
+  .search-description {
+    font-size: 14px;
+  }
+
+  .search-header-right {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-box {
+    width: 100%;
+  }
+
+  .search-results-page .movie-count {
+    align-self: flex-start;
+  }
+
+  .search-results-container .movie-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+    gap: 16px;
+  }
+}
+
+
+@media (max-width: 420px) {
+
+  .search-results-container .movie-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================
+   SEARCH PAGE ANIMATIONS
+========================= */
+
+/* Page fade */
+.search-results-page {
+  animation: searchPageIn 0.6s ease both;
+}
+
+@keyframes searchPageIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+
+/* Header */
+.search-results-header {
+  animation: searchHeaderIn 0.7s ease both;
+}
+
+@keyframes searchHeaderIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* Section label */
+.search-results-header .section-label {
+  animation: searchLabelIn 0.6s ease 0.1s both;
+}
+
+@keyframes searchLabelIn {
+  from {
+    opacity: 0;
+    transform: translateX(-15px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+
+/* Heading */
+.search-results-header h1 {
+  animation: searchTitleIn 0.7s ease 0.15s both;
+}
+
+@keyframes searchTitleIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* Description */
+.search-description {
+  animation: searchDescriptionIn 0.6s ease 0.25s both;
+}
+
+@keyframes searchDescriptionIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* Search box */
+.search-box {
+  animation: searchBoxIn 0.7s ease 0.2s both;
+}
+
+@keyframes searchBoxIn {
+  from {
+    opacity: 0;
+    transform: translateX(20px) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+
+/* Search button */
+.search-box button {
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.search-box button:hover:not(:disabled) {
+  transform: translateY(-2px) scale(1.02);
+}
+
+
+/* Movie count */
+.search-results-page .movie-count {
+  animation: searchCountIn 0.7s ease 0.25s both;
+}
+
+@keyframes searchCountIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+
+/* Filter */
+.search-filter-area {
+  animation: searchFilterIn 0.6s ease 0.3s both;
+}
+
+@keyframes searchFilterIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* Movie cards */
+.search-results-container .movie-grid > * {
+  animation:
+    searchCardIn
+    0.6s
+    cubic-bezier(.22, 1, .36, 1)
+    both;
+
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+@keyframes searchCardIn {
+  from {
+    opacity: 0;
+    transform: translateY(25px) scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+
+/* Stagger */
+.search-results-container .movie-grid > *:nth-child(1) {
+  animation-delay: 0.05s;
+}
+
+.search-results-container .movie-grid > *:nth-child(2) {
+  animation-delay: 0.10s;
+}
+
+.search-results-container .movie-grid > *:nth-child(3) {
+  animation-delay: 0.15s;
+}
+
+.search-results-container .movie-grid > *:nth-child(4) {
+  animation-delay: 0.20s;
+}
+
+.search-results-container .movie-grid > *:nth-child(5) {
+  animation-delay: 0.25s;
+}
+
+.search-results-container .movie-grid > *:nth-child(6) {
+  animation-delay: 0.30s;
+}
+
+.search-results-container .movie-grid > *:nth-child(7) {
+  animation-delay: 0.35s;
+}
+
+.search-results-container .movie-grid > *:nth-child(8) {
+  animation-delay: 0.40s;
+}
+
+.search-results-container .movie-grid > *:nth-child(9) {
+  animation-delay: 0.45s;
+}
+
+.search-results-container .movie-grid > *:nth-child(10) {
+  animation-delay: 0.50s;
+}
+
+
+/* Card hover */
+.search-results-container .movie-grid > *:hover {
+  transform: translateY(-6px);
+}
+
+
+/* Poster hover */
+.search-results-container .movie-grid > * img {
+  transition: transform 0.45s ease;
+}
+
+.search-results-container .movie-grid > *:hover img {
+  transform: scale(1.05);
+}
+
+
+/* Empty state */
+.search-empty {
+  animation: searchEmptyIn 0.7s ease both;
+}
+
+@keyframes searchEmptyIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* =========================
+   REDUCED MOTION
+========================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .search-results-page,
+  .search-results-header,
+  .search-results-header .section-label,
+  .search-results-header h1,
+  .search-description,
+  .search-box,
+  .search-results-page .movie-count,
+  .search-filter-area,
+  .search-results-container .movie-grid > *,
+  .search-empty {
+    animation: none !important;
+  }
+
+  .search-results-container .movie-grid > * img,
+  .search-box button {
+    transition: none !important;
+  }
 }

@@ -3,6 +3,10 @@ import api from "../../services/api";
 import "./contact.css";
 
 const Contact = () => {
+
+  const [activeOption, setActiveOption] =
+    useState("message");
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -15,11 +19,13 @@ const Contact = () => {
   const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
 
+
   // ==========================================
-  // HANDLE INPUT
+  // INPUT
   // ==========================================
 
   const handleChange = (e) => {
+
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
@@ -29,11 +35,13 @@ const Contact = () => {
     setSuccess("");
   };
 
+
   // ==========================================
-  // RESET FORM
+  // RESET
   // ==========================================
 
   const resetForm = () => {
+
     setFormData({
       name: "",
       email: "",
@@ -43,11 +51,13 @@ const Contact = () => {
     });
   };
 
+
   // ==========================================
   // SEND MESSAGE
   // ==========================================
 
   const handleMessage = async (e) => {
+
     e.preventDefault();
 
     setLoading(true);
@@ -60,43 +70,62 @@ const Contact = () => {
       !formData.subject.trim() ||
       !formData.message.trim()
     ) {
-      setError("Please fill all required fields.");
+
+      setError(
+        "Please fill all required fields."
+      );
+
       setLoading(false);
+
       return;
     }
 
     try {
-      const response = await api.post("/contact", {
-        name: formData.name,
-        email: formData.email,
-        subject: formData.subject,
-        message: formData.message,
-      });
+
+      const response = await api.post(
+        "/contact",
+        {
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+        }
+      );
 
       if (response.data.success) {
+
         setSuccess(
-          "Your message has been sent successfully! ✉️"
+          "Your message reached Movira! ✨"
         );
 
         resetForm();
       }
+
     } catch (error) {
-      console.error("Contact Error:", error);
+
+      console.error(
+        "Contact Error:",
+        error
+      );
 
       setError(
         error.response?.data?.message ||
-          "Unable to send message. Please try again."
+          "Unable to send message."
       );
+
     } finally {
+
       setLoading(false);
     }
   };
 
+
   // ==========================================
-  // REQUEST CALLBACK
+  // CALLBACK
   // ==========================================
 
   const handleCallback = async () => {
+
     setLoading(true);
     setSuccess("");
     setError("");
@@ -105,15 +134,18 @@ const Contact = () => {
       !formData.name.trim() ||
       !formData.phone.trim()
     ) {
+
       setError(
         "Please enter your name and phone number."
       );
 
       setLoading(false);
+
       return;
     }
 
     try {
+
       const response = await api.post(
         "/contact/callback",
         {
@@ -127,49 +159,226 @@ const Contact = () => {
       );
 
       if (response.data.success) {
+
         setSuccess(
-          "Your call back request has been sent! 📞"
+          "Call back request sent! We'll get in touch. 📞"
         );
 
         resetForm();
       }
+
     } catch (error) {
-      console.error("Callback Error:", error);
+
+      console.error(
+        "Callback Error:",
+        error
+      );
 
       setError(
         error.response?.data?.message ||
-          "Unable to send call back request."
+          "Unable to send callback request."
       );
+
     } finally {
+
       setLoading(false);
     }
   };
 
+
+  // ==========================================
+  // CHANGE OPTION
+  // ==========================================
+
+  const changeOption = (option) => {
+
+    setActiveOption(option);
+
+    setError("");
+    setSuccess("");
+  };
+
+
   return (
+
     <div className="contact-page">
+
+      {/* ====================================
+          HEADER
+      ==================================== */}
+
+      <div className="contact-heading">
+
+        <span className="contact-small-title">
+          CONNECT WITH MOVIRA
+        </span>
+
+        <h1>
+          Let's Talk <span>🎬</span>
+        </h1>
+
+        <p>
+          Whether you have a question, feedback,
+          or just want to talk movies — we're here.
+        </p>
+
+      </div>
+
+
+      {/* ====================================
+          INTERACTIVE CONTACT AREA
+      ==================================== */}
 
       <div className="contact-container">
 
-        {/* =====================================
-            LEFT SIDE - FORM
-        ===================================== */}
 
-        <div className="contact-left">
+        {/* ==================================
+            LEFT OPTIONS
+        ================================== */}
 
-          <div className="contact-heading">
+        <div className="contact-options">
 
 
-            <h1>
-              Let's Talk
-              <span> 🎬</span>
-            </h1>
+          {/* MESSAGE */}
 
-            <p>
-              Have a question, feedback, or just want
-              to talk movies? We'd love to hear from you.
-            </p>
+          <button
+            type="button"
+            className={`contact-option ${
+              activeOption === "message"
+                ? "active"
+                : ""
+            }`}
+            onClick={() =>
+              changeOption("message")
+            }
+          >
+
+            <div className="option-icon">
+              ✉️
+            </div>
+
+            <div className="option-text">
+
+              <h3>
+                Send a Message
+              </h3>
+
+              <p>
+                Questions, feedback or suggestions
+              </p>
+
+            </div>
+
+            <span className="option-arrow">
+              →
+            </span>
+
+          </button>
+
+
+          {/* CALLBACK */}
+
+          <button
+            type="button"
+            className={`contact-option ${
+              activeOption === "callback"
+                ? "active"
+                : ""
+            }`}
+            onClick={() =>
+              changeOption("callback")
+            }
+          >
+
+            <div className="option-icon">
+              📞
+            </div>
+
+            <div className="option-text">
+
+              <h3>
+                Request a Call Back
+              </h3>
+
+              <p>
+                Leave your number and we'll call you
+              </p>
+
+            </div>
+
+            <span className="option-arrow">
+              →
+            </span>
+
+          </button>
+
+
+          {/* EMAIL */}
+
+          <button
+            type="button"
+            className={`contact-option ${
+              activeOption === "email"
+                ? "active"
+                : ""
+            }`}
+            onClick={() =>
+              changeOption("email")
+            }
+          >
+
+            <div className="option-icon">
+              💌
+            </div>
+
+            <div className="option-text">
+
+              <h3>
+                Email Movira
+              </h3>
+
+              <p>
+                Reach us directly
+              </p>
+
+            </div>
+
+            <span className="option-arrow">
+              →
+            </span>
+
+          </button>
+
+
+          {/* LITTLE BRAND BOX */}
+
+          <div className="contact-mini-card">
+
+            <span>
+              🍿
+            </span>
+
+            <div>
+              <strong>
+                Every story matters.
+              </strong>
+
+              <p>
+                Your feedback helps us make
+                Movira better.
+              </p>
+            </div>
 
           </div>
+
+        </div>
+
+
+        {/* ==================================
+            RIGHT CONTENT
+        ================================== */}
+
+        <div className="contact-content">
 
 
           {/* SUCCESS */}
@@ -190,332 +399,346 @@ const Contact = () => {
           )}
 
 
-          {/* FORM */}
+          {/* =================================
+              MESSAGE PANEL
+          ================================= */}
 
-          <form className="contact-form">
+          {activeOption === "message" && (
 
-            {/* NAME */}
+            <div className="contact-panel">
 
-            <div className="form-group">
+              <div className="panel-header">
 
-              <label>
-                Your Name
-              </label>
+                <div className="panel-icon">
+                  ✉️
+                </div>
 
-              <input
-                type="text"
-                name="name"
-                placeholder="Enter your name"
-                value={formData.name}
-                onChange={handleChange}
-              />
+                <div>
+                  <span>
+                    CONTACT US
+                  </span>
 
-            </div>
+                  <h2>
+                    Tell us what's on your mind
+                  </h2>
+                </div>
 
-
-            {/* EMAIL */}
-
-            <div className="form-group">
-
-              <label>
-                Email Address
-              </label>
-
-              <input
-                type="email"
-                name="email"
-                placeholder="Enter your email"
-                value={formData.email}
-                onChange={handleChange}
-              />
-
-            </div>
+              </div>
 
 
-            {/* PHONE */}
-
-            <div className="form-group">
-
-              <label>
-                Phone Number
-                <span className="optional">
-                  Optional
-                </span>
-              </label>
-
-              <input
-                type="tel"
-                name="phone"
-                placeholder="Enter your phone number"
-                value={formData.phone}
-                onChange={handleChange}
-              />
-
-            </div>
-
-
-            {/* SUBJECT */}
-
-            <div className="form-group">
-
-              <label>
-                Subject
-              </label>
-
-              <input
-                type="text"
-                name="subject"
-                placeholder="What is this about?"
-                value={formData.subject}
-                onChange={handleChange}
-              />
-
-            </div>
-
-
-            {/* MESSAGE */}
-
-            <div className="form-group">
-
-              <label>
-                Message
-              </label>
-
-              <textarea
-                name="message"
-                placeholder="Write your message..."
-                value={formData.message}
-                onChange={handleChange}
-              />
-
-            </div>
-
-
-            {/* BUTTONS */}
-
-            <div className="contact-buttons">
-
-              <button
-                type="button"
-                className="send-message-btn"
-                onClick={handleMessage}
-                disabled={loading}
+              <form
+                className="contact-form"
+                onSubmit={handleMessage}
               >
 
-                {loading
-                  ? "Sending..."
-                  : "Send Message  ✉️"}
+                <div className="form-row">
 
-              </button>
+                  <div className="form-group">
+
+                    <label>
+                      Your Name
+                    </label>
+
+                    <input
+                      type="text"
+                      name="name"
+                      placeholder="Enter your name"
+                      value={formData.name}
+                      onChange={handleChange}
+                    />
+
+                  </div>
+
+
+                  <div className="form-group">
+
+                    <label>
+                      Email Address
+                    </label>
+
+                    <input
+                      type="email"
+                      name="email"
+                      placeholder="Enter your email"
+                      value={formData.email}
+                      onChange={handleChange}
+                    />
+
+                  </div>
+
+                </div>
+
+
+                <div className="form-row">
+
+                  <div className="form-group">
+
+                    <label>
+                      Phone Number
+                    </label>
+
+                    <input
+                      type="tel"
+                      name="phone"
+                      placeholder="Optional"
+                      value={formData.phone}
+                      onChange={handleChange}
+                    />
+
+                  </div>
+
+
+                  <div className="form-group">
+
+                    <label>
+                      Subject
+                    </label>
+
+                    <input
+                      type="text"
+                      name="subject"
+                      placeholder="What's this about?"
+                      value={formData.subject}
+                      onChange={handleChange}
+                    />
+
+                  </div>
+
+                </div>
+
+
+                <div className="form-group">
+
+                  <label>
+                    Message
+                  </label>
+
+                  <textarea
+                    name="message"
+                    placeholder="Write your message..."
+                    value={formData.message}
+                    onChange={handleChange}
+                  />
+
+                </div>
+
+
+                <button
+                  type="submit"
+                  className="panel-submit"
+                  disabled={loading}
+                >
+
+                  {loading
+                    ? "Sending..."
+                    : "Send Message ✨"}
+
+                </button>
+
+              </form>
+
+            </div>
+
+          )}
+
+
+          {/* =================================
+              CALLBACK PANEL
+          ================================= */}
+
+          {activeOption === "callback" && (
+
+            <div className="contact-panel">
+
+              <div className="panel-header">
+
+                <div className="panel-icon">
+                  📞
+                </div>
+
+                <div>
+
+                  <span>
+                    CALL BACK
+                  </span>
+
+                  <h2>
+                    We'd love to call you
+                  </h2>
+
+                </div>
+
+              </div>
+
+
+              <p className="panel-description">
+                Enter your details and our team
+                will get in touch with you.
+              </p>
+
+
+              <div className="form-group">
+
+                <label>
+                  Your Name
+                </label>
+
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Enter your name"
+                  value={formData.name}
+                  onChange={handleChange}
+                />
+
+              </div>
+
+
+              <div className="form-group">
+
+                <label>
+                  Phone Number
+                </label>
+
+                <input
+                  type="tel"
+                  name="phone"
+                  placeholder="Enter your phone number"
+                  value={formData.phone}
+                  onChange={handleChange}
+                />
+
+              </div>
+
+
+              <div className="form-group">
+
+                <label>
+                  Email
+                  <span className="optional">
+                    Optional
+                  </span>
+                </label>
+
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Enter your email"
+                  value={formData.email}
+                  onChange={handleChange}
+                />
+
+              </div>
+
+
+              <div className="form-group">
+
+                <label>
+                  Message
+                  <span className="optional">
+                    Optional
+                  </span>
+                </label>
+
+                <textarea
+                  name="message"
+                  placeholder="Anything you'd like us to know?"
+                  value={formData.message}
+                  onChange={handleChange}
+                />
+
+              </div>
 
 
               <button
                 type="button"
-                className="callback-btn"
+                className="panel-submit"
                 onClick={handleCallback}
                 disabled={loading}
               >
 
                 {loading
                   ? "Sending..."
-                  : "Request a Call Back  📞"}
+                  : "Request a Call Back 📞"}
 
               </button>
 
             </div>
 
-          </form>
-
-        </div>
+          )}
 
 
-        {/* =====================================
-            RIGHT SIDE - MOVIRA INFO
-        ===================================== */}
+          {/* =================================
+              EMAIL PANEL
+          ================================= */}
 
-        <div className="contact-right">
+          {activeOption === "email" && (
 
-          <div className="about-card">
+            <div className="email-panel">
 
-            {/* TOP */}
-
-            <div className="about-header">
-
-              <div className="about-icon">
-                🎬
+              <div className="email-glow">
+                💌
               </div>
 
-              <div>
-                <span className="about-label">
-                  WELCOME TO
-                </span>
+              <span className="email-label">
+                SAY HELLO
+              </span>
 
-                <h2>
-                  Movira
-                </h2>
-              </div>
+              <h2>
+                We'd love to
+                <span> hear from you.</span>
+              </h2>
 
-            </div>
-
-
-            {/* DIVIDER */}
-
-            <div className="about-line"></div>
+              <p>
+                For direct enquiries, feedback,
+                collaboration or anything movie-related,
+                drop us an email.
+              </p>
 
 
-            {/* DESCRIPTION */}
+              <div className="official-email">
 
-            <p className="about-description">
-              Your personal movie discovery space.
-              Explore trending movies, discover
-              highly rated films, find upcoming
-              releases and get personalized
-              recommendations — all in one place.
-            </p>
-
-
-            {/* FEATURES */}
-
-            <div className="movira-features">
-
-              <div className="feature-item">
-
-                <span className="feature-icon">
-                  🔥
-                </span>
-
-                <div>
-                  <h4>
-                    Trending Movies
-                  </h4>
-
-                  <p>
-                    Discover what's popular right now.
-                  </p>
-                </div>
-
-              </div>
-
-
-              <div className="feature-item">
-
-                <span className="feature-icon">
-                  ⭐
-                </span>
-
-                <div>
-                  <h4>
-                    Top Rated
-                  </h4>
-
-                  <p>
-                    Find movies loved by viewers.
-                  </p>
-                </div>
-
-              </div>
-
-
-              <div className="feature-item">
-
-                <span className="feature-icon">
-                  🎯
-                </span>
-
-                <div>
-                  <h4>
-                    Personalized
-                  </h4>
-
-                  <p>
-                    Get recommendations made for you.
-                  </p>
-                </div>
-
-              </div>
-
-            </div>
-
-
-            {/* CONTACT INFO */}
-
-            <div className="contact-info-box">
-
-              <div className="info-item">
-
-                <div className="info-icon">
+                <span>
                   ✉️
-                </div>
+                </span>
 
                 <div>
-                  <span>
-                    Email
-                  </span>
+
+                  <small>
+                    OFFICIAL EMAIL
+                  </small>
 
                   <strong>
                     moviraprojo123@gmail.com
                   </strong>
+
                 </div>
 
               </div>
 
 
-              <div className="info-item">
-
-                <div className="info-icon">
-                  📍
-                </div>
-
-                <div>
-                  <span>
-                    Location
-                  </span>
-
-                  <strong>
-                    New Delhi, India
-                  </strong>
-                </div>
-
-              </div>
+              <a
+                href="mailto:moviraprojo123@gmail.com"
+                className="email-button"
+              >
+                Open Email ✨
+              </a>
 
 
-              <div className="info-item">
+              <div className="email-footer">
+                <span>
+                  🍿
+                </span>
 
-                <div className="info-icon">
-                  ⏱️
-                </div>
-
-                <div>
-                  <span>
-                    Response Time
-                  </span>
-
-                  <strong>
-                    Usually within 24 hours
-                  </strong>
-                </div>
-
+                <p>
+                  Every great movie starts
+                  with a conversation.
+                </p>
               </div>
 
             </div>
 
-
-            {/* BOTTOM MESSAGE */}
-
-            <div className="about-footer">
-
-              <span>
-                🍿
-              </span>
-
-              <p>
-                Your feedback helps us make
-                Movira better.
-              </p>
-
-            </div>
-
-          </div>
+          )}
 
         </div>
 

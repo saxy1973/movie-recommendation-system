@@ -1,0 +1,384 @@
+/* ================================
+   MOVIRA AI ASSISTANT
+================================ */
+
+.assistant-panel {
+  position: fixed;
+  top: 40px;
+  right: 20px;
+  width: 390px;
+
+  height: calc(100vh - 150px);
+  max-height: calc(100vh - 150px);
+
+  z-index: 9999;
+
+  display: flex;
+  flex-direction: column;
+
+  background:
+    radial-gradient(circle at 85% 10%, rgba(168, 85, 247, 0.18), transparent 35%),
+    radial-gradient(circle at 15% 90%, rgba(236, 72, 153, 0.12), transparent 35%),
+    rgba(12, 10, 24, 0.94);
+
+  border: 1px solid rgba(168, 85, 247, 0.28);
+  border-radius: 24px;
+
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.55),
+    0 0 40px rgba(168, 85, 247, 0.16);
+
+  overflow: hidden;
+
+  animation: assistantSlideIn 0.35s ease forwards;
+}
+
+/* ================================
+   HEADER
+================================ */
+
+.assistant-header {
+  min-height: 72px;
+  padding: 0 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.assistant-header h2 {
+  margin: 0;
+
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+
+  color: #ffffff;
+}
+
+.assistant-close {
+  width: 36px;
+  height: 36px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.75);
+
+  font-size: 17px;
+  cursor: pointer;
+
+  transition: all 0.25s ease;
+}
+
+.assistant-close:hover {
+  background: rgba(236, 72, 153, 0.14);
+  border-color: rgba(236, 72, 153, 0.4);
+  color: #ffffff;
+
+  transform: rotate(90deg);
+}
+
+/* ================================
+   BODY
+================================ */
+
+.assistant-body {
+  flex: 1;
+  padding: 24px 20px;
+
+  overflow-y: auto;
+}
+
+.assistant-body::-webkit-scrollbar {
+  width: 5px;
+}
+
+.assistant-body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.assistant-body::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: rgba(168, 85, 247, 0.3);
+}
+
+/* ================================
+   WELCOME
+================================ */
+
+.assistant-welcome {
+  margin-bottom: 26px;
+}
+
+.assistant-welcome h3 {
+  margin: 0 0 8px;
+
+  font-size: 22px;
+  font-weight: 700;
+
+  background: linear-gradient(
+    90deg,
+    #ffffff,
+    #d8b4fe,
+    #f9a8d4
+  );
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.assistant-welcome p {
+  margin: 0;
+
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* ================================
+   SUGGESTIONS
+================================ */
+
+.assistant-suggestions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.assistant-suggestions button {
+  width: 100%;
+  padding: 13px 15px;
+
+  text-align: left;
+
+  border: 1px solid rgba(168, 85, 247, 0.18);
+  border-radius: 13px;
+
+  background: rgba(255, 255, 255, 0.035);
+  color: rgba(255, 255, 255, 0.82);
+
+  font-size: 14px;
+  cursor: pointer;
+
+  transition: all 0.25s ease;
+}
+
+.assistant-suggestions button:hover {
+  border-color: rgba(168, 85, 247, 0.45);
+  background: rgba(168, 85, 247, 0.1);
+
+  transform: translateX(4px);
+
+  box-shadow:
+    0 0 20px rgba(168, 85, 247, 0.08);
+}
+
+/* ================================
+   INPUT AREA
+================================ */
+
+.assistant-input-area {
+  padding: 16px;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+
+  background: rgba(8, 7, 18, 0.72);
+}
+
+.assistant-input-area input {
+  flex: 1;
+
+  min-width: 0;
+  height: 46px;
+
+  padding: 0 15px;
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 13px;
+
+  outline: none;
+
+  background: rgba(255, 255, 255, 0.045);
+  color: #ffffff;
+
+  font-size: 14px;
+
+  transition: all 0.25s ease;
+}
+
+.assistant-input-area input::placeholder {
+  color: rgba(255, 255, 255, 0.38);
+}
+
+.assistant-input-area input:focus {
+  border-color: rgba(168, 85, 247, 0.55);
+
+  box-shadow:
+    0 0 0 3px rgba(168, 85, 247, 0.08),
+    0 0 18px rgba(168, 85, 247, 0.08);
+}
+
+.assistant-send {
+  width: 46px;
+  height: 46px;
+  flex-shrink: 0;
+
+  border: none;
+  border-radius: 13px;
+
+  background: linear-gradient(
+    135deg,
+    #8b5cf6,
+    #ec4899
+  );
+
+  color: #ffffff;
+
+  font-size: 18px;
+  cursor: pointer;
+
+  box-shadow:
+    0 8px 24px rgba(139, 92, 246, 0.25);
+
+  transition: all 0.25s ease;
+}
+
+.assistant-send:hover {
+  transform: translateY(-2px) scale(1.03);
+
+  box-shadow:
+    0 10px 30px rgba(236, 72, 153, 0.28);
+}
+
+.assistant-send:active {
+  transform: scale(0.96);
+}
+
+/* ================================
+   ANIMATION
+================================ */
+
+@keyframes assistantSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ================================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 600px) {
+  .assistant-panel {
+    top: 0;
+    right: 0;
+
+    width: 100%;
+    height: 100vh;
+
+    border-radius: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .assistant-panel {
+    animation: none;
+  }
+
+  .assistant-close,
+  .assistant-suggestions button,
+  .assistant-send {
+    transition: none;
+  }
+}
+
+.assistant-panel.open {
+  animation: assistantSlideIn 0.6s ease forwards;
+}
+
+.assistant-panel.closing {
+  animation: assistantSlideOut 1s ease forwards;
+}
+@keyframes assistantSlideOut {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateX(110%);
+  }
+}
+
+/* ================================
+   CHAT MESSAGES
+================================ */
+
+.assistant-message {
+  max-width: 85%;
+  margin-bottom: 12px;
+  padding: 11px 14px;
+
+  border-radius: 14px;
+
+  font-size: 14px;
+  line-height: 1.5;
+
+  word-wrap: break-word;
+}
+
+/* AI */
+.ai-message {
+  margin-right: auto;
+
+  background: rgba(168, 85, 247, 0.1);
+  border: 1px solid rgba(168, 85, 247, 0.18);
+
+  color: rgba(255, 255, 255, 0.88);
+}
+
+/* User */
+.user-message {
+  margin-left: auto;
+
+  background: linear-gradient(
+    135deg,
+    rgba(139, 92, 246, 0.85),
+    rgba(236, 72, 153, 0.85)
+  );
+
+  color: #ffffff;
+}
+
+/* Disabled send */
+.assistant-send:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}

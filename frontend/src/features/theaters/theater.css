@@ -585,3 +585,621 @@ box-sizing:border-box;
     padding-top:100px;
 }
 
+/* =========================================================
+   PREMIUM ANIMATIONS
+========================================================= */
+
+/* =========================
+   PAGE FADE IN
+========================= */
+
+.theaters-page {
+    animation: pageFadeIn 0.8s ease both;
+}
+
+@keyframes pageFadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+
+/* =========================
+   HERO ANIMATION
+========================= */
+
+.theater-hero {
+    animation: heroReveal 1s ease both;
+}
+
+@keyframes heroReveal {
+    from {
+        opacity: 0;
+        transform: scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+
+/* =========================
+   HERO CONTENT
+========================= */
+
+.hero-left {
+    animation: heroLeftReveal 0.9s ease 0.2s both;
+}
+
+@keyframes heroLeftReveal {
+    from {
+        opacity: 0;
+        transform: translateX(-40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+
+.hero-right {
+    animation: heroRightReveal 0.9s ease 0.35s both;
+}
+
+@keyframes heroRightReveal {
+    from {
+        opacity: 0;
+        transform: translateX(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+
+/* =========================
+   BADGE
+========================= */
+
+.hero-badge {
+    animation: badgePop 0.7s ease 0.4s both;
+}
+
+@keyframes badgePop {
+    from {
+        opacity: 0;
+        transform: translateY(-15px) scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+
+/* =========================
+   HERO TITLE
+========================= */
+
+.hero-title {
+    animation: titleReveal 0.8s ease 0.5s both;
+}
+
+@keyframes titleReveal {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+        filter: blur(6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+    }
+}
+
+
+/* =========================
+   HERO DESCRIPTION
+========================= */
+
+.hero-description {
+    animation: descriptionReveal 0.8s ease 0.65s both;
+}
+
+@keyframes descriptionReveal {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* =========================
+   SEARCH CARD
+========================= */
+
+.search-card {
+    animation: searchCardReveal 0.9s cubic-bezier(.22, 1, .36, 1) 0.45s both;
+}
+
+@keyframes searchCardReveal {
+    from {
+        opacity: 0;
+        transform: translateY(35px) scale(0.96);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+
+/* =========================
+   SEARCH CARD FLOAT
+========================= */
+
+.search-card {
+    transition:
+        transform 0.4s ease,
+        box-shadow 0.4s ease;
+}
+
+.search-card:hover {
+    transform: translateY(-5px);
+
+    box-shadow:
+        0 18px 45px rgba(0, 0, 0, .35),
+        0 0 35px rgba(255, 77, 109, .10),
+        inset 0 1px 0 rgba(255, 255, 255, .08);
+}
+
+
+/* =========================
+   LOCATION BUTTON
+========================= */
+
+.location-btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.location-btn::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: -100%;
+
+    width: 60%;
+    height: 100%;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.12),
+        transparent
+    );
+
+    transform: skewX(-20deg);
+
+    transition: left 0.6s ease;
+}
+
+.location-btn:hover::before {
+    left: 130%;
+}
+
+
+/* =========================
+   SEARCH FOCUS GLOW
+========================= */
+
+.search-container {
+    transition:
+        border-color 0.3s ease,
+        box-shadow 0.3s ease,
+        transform 0.3s ease;
+}
+
+.search-container:focus-within {
+    border-color: #ff4d6d;
+
+    box-shadow:
+        0 0 0 3px rgba(255, 77, 109, .08),
+        0 0 25px rgba(255, 77, 109, .12);
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================
+   REGION CARDS
+========================= */
+
+.region-card {
+    animation: regionReveal 0.7s ease both;
+}
+
+@keyframes regionReveal {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* Stagger effect */
+
+.region-card:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.region-card:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.region-card:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.region-card:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+.region-card:nth-child(5) {
+    animation-delay: 0.5s;
+}
+
+.region-card:nth-child(6) {
+    animation-delay: 0.6s;
+}
+
+
+/* =========================
+   REGION IMAGE SMOOTH ZOOM
+========================= */
+
+.region-image {
+    transition:
+        transform 0.7s cubic-bezier(.22, 1, .36, 1),
+        filter 0.5s ease;
+}
+
+.region-card:hover .region-image {
+    transform: scale(1.1);
+    filter: brightness(1.08);
+}
+
+
+/* =========================
+   REGION CONTENT
+========================= */
+
+.region-content {
+    transition:
+        transform 0.4s ease,
+        opacity 0.4s ease;
+}
+
+.region-card:hover .region-content {
+    transform: translateY(-4px);
+}
+
+
+/* =========================
+   THEATER GRID
+========================= */
+
+.theater-grid {
+    animation: gridReveal 0.7s ease both;
+}
+
+@keyframes gridReveal {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+
+/* =========================
+   THEATER CARDS
+========================= */
+
+.theater-card {
+    animation: theaterCardReveal 0.7s cubic-bezier(.22, 1, .36, 1) both;
+
+    transition:
+        transform 0.4s cubic-bezier(.22, 1, .36, 1),
+        box-shadow 0.4s ease,
+        border-color 0.4s ease;
+}
+
+@keyframes theaterCardReveal {
+    from {
+        opacity: 0;
+        transform: translateY(35px) scale(0.96);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+
+/* =========================
+   THEATER CARD STAGGER
+========================= */
+
+.theater-card:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.theater-card:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.theater-card:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.theater-card:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+.theater-card:nth-child(5) {
+    animation-delay: 0.5s;
+}
+
+.theater-card:nth-child(6) {
+    animation-delay: 0.6s;
+}
+
+.theater-card:nth-child(7) {
+    animation-delay: 0.7s;
+}
+
+.theater-card:nth-child(8) {
+    animation-delay: 0.8s;
+}
+
+.theater-card:nth-child(9) {
+    animation-delay: 0.9s;
+}
+
+.theater-card:nth-child(10) {
+    animation-delay: 1s;
+}
+
+
+/* =========================
+   THEATER CARD HOVER
+========================= */
+
+.theater-card:hover {
+    transform: translateY(-10px) scale(1.015);
+
+    box-shadow:
+        0 25px 50px rgba(0,0,0,.55),
+        0 0 40px rgba(255,77,109,.18);
+}
+
+
+/* =========================
+   CARD TOP LIGHT
+========================= */
+
+.theater-card::before {
+    transform: scaleX(0.3);
+    transform-origin: left;
+
+    transition:
+        transform 0.5s ease,
+        opacity 0.4s ease;
+}
+
+.theater-card:hover::before {
+    transform: scaleX(1);
+}
+
+
+/* =========================
+   CARD GLOW
+========================= */
+
+.theater-card::after {
+    transition:
+        opacity 0.5s ease,
+        transform 0.5s ease;
+}
+
+.theater-card:hover::after {
+    opacity: .20;
+    transform: scale(1.2);
+}
+
+
+/* =========================
+   THEATER TITLE
+========================= */
+
+.theater-content h3 {
+    transition:
+        color 0.3s ease,
+        transform 0.3s ease;
+}
+
+.theater-card:hover .theater-content h3 {
+    color: #ff6b85;
+    transform: translateX(3px);
+}
+
+
+/* =========================
+   ADDRESS ICON
+========================= */
+
+.theater-address svg {
+    transition:
+        transform 0.3s ease,
+        filter 0.3s ease;
+}
+
+.theater-card:hover .theater-address svg {
+    transform: scale(1.15);
+
+    filter:
+        drop-shadow(0 0 6px rgba(255,77,109,.7));
+}
+
+
+/* =========================
+   DISTANCE
+========================= */
+
+.theater-distance {
+    transition:
+        transform 0.3s ease,
+        color 0.3s ease;
+}
+
+.theater-card:hover .theater-distance {
+    transform: translateX(3px);
+    color: #ff6b85;
+}
+
+
+/* =========================
+   DIRECTION BUTTON
+========================= */
+
+.direction-btn {
+    position: relative;
+    overflow: hidden;
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        background 0.3s ease;
+}
+
+
+/* Button shine */
+
+.direction-btn::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: -120%;
+
+    width: 70%;
+    height: 100%;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.18),
+        transparent
+    );
+
+    transform: skewX(-20deg);
+
+    transition: left 0.6s ease;
+}
+
+.direction-btn:hover::before {
+    left: 140%;
+}
+
+
+.direction-btn:hover {
+    transform: translateY(-3px) scale(1.01);
+
+    box-shadow:
+        0 12px 28px rgba(255,77,109,.35),
+        0 0 20px rgba(255,77,109,.12);
+}
+
+
+/* =========================
+   BUTTON ICON
+========================= */
+
+.direction-btn svg {
+    transition:
+        transform 0.3s ease;
+}
+
+.direction-btn:hover svg {
+    transform: translateX(4px);
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 768px) {
+
+    .theater-hero {
+        animation-duration: .7s;
+    }
+
+    .hero-left,
+    .hero-right {
+        animation-duration: .7s;
+    }
+
+    .theater-card:hover {
+        transform: translateY(-5px);
+    }
+
+}
+
+
+/* =========================
+   ACCESSIBILITY
+========================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+}

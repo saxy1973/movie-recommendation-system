@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { searchMovies } from "../../services/movieService";
+import Assistant from "../assistant/assistant";
 
 const HeroContent = () => {
   const [query, setQuery] = useState("");
+  const [assistantOpen, setAssistantOpen] = useState(false);
+
   const navigate = useNavigate();
 
   const handleSearch = async () => {
@@ -12,12 +15,12 @@ const HeroContent = () => {
     try {
       const data = await searchMovies(query);
 
-     navigate("/search-results", {
-  state: {
-    movies: data.Search || [],
-    query: query,
-  },
-});
+      navigate("/search-results", {
+        state: {
+          movies: data.Search || [],
+          query: query,
+        },
+      });
     } catch (error) {
       console.error("Search Error:", error);
     }
@@ -41,25 +44,33 @@ const HeroContent = () => {
 
       {/* Heading */}
       <h1 className="hero-title">
-        Your Ultimate Movies 
-        <br/>
-        & Web Series 
-        <br/>Explorer
-   
+        Your Ultimate Movies
+        <br />
+        & Web Series
+        <br />
+        Explorer
       </h1>
 
       {/* Description */}
       <p className="hero-description">
-        From trending blockbusters to hidden gems, explore movies and web series with smart recommendations, detailed information, and everything you need to discover your next favorite title.
+        From trending blockbusters to hidden gems, explore movies and web
+        series with smart recommendations, detailed information, and
+        everything you need to discover your next favorite title.
       </p>
 
       {/* Buttons */}
       <div className="hero-buttons">
-        <button className="primary-btn">
+        <button
+          className="primary-btn"
+          onClick={() => navigate("/top-rated")}
+        >
           Explore Movies
         </button>
 
-        <button className="secondary-btn">
+        <button
+          className="secondary-btn"
+          onClick={() => setAssistantOpen(true)}
+        >
           AI Assistant
         </button>
       </div>
@@ -69,9 +80,14 @@ const HeroContent = () => {
         <div className="search-box">
           <input
             type="text"
-            placeholder=" Search movies..."
+            placeholder="Search movies..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                handleSearch();
+              }
+            }}
           />
 
           <button
@@ -82,6 +98,14 @@ const HeroContent = () => {
           </button>
         </div>
       </div>
+
+      {/* AI Assistant Panel */}
+      {assistantOpen && (
+        <Assistant
+  isOpen={assistantOpen}
+  onClose={() => setAssistantOpen(false)}
+/>
+      )}
 
     </div>
   );

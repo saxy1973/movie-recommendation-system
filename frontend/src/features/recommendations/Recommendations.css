@@ -827,3 +827,665 @@
   }
 
 }
+.recommendation-filter-area {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto 35px;
+}
+
+/* =========================================================
+   PREMIUM MOVIRA ANIMATIONS
+========================================================= */
+
+
+/* =========================
+   PAGE ENTRY
+========================= */
+
+.recommendations-page {
+  animation: pageEnter 0.8s ease both;
+}
+
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+
+/* =========================
+   HEADER ANIMATION
+========================= */
+
+.recommendations-header {
+  animation: headerEnter 0.8s cubic-bezier(.22, 1, .36, 1) both;
+}
+
+@keyframes headerEnter {
+  from {
+    opacity: 0;
+    transform: translateY(-25px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* Label */
+
+.recommendations-label {
+  animation: labelEnter 0.7s ease 0.15s both;
+}
+
+@keyframes labelEnter {
+  from {
+    opacity: 0;
+    transform: translateX(-15px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+
+/* Heading */
+
+.recommendations-header h1 {
+  animation: headingEnter 0.8s ease 0.25s both;
+}
+
+@keyframes headingEnter {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+    filter: blur(5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+
+/* Description */
+
+.recommendations-header p {
+  animation: descriptionEnter 0.7s ease 0.4s both;
+}
+
+@keyframes descriptionEnter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* =========================
+   PREFERENCE SUMMARY
+========================= */
+
+.preference-summary {
+  animation: summaryEnter 0.9s cubic-bezier(.22, 1, .36, 1) 0.35s both;
+
+  transition:
+    transform 0.4s ease,
+    box-shadow 0.4s ease,
+    border-color 0.4s ease;
+}
+
+@keyframes summaryEnter {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+
+.preference-summary:hover {
+  transform: translateY(-3px);
+
+  border-color: rgba(168, 85, 247, .18);
+
+  box-shadow:
+    0 25px 55px rgba(0, 0, 0, .30),
+    0 0 35px rgba(168, 85, 247, .06),
+    inset 0 1px rgba(255, 255, 255, .05);
+}
+
+
+/* =========================
+   SUMMARY HEADING
+========================= */
+
+.summary-heading {
+  animation: summaryHeadingEnter 0.7s ease 0.5s both;
+}
+
+@keyframes summaryHeadingEnter {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+
+/* Summary icon */
+
+.summary-heading > span {
+  transition:
+    transform 0.4s ease,
+    box-shadow 0.4s ease;
+}
+
+.summary-heading:hover > span {
+  transform: rotate(-5deg) scale(1.06);
+
+  box-shadow:
+    0 0 20px rgba(255, 55, 135, .15);
+}
+
+
+/* =========================
+   SUMMARY ITEMS
+========================= */
+
+.summary-item {
+  transition:
+    transform 0.35s ease,
+    border-color 0.35s ease,
+    background 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.summary-item:hover {
+  transform: translateY(-4px);
+
+  border-color: rgba(168, 85, 247, .20);
+
+  background: rgba(168, 85, 247, .045);
+
+  box-shadow:
+    0 10px 25px rgba(0, 0, 0, .20);
+}
+
+
+/* =========================
+   GENRE TAGS
+========================= */
+
+.summary-genres span {
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.summary-genres span:hover {
+  transform: translateY(-2px);
+
+  background: rgba(168, 85, 247, .22);
+
+  border-color: rgba(168, 85, 247, .35);
+}
+
+
+/* =========================
+   FILTER AREA
+========================= */
+
+.recommendation-filter-area {
+  animation: filtersEnter 0.8s ease 0.55s both;
+}
+
+@keyframes filtersEnter {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+.recommendation-filters {
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.recommendation-filters:hover {
+  border-color: rgba(168, 85, 247, .15);
+
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, .18);
+}
+
+
+/* Select focus */
+
+.filter-group select {
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    transform 0.25s ease;
+}
+
+.filter-group select:hover {
+  border-color: rgba(168, 85, 247, .35);
+}
+
+.filter-group select:focus {
+  border-color: #a855f7;
+
+  box-shadow:
+    0 0 0 3px rgba(168, 85, 247, .08);
+
+  transform: translateY(-1px);
+}
+
+
+/* =========================
+   SECTION TITLE
+========================= */
+
+.section-title {
+  animation: sectionTitleEnter 0.7s ease 0.65s both;
+}
+
+@keyframes sectionTitleEnter {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* =========================
+   MOVIE GRID
+========================= */
+
+.recommendation-grid {
+  animation: gridEnter 0.6s ease 0.7s both;
+}
+
+@keyframes gridEnter {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+
+/* =========================
+   MOVIE CARD ENTRY
+========================= */
+
+.recommendation-card {
+  animation: movieCardEnter 0.7s cubic-bezier(.22, 1, .36, 1) both;
+}
+
+@keyframes movieCardEnter {
+  from {
+    opacity: 0;
+    transform: translateY(35px) scale(.94);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+
+/* =========================
+   STAGGER EFFECT
+========================= */
+
+.recommendation-card:nth-child(1) {
+  animation-delay: .10s;
+}
+
+.recommendation-card:nth-child(2) {
+  animation-delay: .16s;
+}
+
+.recommendation-card:nth-child(3) {
+  animation-delay: .22s;
+}
+
+.recommendation-card:nth-child(4) {
+  animation-delay: .28s;
+}
+
+.recommendation-card:nth-child(5) {
+  animation-delay: .34s;
+}
+
+.recommendation-card:nth-child(6) {
+  animation-delay: .40s;
+}
+
+.recommendation-card:nth-child(7) {
+  animation-delay: .46s;
+}
+
+.recommendation-card:nth-child(8) {
+  animation-delay: .52s;
+}
+
+.recommendation-card:nth-child(9) {
+  animation-delay: .58s;
+}
+
+.recommendation-card:nth-child(10) {
+  animation-delay: .64s;
+}
+
+.recommendation-card:nth-child(11) {
+  animation-delay: .70s;
+}
+
+.recommendation-card:nth-child(12) {
+  animation-delay: .76s;
+}
+
+.recommendation-card:nth-child(13) {
+  animation-delay: .82s;
+}
+
+.recommendation-card:nth-child(14) {
+  animation-delay: .88s;
+}
+
+.recommendation-card:nth-child(15) {
+  animation-delay: .94s;
+}
+
+
+/* =========================
+   MOVIE CARD HOVER
+========================= */
+
+.recommendation-card {
+  will-change: transform;
+
+  transition:
+    transform .4s cubic-bezier(.22, 1, .36, 1),
+    border-color .4s ease,
+    box-shadow .4s ease;
+}
+
+.recommendation-card:hover {
+  transform: translateY(-9px) scale(1.015);
+
+  border-color: rgba(255, 67, 151, .45);
+
+  box-shadow:
+    0 25px 50px rgba(0, 0, 0, .45),
+    0 0 30px rgba(188, 47, 255, .12);
+}
+
+
+/* =========================
+   POSTER
+========================= */
+
+.movie-poster {
+  transition:
+    transform .65s cubic-bezier(.22, 1, .36, 1),
+    filter .5s ease;
+}
+
+.recommendation-card:hover .movie-poster {
+  transform: scale(1.08);
+
+  filter: brightness(.68) saturate(1.08);
+}
+
+
+/* =========================
+   POSTER OVERLAY
+========================= */
+
+.poster-overlay {
+  transition:
+    opacity .4s ease,
+    backdrop-filter .4s ease;
+}
+
+.recommendation-card:hover .poster-overlay {
+  opacity: 1;
+
+  backdrop-filter: blur(2px);
+}
+
+
+/* =========================
+   WATCH TEXT
+========================= */
+
+.watch-text {
+  transform: translateY(8px);
+  opacity: 0;
+
+  transition:
+    transform .35s ease,
+    opacity .35s ease;
+}
+
+.recommendation-card:hover .watch-text {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+
+/* =========================
+   MOVIE INFO
+========================= */
+
+.movie-info {
+  transition:
+    background .35s ease;
+}
+
+.recommendation-card:hover .movie-info {
+  background: rgba(255, 255, 255, .008);
+}
+
+
+/* =========================
+   MOVIE TITLE
+========================= */
+
+.movie-info h3 {
+  transition:
+    color .3s ease,
+    transform .3s ease;
+}
+
+.recommendation-card:hover .movie-info h3 {
+  color: #ff70aa;
+
+  transform: translateX(2px);
+}
+
+
+/* =========================
+   RATING BADGES
+========================= */
+
+.tmdb-rating,
+.user-rating {
+  transition:
+    transform .3s ease,
+    box-shadow .3s ease;
+}
+
+.recommendation-card:hover .tmdb-rating {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 5px 15px rgba(255, 190, 40, .08);
+}
+
+.recommendation-card:hover .user-rating {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 5px 15px rgba(255, 66, 137, .08);
+}
+
+
+/* =========================
+   EMPTY STATE
+========================= */
+
+.no-movies,
+.recommendations-empty {
+  animation: emptyEnter .8s ease both;
+}
+
+@keyframes emptyEnter {
+  from {
+    opacity: 0;
+    transform: translateY(25px) scale(.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+
+.empty-icon {
+  animation: emptyIconFloat 3s ease-in-out infinite;
+}
+
+@keyframes emptyIconFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-7px);
+  }
+}
+
+
+/* =========================
+   LOADING
+========================= */
+
+.recommendations-loading {
+  animation: loadingFade .5s ease both;
+}
+
+@keyframes loadingFade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+
+/* =========================
+   SPINNER GLOW
+========================= */
+
+.loading-spinner {
+  box-shadow:
+    0 0 20px rgba(255, 63, 145, .15);
+
+  animation:
+    recommendationSpin .8s linear infinite,
+    spinnerGlow 1.8s ease-in-out infinite;
+}
+
+@keyframes spinnerGlow {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 3px rgba(255, 63, 145, .15));
+  }
+
+  50% {
+    filter: drop-shadow(0 0 10px rgba(255, 63, 145, .35));
+  }
+}
+
+
+/* =========================
+   MOBILE OPTIMIZATION
+========================= */
+
+@media (max-width: 600px) {
+
+  .recommendation-card:hover {
+    transform: translateY(-5px) scale(1.01);
+  }
+
+  .recommendation-card:hover .movie-poster {
+    transform: scale(1.04);
+  }
+
+}
+
+
+/* =========================
+   REDUCED MOTION
+========================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+}

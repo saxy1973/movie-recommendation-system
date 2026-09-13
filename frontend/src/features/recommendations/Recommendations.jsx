@@ -1,11 +1,17 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+
 import api from "../../services/api";
+import MovieCard from "../movies/MovieCard";
+import MovieFilters from "../filters/MovieFilters";
+import {
+  filterMovies,
+  getDefaultFilters,
+} from "../../services/movieFilterService";
+
 import "./Recommendations.css";
 
 const Recommendations = () => {
   const [movies, setMovies] = useState([]);
-  const [filteredMovies, setFilteredMovies] = useState([]);
-
   const [preferences, setPreferences] = useState({
     genres: [],
     language: ["English"],
@@ -18,17 +24,9 @@ const Recommendations = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  // =========================================
-  // FILTERS
-  // =========================================
-
-  const [filters, setFilters] = useState({
-    year: "All",
-    language: "All",
-    industry: "All",
-    genre: "All",
-    contentType: "Both",
-  });
+  const [filters, setFilters] = useState(
+    getDefaultFilters()
+  );
 
   // =========================================
   // GET CURRENT USER
@@ -49,7 +47,9 @@ const Recommendations = () => {
   useEffect(() => {
     const fetchRecommendations = async () => {
       if (!user?.id) {
-        setError("Please login to see your recommendations.");
+        setError(
+          "Please login to see your recommendations."
+        );
         setLoading(false);
         return;
       }
@@ -63,10 +63,10 @@ const Recommendations = () => {
         );
 
         if (response.data.success) {
-          const movieData = response.data.movies || [];
+          const movieData =
+            response.data.movies || [];
 
           setMovies(movieData);
-          setFilteredMovies(movieData);
 
           const userPreferences =
             response.data.preferences || {
@@ -78,16 +78,12 @@ const Recommendations = () => {
             };
 
           setPreferences(userPreferences);
-
-          // Default content type from preference
-          setFilters((prev) => ({
-            ...prev,
-            contentType:
-              userPreferences.contentType || "Both",
-          }));
         }
       } catch (err) {
-        console.error("Recommendation Error:", err);
+        console.error(
+          "Recommendation Error:",
+          err
+        );
 
         setError(
           err.response?.data?.message ||
@@ -117,15 +113,20 @@ const Recommendations = () => {
         if (response.data.success) {
           const reviewMap = {};
 
-          response.data.reviews.forEach((review) => {
-            reviewMap[String(review.movieId)] =
-              review.rating;
-          });
+          response.data.reviews.forEach(
+            (review) => {
+              reviewMap[String(review.movieId)] =
+                review.rating;
+            }
+          );
 
           setReviews(reviewMap);
         }
       } catch (err) {
-        console.error("Reviews Error:", err);
+        console.error(
+          "Reviews Error:",
+          err
+        );
       }
     };
 
@@ -136,120 +137,31 @@ const Recommendations = () => {
   // FILTER MOVIES
   // =========================================
 
-  useEffect(() => {
-    let result = [...movies];
-
-    // YEAR
-    if (filters.year !== "All") {
-      result = result.filter((movie) => {
-        const movieYear = Number(movie.year);
-
-        if (!movieYear) return false;
-
-        if (filters.year === "2000-2010") {
-          return movieYear >= 2000 && movieYear <= 2010;
-        }
-
-        if (filters.year === "2011-2020") {
-          return movieYear >= 2011 && movieYear <= 2020;
-        }
-
-        if (filters.year === "2021-2030") {
-          return movieYear >= 2021 && movieYear <= 2030;
-        }
-
-        return true;
-      });
-    }
-
-    // LANGUAGE
-    if (filters.language !== "All") {
-      result = result.filter((movie) => {
-        const movieLanguage =
-          movie.language ||
-          movie.Language ||
-          "";
-
-        return (
-          String(movieLanguage).toLowerCase() ===
-          String(filters.language).toLowerCase()
-        );
-      });
-    }
-
-    // INDUSTRY
-    if (filters.industry !== "All") {
-      result = result.filter((movie) => {
-        const movieIndustry =
-          movie.industry ||
-          movie.Industry ||
-          "";
-
-        return (
-          String(movieIndustry).toLowerCase() ===
-          String(filters.industry).toLowerCase()
-        );
-      });
-    }
-
-    // GENRE
-    if (filters.genre !== "All") {
-      result = result.filter((movie) => {
-        const movieGenre =
-          movie.genre ||
-          movie.Genre ||
-          "";
-
-        if (Array.isArray(movieGenre)) {
-          return movieGenre.some(
-            (genre) =>
-              String(genre).toLowerCase() ===
-              String(filters.genre).toLowerCase()
-          );
-        }
-
-        return String(movieGenre)
-          .toLowerCase()
-          .includes(
-            String(filters.genre).toLowerCase()
-          );
-      });
-    }
-
-    // CONTENT TYPE
-    if (filters.contentType !== "Both") {
-      result = result.filter((movie) => {
-        const movieType =
-          movie.type ||
-          movie.Type ||
-          "movie";
-
-        if (filters.contentType === "Movies") {
-          return movieType.toLowerCase() === "movie";
-        }
-
-        if (filters.contentType === "Series") {
-          return movieType.toLowerCase() === "series";
-        }
-
-        return true;
-      });
-    }
-
-    setFilteredMovies(result);
+  const filteredMovies = useMemo(() => {
+    return filterMovies(
+      movies,
+      filters
+    );
   }, [movies, filters]);
 
   // =========================================
-  // FILTER CHANGE
+  // APPLY FILTERS
   // =========================================
 
-  const handleFilterChange = (e) => {
-    const { name, value } = e.target;
+  const handleApplyFilters = (
+    newFilters
+  ) => {
+    setFilters(newFilters);
+  };
 
-    setFilters((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+  // =========================================
+  // CLEAR FILTERS
+  // =========================================
+
+  const handleClearFilters = (
+    clearedFilters
+  ) => {
+    setFilters(clearedFilters);
   };
 
   // =========================================
@@ -260,14 +172,18 @@ const Recommendations = () => {
     return (
       <div className="recommendations-page">
         <div className="recommendations-loading">
+
           <div className="loading-spinner"></div>
 
-          <h2>Finding movies for you...</h2>
+          <h2>
+            Finding movies for you...
+          </h2>
 
           <p>
-            We're using your preferences and recently
-            viewed movies.
+            We're using your preferences
+            and recently viewed movies.
           </p>
+
         </div>
       </div>
     );
@@ -280,15 +196,23 @@ const Recommendations = () => {
   if (error) {
     return (
       <div className="recommendations-page">
+
         <div className="recommendations-empty">
 
-          <div className="empty-icon">🎬</div>
+          <div className="empty-icon">
+            🎬
+          </div>
 
-          <h2>Oops!</h2>
+          <h2>
+            Oops!
+          </h2>
 
-          <p>{error}</p>
+          <p>
+            {error}
+          </p>
 
         </div>
+
       </div>
     );
   }
@@ -302,7 +226,9 @@ const Recommendations = () => {
 
       <div className="recommendations-container">
 
-        {/* HEADER */}
+        {/* =========================
+            HEADER
+        ========================= */}
 
         <div className="recommendations-header">
 
@@ -317,190 +243,33 @@ const Recommendations = () => {
             </h1>
 
             <p>
-              Movies picked based on your preferences,
-              recently viewed movies and reviews.
+              Movies picked based on your
+              preferences, recently viewed
+              movies and reviews.
             </p>
 
           </div>
 
         </div>
 
+        {/* =========================
+            FILTERS
+        ========================= */}
 
-        {/* =====================================
-            FILTER BAR
-        ===================================== */}
+        <div className="recommendation-filter-area">
 
-        <div className="recommendation-filters">
-
-          {/* YEAR */}
-
-          <div className="filter-group">
-
-            <label>Year</label>
-
-            <select
-              name="year"
-              value={filters.year}
-              onChange={handleFilterChange}
-            >
-              <option value="All">All</option>
-              <option value="2000-2010">
-                2000–2010
-              </option>
-              <option value="2011-2020">
-                2011–2020
-              </option>
-              <option value="2021-2030">
-                2021–2030
-              </option>
-            </select>
-
-          </div>
-
-
-          {/* LANGUAGE */}
-
-          <div className="filter-group">
-
-            <label>Language</label>
-
-            <select
-              name="language"
-              value={filters.language}
-              onChange={handleFilterChange}
-            >
-
-              <option value="All">
-                All
-              </option>
-
-              {[
-                ...new Set([
-                  ...(preferences.language || []),
-                  "English",
-                  "Hindi",
-                  "Korean",
-                  "Japanese",
-                  "Spanish",
-                ]),
-              ].map((language) => (
-
-                <option
-                  key={language}
-                  value={language}
-                >
-                  {language}
-                </option>
-
-              ))}
-
-            </select>
-
-          </div>
-
-
-          {/* INDUSTRY */}
-
-          <div className="filter-group">
-
-            <label>Industry</label>
-
-            <select
-              name="industry"
-              value={filters.industry}
-              onChange={handleFilterChange}
-            >
-
-              <option value="All">
-                All
-              </option>
-
-              {(preferences.industries || []).map(
-                (industry) => (
-
-                  <option
-                    key={industry}
-                    value={industry}
-                  >
-                    {industry}
-                  </option>
-
-                )
-              )}
-
-            </select>
-
-          </div>
-
-
-          {/* GENRE */}
-
-          <div className="filter-group">
-
-            <label>Genre</label>
-
-            <select
-              name="genre"
-              value={filters.genre}
-              onChange={handleFilterChange}
-            >
-
-              <option value="All">
-                All
-              </option>
-
-              {(preferences.genres || []).map(
-                (genre) => (
-
-                  <option
-                    key={genre}
-                    value={genre}
-                  >
-                    {genre}
-                  </option>
-
-                )
-              )}
-
-            </select>
-
-          </div>
-
-
-          {/* CONTENT TYPE */}
-
-          <div className="filter-group">
-
-            <label>Content Type</label>
-
-            <select
-              name="contentType"
-              value={filters.contentType}
-              onChange={handleFilterChange}
-            >
-
-              <option value="Both">
-                Both
-              </option>
-
-              <option value="Movies">
-                Movies
-              </option>
-
-              <option value="Series">
-                Series
-              </option>
-
-            </select>
-
-          </div>
+          <MovieFilters
+            initialFilters={filters}
+            showYear={true}
+            onApply={handleApplyFilters}
+            onClear={handleClearFilters}
+          />
 
         </div>
 
-
-        {/* =====================================
+        {/* =========================
             MOVIES
-        ===================================== */}
+        ========================= */}
 
         <div className="movies-section">
 
@@ -524,20 +293,21 @@ const Recommendations = () => {
 
           </div>
 
-
           {filteredMovies.length === 0 ? (
 
             <div className="no-movies">
 
-              <div>🎬</div>
+              <div>
+                🎬
+              </div>
 
               <h3>
                 No movies found
               </h3>
 
               <p>
-                Try changing your filters to discover
-                more movies.
+                Try changing your filters to
+                discover more movies.
               </p>
 
             </div>
@@ -546,131 +316,57 @@ const Recommendations = () => {
 
             <div className="recommendation-grid">
 
-              {filteredMovies.map((movie) => {
+              {filteredMovies.map(
+                (movie, index) => {
 
-                const userRating =
-                  reviews[String(movie.id)];
+                  const userRating =
+                    reviews[
+                      String(
+                        movie.id ||
+                        movie.imdbID
+                      )
+                    ];
 
-                return (
+                  return (
+                    <MovieCard
+                      key={
+                        movie.id ||
+                        movie.imdbID ||
+                        index
+                      }
+                      movie={{
+                        imdbID:
+                          movie.imdbID ||
+                          movie.id,
 
-                  <div
-                    className="recommendation-card"
-                    key={movie.id}
-                  >
+                        Title:
+                          movie.Title ||
+                          movie.title,
 
-                    {/* POSTER */}
+                        Year:
+                          movie.Year ||
+                          movie.year,
 
-                    <div className="movie-poster-wrapper">
+                        Poster:
+                          movie.Poster ||
+                          movie.poster,
 
-                      <img
-                        src={movie.poster}
-                        alt={movie.title}
-                        className="movie-poster"
-                      />
+                        Type:
+                          movie.Type ||
+                          movie.type,
 
-                      <div className="poster-overlay">
+                        Rating:
+                          movie.Rating ||
+                          movie.rating,
 
-                        <span className="watch-text">
-                          Recommended for you
-                        </span>
-
-                      </div>
-
-                    </div>
-
-
-                    {/* DETAILS */}
-
-                    <div className="movie-info">
-
-                      <h3 title={movie.title}>
-                        {movie.title}
-                      </h3>
-
-
-                      <div className="movie-meta">
-
-                        <span>
-                          {movie.year}
-                        </span>
-
-                        <span className="dot">
-                          •
-                        </span>
-
-                        <span>
-                          {movie.type === "series"
-                            ? "TV Series"
-                            : "Movie"}
-                        </span>
-
-                      </div>
-
-
-                      {/* RATINGS */}
-
-                      <div className="rating-row">
-
-                        <div className="tmdb-rating">
-
-                          <span>⭐</span>
-
-                          <strong>
-                            {Number(
-                              movie.rating || 0
-                            ).toFixed(1)}
-                          </strong>
-
-                          <small>
-                            /10
-                          </small>
-
-                        </div>
-
-
-                        {userRating && (
-
-                          <div className="user-rating">
-
-                            <span>★</span>
-
-                            <strong>
-                              {userRating}
-                            </strong>
-
-                            <small>
-                              /5
-                            </small>
-
-                          </div>
-
-                        )}
-
-                      </div>
-
-
-                      {/* USER REVIEW */}
-
-                      {userRating && (
-
-                        <div className="your-review">
-                          ✓ You reviewed this movie
-                        </div>
-
-                      )}
-
-
-                      <p className="movie-overview">
-                        {movie.overview}
-                      </p>
-
-                    </div>
-
-                  </div>
-
-                );
-
-              })}
+                        Overview:
+                          movie.Overview ||
+                          movie.overview,
+                      }}
+                    />
+                  );
+                }
+              )}
 
             </div>
 

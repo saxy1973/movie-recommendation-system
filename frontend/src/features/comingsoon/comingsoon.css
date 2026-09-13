@@ -1,77 +1,300 @@
 /* =========================
-   MOVIE SECTION
+   COMING SOON PAGE
 ========================= */
 
-.movie-section {
-    width: 100%;
-    padding: 80px 60px;
-    background: #0b0f19;
-    position: relative;
+.coming-soon-page {
+  min-height: calc(100vh - 70px);
+
+  padding: 110px 60px 60px;
+
+  background:
+    radial-gradient(
+      circle at 10% 10%,
+      rgba(124, 58, 237, 0.12),
+      transparent 32%
+    ),
+    radial-gradient(
+      circle at 90% 20%,
+      rgba(236, 0, 140, 0.10),
+      transparent 30%
+    ),
+    #0b0f19;
+
+  color: #ffffff;
 }
 
-/* Purple glow - left */
-.movie-section::before {
-    content: "";
-    position: absolute;
-    left: -120px;
-    top: 40px;
-    width: 300px;
-    height: 300px;
-    background: rgba(124, 58, 237, 0.12);
-    filter: blur(100px);
-    border-radius: 50%;
-    pointer-events: none;
+
+/* =========================
+   HEADER
+========================= */
+
+.coming-soon-header {
+  max-width: 1400px;
+
+  margin: 0 auto 42px;
+
+  display: flex;
+
+  align-items: flex-end;
+
+  justify-content: space-between;
+
+  gap: 30px;
 }
 
-/* Pink glow - right */
-.movie-section::after {
-    content: "";
-    position: absolute;
-    right: -120px;
-    bottom: 0;
-    width: 300px;
-    height: 300px;
-    background: rgba(255, 45, 85, 0.10);
-    filter: blur(100px);
-    border-radius: 50%;
-    pointer-events: none;
+.coming-soon-header .section-label {
+  display: inline-block;
+
+  margin-bottom: 10px;
+
+  font-size: 12px;
+
+  font-weight: 600;
+
+  letter-spacing: 2px;
+
+  color: #a78bfa;
 }
 
-/* Heading */
-.movie-section h2 {
-    position: relative;
-    z-index: 2;
 
-    color: #ffffff;
-    font-size: 32px;
-    font-weight: 700;
+.coming-soon-header h1 {
+  margin: 0;
 
-    margin: 0 0 25px 0;
+  font-size: clamp(38px, 4vw, 56px);
 
-    line-height: 1.2;
+  line-height: 1.05;
+
+  font-weight: 700;
+
+  letter-spacing: -1.5px;
 }
 
-/* Gradient line under heading */
-.movie-section h2::after {
-    content: "";
-    display: block;
 
-    width: 65px;
-    height: 4px;
-
-    margin-top: 10px;
-
-    border-radius: 10px;
-
-    background: linear-gradient(
-        90deg,
-        #7c3aed,
-        #ec008c,
-        #ff4d6d
+.coming-soon-header h1 span {
+  background:
+    linear-gradient(
+      90deg,
+      #a855f7,
+      #ec008c
     );
 
-    box-shadow:
-        0 0 12px rgba(236, 0, 140, 0.35);
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+}
+
+
+.coming-soon-header p {
+  max-width: 650px;
+
+  margin-top: 14px;
+
+  color: #9ea3b2;
+
+  font-size: 15px;
+
+  line-height: 1.7;
+}
+
+
+/* =========================
+   MOVIE COUNT
+========================= */
+
+.coming-soon-page .movie-count {
+  min-width: 110px;
+
+  padding: 14px 20px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border: 1px solid rgba(139, 92, 246, 0.22);
+
+  border-radius: 16px;
+
+  background: rgba(255, 255, 255, 0.035);
+
+  backdrop-filter: blur(12px);
+
+  -webkit-backdrop-filter: blur(12px);
+
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.20);
+}
+
+.coming-soon-page .movie-count strong {
+  font-size: 28px;
+
+  line-height: 1;
+
+  color: #ffffff;
+}
+
+.coming-soon-page .movie-count span {
+  margin-top: 6px;
+
+  color: #8f94a3;
+
+  font-size: 12px;
+
+  text-transform: uppercase;
+
+  letter-spacing: 1px;
+}
+
+
+/* =========================
+   MOVIE GRID
+========================= */
+
+.coming-soon-page .movie-grid {
+  max-width: 1400px;
+
+  margin: 0 auto;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(5, minmax(0, 1fr));
+
+  gap: 24px;
+}
+
+
+/* =========================
+   MOVIE CARD ANIMATION
+========================= */
+
+.coming-soon-page .movie-grid > * {
+  animation: comingMovieAppear 0.55s ease both;
+}
+
+.coming-soon-page .movie-grid > *:nth-child(2) {
+  animation-delay: 0.05s;
+}
+
+.coming-soon-page .movie-grid > *:nth-child(3) {
+  animation-delay: 0.10s;
+}
+
+.coming-soon-page .movie-grid > *:nth-child(4) {
+  animation-delay: 0.15s;
+}
+
+.coming-soon-page .movie-grid > *:nth-child(5) {
+  animation-delay: 0.20s;
+}
+
+@keyframes comingMovieAppear {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* =========================
+   EMPTY STATE
+========================= */
+
+.coming-soon-page .empty-movies {
+  min-height: 400px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  text-align: center;
+
+  color: #ffffff;
+}
+
+.coming-soon-page .empty-icon {
+  font-size: 46px;
+
+  margin-bottom: 14px;
+}
+
+.coming-soon-page .empty-movies h3 {
+  margin: 0;
+
+  font-size: 22px;
+}
+
+.coming-soon-page .empty-movies p {
+  margin-top: 8px;
+
+  color: #8f94a3;
+
+  font-size: 14px;
+}
+
+
+/* =========================
+   LOADING
+========================= */
+
+.coming-page-loading {
+  min-height: calc(100vh - 70px);
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  background: #0b0f19;
+
+  color: #ffffff;
+}
+
+.coming-loading-spinner {
+  width: 42px;
+
+  height: 42px;
+
+  border: 3px solid rgba(255, 255, 255, 0.08);
+
+  border-top-color: #ec008c;
+
+  border-right-color: #a855f7;
+
+  border-radius: 50%;
+
+  animation:
+    comingSpin 0.8s linear infinite;
+}
+
+.coming-page-loading p {
+  margin-top: 14px;
+
+  color: #8f94a3;
+
+  font-size: 14px;
+}
+
+@keyframes comingSpin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 
@@ -79,14 +302,552 @@
    RESPONSIVE
 ========================= */
 
-@media (max-width: 768px) {
+@media (max-width: 1200px) {
 
-    .movie-section {
-        padding: 35px 25px;
-    }
+  .coming-soon-page {
+    padding: 105px 35px 50px;
+  }
 
-    .movie-section h2 {
-        font-size: 27px;
-        margin-bottom: 20px;
-    }
+  .coming-soon-page .movie-grid {
+    grid-template-columns:
+      repeat(4, minmax(0, 1fr));
+  }
+}
+
+
+@media (max-width: 900px) {
+
+  .coming-soon-page {
+    padding: 100px 25px 40px;
+  }
+
+  .coming-soon-header {
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+
+  .coming-soon-page .movie-count {
+    align-self: flex-start;
+  }
+
+  .coming-soon-page .movie-grid {
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
+  }
+}
+
+
+@media (max-width: 650px) {
+
+  .coming-soon-page {
+    padding: 95px 18px 35px;
+  }
+
+  .coming-soon-header h1 {
+    font-size: 36px;
+  }
+
+  .coming-soon-header p {
+    font-size: 14px;
+  }
+
+  .coming-soon-page .movie-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+    gap: 16px;
+  }
+}
+
+
+@media (max-width: 420px) {
+
+  .coming-soon-page .movie-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.coming-soon-filter-area {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto 35px;
+}
+
+/* =========================================================
+   PREMIUM COMING SOON ANIMATIONS
+========================================================= */
+
+
+/* =========================
+   PAGE ENTRY
+========================= */
+
+.coming-soon-page {
+  animation: comingPageEnter 0.8s ease both;
+}
+
+@keyframes comingPageEnter {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.coming-soon-header {
+  animation:
+    comingHeaderEnter 0.8s cubic-bezier(.22, 1, .36, 1) both;
+}
+
+@keyframes comingHeaderEnter {
+  from {
+    opacity: 0;
+    transform: translateY(-25px);
+    filter: blur(5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+
+/* =========================
+   SECTION LABEL
+========================= */
+
+.coming-soon-header .section-label {
+  animation: comingLabelEnter 0.7s ease 0.15s both;
+}
+
+@keyframes comingLabelEnter {
+  from {
+    opacity: 0;
+    transform: translateX(-18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+
+/* =========================
+   TITLE
+========================= */
+
+.coming-soon-header h1 {
+  animation:
+    comingTitleEnter 0.8s ease 0.25s both;
+}
+
+@keyframes comingTitleEnter {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+    filter: blur(7px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+
+/* =========================
+   DESCRIPTION
+========================= */
+
+.coming-soon-header p {
+  animation: comingDescriptionEnter 0.7s ease 0.4s both;
+}
+
+@keyframes comingDescriptionEnter {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* =========================
+   MOVIE COUNT
+========================= */
+
+.coming-soon-page .movie-count {
+  animation:
+    comingCountEnter
+    0.8s
+    cubic-bezier(.22, 1, .36, 1)
+    0.35s
+    both;
+
+  transition:
+    transform .35s ease,
+    box-shadow .35s ease,
+    border-color .35s ease;
+}
+
+@keyframes comingCountEnter {
+  from {
+    opacity: 0;
+    transform: translateX(25px) scale(.94);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+
+.coming-soon-page .movie-count:hover {
+  transform: translateY(-5px) scale(1.02);
+
+  border-color: rgba(168, 85, 247, .35);
+
+  box-shadow:
+    0 18px 40px rgba(0, 0, 0, .3),
+    0 0 28px rgba(168, 85, 247, .10);
+}
+
+
+.coming-soon-page .movie-count strong {
+  transition:
+    transform .3s ease,
+    color .3s ease;
+}
+
+
+.coming-soon-page .movie-count:hover strong {
+  transform: scale(1.08);
+  color: #d8b4fe;
+}
+
+
+/* =========================
+   FILTER AREA
+========================= */
+
+.coming-soon-filter-area {
+  animation:
+    comingFilterEnter
+    0.8s
+    ease
+    0.5s
+    both;
+}
+
+@keyframes comingFilterEnter {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* =========================
+   MOVIE GRID
+========================= */
+
+.coming-soon-page .movie-grid {
+  animation:
+    comingGridEnter
+    0.6s
+    ease
+    0.6s
+    both;
+}
+
+@keyframes comingGridEnter {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+
+/* =========================
+   MOVIE CARD
+========================= */
+
+.coming-soon-page .movie-grid > * {
+  animation:
+    comingMovieAppear
+    0.65s
+    cubic-bezier(.22, 1, .36, 1)
+    both;
+
+  transition:
+    transform .4s cubic-bezier(.22, 1, .36, 1),
+    box-shadow .4s ease,
+    filter .4s ease;
+}
+
+@keyframes comingMovieAppear {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+
+/* =========================
+   STAGGER ANIMATION
+========================= */
+
+.coming-soon-page .movie-grid > *:nth-child(1) {
+  animation-delay: .08s;
+}
+
+.coming-soon-page .movie-grid > *:nth-child(2) {
+  animation-delay: .14s;
+}
+
+.coming-soon-page .movie-grid > *:nth-child(3) {
+  animation-delay: .20s;
+}
+
+.coming-soon-page .movie-grid > *:nth-child(4) {
+  animation-delay: .26s;
+}
+
+.coming-soon-page .movie-grid > *:nth-child(5) {
+  animation-delay: .32s;
+}
+
+.coming-soon-page .movie-grid > *:nth-child(6) {
+  animation-delay: .38s;
+}
+
+.coming-soon-page .movie-grid > *:nth-child(7) {
+  animation-delay: .44s;
+}
+
+.coming-soon-page .movie-grid > *:nth-child(8) {
+  animation-delay: .50s;
+}
+
+.coming-soon-page .movie-grid > *:nth-child(9) {
+  animation-delay: .56s;
+}
+
+.coming-soon-page .movie-grid > *:nth-child(10) {
+  animation-delay: .62s;
+}
+
+.coming-soon-page .movie-grid > *:nth-child(11) {
+  animation-delay: .68s;
+}
+
+.coming-soon-page .movie-grid > *:nth-child(12) {
+  animation-delay: .74s;
+}
+
+.coming-soon-page .movie-grid > *:nth-child(13) {
+  animation-delay: .80s;
+}
+
+.coming-soon-page .movie-grid > *:nth-child(14) {
+  animation-delay: .86s;
+}
+
+.coming-soon-page .movie-grid > *:nth-child(15) {
+  animation-delay: .92s;
+}
+
+
+/* =========================
+   MOVIE CARD HOVER
+========================= */
+
+.coming-soon-page .movie-grid > *:hover {
+  transform: translateY(-9px) scale(1.015);
+
+  filter: brightness(1.04);
+
+  box-shadow:
+    0 25px 50px rgba(0, 0, 0, .45),
+    0 0 30px rgba(236, 0, 140, .10);
+}
+
+
+/* =========================
+   POSTER ZOOM
+========================= */
+
+.coming-soon-page .movie-grid > * img {
+  transition:
+    transform .65s cubic-bezier(.22, 1, .36, 1),
+    filter .5s ease;
+}
+
+
+.coming-soon-page .movie-grid > *:hover img {
+  transform: scale(1.07);
+
+  filter:
+    brightness(.72)
+    saturate(1.08);
+}
+
+
+/* =========================
+   EMPTY STATE
+========================= */
+
+.coming-soon-page .empty-movies {
+  animation:
+    comingEmptyEnter
+    0.8s
+    ease
+    both;
+}
+
+@keyframes comingEmptyEnter {
+  from {
+    opacity: 0;
+    transform: translateY(25px) scale(.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+
+.coming-soon-page .empty-icon {
+  animation:
+    comingEmptyFloat
+    3s
+    ease-in-out
+    infinite;
+}
+
+@keyframes comingEmptyFloat {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+
+}
+
+
+/* =========================
+   LOADING
+========================= */
+
+.coming-page-loading {
+  animation:
+    comingLoadingEnter
+    .5s
+    ease
+    both;
+}
+
+@keyframes comingLoadingEnter {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+
+/* =========================
+   LOADING SPINNER GLOW
+========================= */
+
+.coming-loading-spinner {
+  animation:
+    comingSpin .8s linear infinite,
+    comingSpinnerGlow 1.8s ease-in-out infinite;
+}
+
+@keyframes comingSpinnerGlow {
+
+  0%,
+  100% {
+    filter:
+      drop-shadow(0 0 3px rgba(168, 85, 247, .15));
+  }
+
+  50% {
+    filter:
+      drop-shadow(0 0 12px rgba(236, 0, 140, .35));
+  }
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 650px) {
+
+  .coming-soon-page .movie-grid > *:hover {
+    transform: translateY(-5px) scale(1.01);
+  }
+
+  .coming-soon-page .movie-grid > *:hover img {
+    transform: scale(1.04);
+  }
+
+}
+
+
+/* =========================
+   ACCESSIBILITY
+========================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+
 }

@@ -1,65 +1,83 @@
-/* ==========================================
-   MOVIRA CONTACT PAGE
-   Cute + Cinematic Theme
-========================================== */
+/* =========================================================
+   MOVIRA — CONTACT PAGE
+   Premium Cinematic Glassmorphism
+   ========================================================= */
 
-* {
+
+/* =========================================================
+   RESET
+   ========================================================= */
+
+.contact-page,
+.contact-page * {
   box-sizing: border-box;
 }
 
+.contact-page button,
+.contact-page input,
+.contact-page textarea {
+  font-family: inherit;
+}
 
-/* ==========================================
-   PAGE
-========================================== */
+
+/* =========================================================
+   MAIN PAGE
+   ========================================================= */
 
 .contact-page {
   position: relative;
 
+  width: 100%;
   min-height: calc(100vh - 70px);
 
-  padding: 80px 6% 65px;
+  padding: 80px 5% 70px;
+
+  overflow: hidden;
 
   color: #ffffff;
 
   background:
     radial-gradient(
-      circle at 8% 25%,
-      rgba(139, 92, 246, 0.13),
-      transparent 30%
+      circle at 0% 30%,
+      rgba(124, 58, 237, 0.18),
+      transparent 32%
     ),
     radial-gradient(
-      circle at 92% 75%,
-      rgba(244, 114, 182, 0.11),
-      transparent 30%
+      circle at 100% 35%,
+      rgba(236, 72, 153, 0.15),
+      transparent 32%
     ),
-    #0b0f19;
-
-  overflow: hidden;
+    radial-gradient(
+      circle at 50% 100%,
+      rgba(99, 102, 241, 0.07),
+      transparent 38%
+    ),
+    #070911;
 }
 
 
-/* ==========================================
-   SOFT PAGE GLOWS
-========================================== */
+/* Cinematic ambient glow */
 
 .contact-page::before {
   content: "";
 
   position: absolute;
 
-  width: 380px;
-  height: 380px;
+  width: 500px;
+  height: 500px;
 
-  left: -180px;
-  top: 170px;
+  left: -280px;
+  top: 180px;
 
   border-radius: 50%;
 
-  background: rgba(139, 92, 246, 0.10);
+  background: rgba(124, 58, 237, 0.14);
 
-  filter: blur(120px);
+  filter: blur(130px);
 
   pointer-events: none;
+
+  z-index: 0;
 }
 
 
@@ -68,25 +86,116 @@
 
   position: absolute;
 
-  width: 360px;
-  height: 360px;
+  width: 500px;
+  height: 500px;
 
-  right: -180px;
-  bottom: -100px;
+  right: -280px;
+  bottom: -120px;
 
   border-radius: 50%;
 
-  background: rgba(244, 114, 182, 0.09);
+  background: rgba(236, 72, 153, 0.12);
 
-  filter: blur(120px);
+  filter: blur(130px);
 
   pointer-events: none;
+
+  z-index: 0;
 }
 
 
-/* ==========================================
-   MAIN CONTAINER
-========================================== */
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.contact-heading {
+  position: relative;
+
+  z-index: 2;
+
+  max-width: 850px;
+
+  margin: 0 auto 40px;
+
+  text-align: center;
+}
+
+
+.contact-small-title {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 7px 15px;
+
+  margin-bottom: 15px;
+
+  border-radius: 999px;
+
+  color: #c4b5fd;
+
+  background:
+    rgba(124, 58, 237, 0.09);
+
+  border:
+    1px solid rgba(167, 139, 250, 0.20);
+
+  box-shadow:
+    0 0 25px rgba(124, 58, 237, 0.07);
+
+  font-size: 9px;
+
+  font-weight: 700;
+
+  letter-spacing: 2px;
+}
+
+
+.contact-heading h1 {
+  margin: 0 0 14px;
+
+  color: #f8f7fb;
+
+  font-size: clamp(40px, 5vw, 60px);
+
+  line-height: 1;
+
+  font-weight: 800;
+
+  letter-spacing: -2.5px;
+
+  text-shadow:
+    0 15px 40px rgba(0, 0, 0, 0.4);
+}
+
+
+.contact-heading h1 span {
+  display: inline-block;
+
+  filter:
+    drop-shadow(
+      0 0 15px rgba(244, 114, 182, 0.25)
+    );
+}
+
+
+.contact-heading p {
+  max-width: 620px;
+
+  margin: auto;
+
+  color: #918b9f;
+
+  font-size: 14px;
+
+  line-height: 1.7;
+}
+
+
+/* =========================================================
+   MAIN LAYOUT
+   ========================================================= */
 
 .contact-container {
   position: relative;
@@ -95,149 +204,513 @@
 
   width: 100%;
 
-  max-width: 1280px;
+  max-width: 1180px;
 
   margin: auto;
 
   display: grid;
 
-  grid-template-columns: 1.05fr 0.95fr;
+  grid-template-columns:
+    minmax(0, 0.82fr) minmax(0, 1.18fr);
 
-  gap: 55px;
+  gap: 18px;
 
-  align-items: center;
+  align-items: stretch;
 }
 
 
-/* ==========================================
-   LEFT SIDE
-========================================== */
+/* =========================================================
+   LEFT GLASS CARD
+   ========================================================= */
 
-.contact-left {
-  width: 100%;
-}
+.contact-options {
+  position: relative;
 
+  display: flex;
 
-/* ==========================================
-   SMALL TITLE
-========================================== */
+  flex-direction: column;
 
-.contact-small-title {
-  display: inline-flex;
+  gap: 5px;
 
-  align-items: center;
+  padding: 10px;
 
-  padding: 7px 14px;
-
-  margin-bottom: 14px;
-
-  border-radius: 50px;
+  border-radius: 24px;
 
   background:
-    rgba(139, 92, 246, 0.08);
+    linear-gradient(
+      145deg,
+      rgba(27, 24, 43, 0.88),
+      rgba(8, 11, 19, 0.94)
+    );
 
   border:
-    1px solid rgba(167, 139, 250, 0.22);
+    1px solid rgba(255, 255, 255, 0.075);
 
-  color: #c4b5fd;
+  box-shadow:
+    0 25px 70px rgba(0, 0, 0, 0.38),
+    inset 0 1px 0 rgba(255, 255, 255, 0.035);
 
-  font-size: 10px;
+  backdrop-filter: blur(22px);
+
+  -webkit-backdrop-filter: blur(22px);
+}
+
+
+/* =========================================================
+   OPTION CARD
+   ========================================================= */
+
+.contact-option {
+  position: relative;
+
+  width: 100%;
+
+  min-height: 82px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 13px;
+
+  padding: 14px 16px;
+
+  border: 1px solid transparent;
+
+  border-radius: 16px;
+
+  background: transparent;
+
+  color: #ffffff;
+
+  text-align: left;
+  font: inherit;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+
+/* Hover */
+
+.contact-option:hover {
+  transform: translateY(-3px);
+
+  background:
+    rgba(255, 255, 255, 0.035);
+
+  border-color:
+    rgba(196, 181, 253, 0.13);
+
+  box-shadow:
+    0 12px 28px rgba(0, 0, 0, 0.18);
+}
+
+
+/* Active */
+
+.contact-option.active {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(124, 58, 237, 0.20),
+      rgba(236, 72, 153, 0.09)
+    );
+
+  border-color:
+    rgba(196, 181, 253, 0.25);
+
+  box-shadow:
+    0 0 0 1px rgba(139, 92, 246, 0.07),
+    0 12px 35px rgba(124, 58, 237, 0.10),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+
+/* Neon active line */
+
+.contact-option.active::before {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+
+  top: 13px;
+  bottom: 13px;
+
+  width: 3px;
+
+  border-radius: 999px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #f472b6,
+      #a78bfa
+    );
+
+  box-shadow:
+    0 0 8px rgba(244, 114, 182, 0.65),
+    0 0 18px rgba(139, 92, 246, 0.35);
+}
+
+
+/* =========================================================
+   OPTION ICON
+   ========================================================= */
+
+.option-icon {
+  width: 46px;
+  height: 46px;
+
+  min-width: 46px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 14px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(167, 139, 250, 0.14),
+      rgba(244, 114, 182, 0.08)
+    );
+
+  border:
+    1px solid rgba(196, 181, 253, 0.11);
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+
+  font-size: 20px;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+
+.contact-option:hover .option-icon,
+.contact-option.active .option-icon {
+  transform:
+    scale(1.07)
+    rotate(-2deg);
+
+  box-shadow:
+    0 0 24px rgba(167, 139, 250, 0.13);
+}
+
+
+/* =========================================================
+   OPTION TEXT
+   ========================================================= */
+
+.option-text {
+  flex: 1;
+
+  min-width: 0;
+}
+
+
+.option-text h3 {
+  margin: 0 0 4px;
+
+  color: #f3f0f7;
+
+  font-size: 14px;
+
+  font-weight: 700;
+
+  letter-spacing: -0.15px;
+}
+
+
+.option-text p {
+  margin: 0;
+
+  color: #817a8e;
+
+  font-size: 10.5px;
+
+  line-height: 1.45;
+
+  overflow-wrap: anywhere;
+}
+
+
+/* =========================================================
+   ARROW
+   ========================================================= */
+
+.option-arrow {
+  color: #625b70;
+
+  font-size: 19px;
+
+  transition:
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+
+.contact-option:hover .option-arrow,
+.contact-option.active .option-arrow {
+  color: #f5a3ca;
+
+  transform:
+    translateX(4px);
+}
+
+
+/* =========================================================
+   MINI BRAND CARD
+   ========================================================= */
+
+.contact-mini-card {
+  display: flex;
+
+  align-items: center;
+
+  gap: 11px;
+
+  margin: 8px 2px 2px;
+
+  padding: 15px;
+
+  border-radius: 15px;
+
+  background:
+    rgba(255, 255, 255, 0.025);
+
+  border:
+    1px solid rgba(255, 255, 255, 0.065);
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.02);
+}
+
+
+.contact-mini-card > span {
+  font-size: 20px;
+}
+
+
+.contact-mini-card strong {
+  display: block;
+
+  margin-bottom: 3px;
+
+  color: #e9e4ee;
+
+  font-size: 11px;
+}
+
+
+.contact-mini-card p {
+  margin: 0;
+
+  color: #716a7c;
+
+  font-size: 9px;
+
+  line-height: 1.45;
+}
+
+
+/* =========================================================
+   RIGHT CONTENT
+   ========================================================= */
+
+.contact-content {
+  position: relative;
+
+  width: 100%;
+
+  min-width: 0;
+}
+
+
+/* =========================================================
+   CONTACT PANEL
+   ========================================================= */
+
+.contact-panel,
+.email-panel {
+  position: relative;
+
+  width: 100%;
+
+  min-height: 100%;
+
+  padding: 29px;
+
+  border-radius: 24px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(30, 27, 47, 0.92),
+      rgba(9, 13, 22, 0.96)
+    );
+
+  border:
+    1px solid rgba(196, 181, 253, 0.12);
+
+  box-shadow:
+    0 28px 80px rgba(0, 0, 0, 0.40),
+    inset 0 1px 0 rgba(255, 255, 255, 0.035);
+
+  backdrop-filter: blur(24px);
+
+  -webkit-backdrop-filter: blur(24px);
+
+  overflow: hidden;
+
+  animation:
+    panelIn 0.35s ease;
+}
+
+
+/* Top light */
+
+.contact-panel::before,
+.email-panel::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 12%;
+
+  width: 76%;
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(244, 114, 182, 0.35),
+      rgba(167, 139, 250, 0.35),
+      transparent
+    );
+}
+
+
+@keyframes panelIn {
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(10px)
+      scale(0.985);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0)
+      scale(1);
+  }
+}
+
+
+/* =========================================================
+   PANEL HEADER
+   ========================================================= */
+
+.panel-header {
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+  margin-bottom: 23px;
+}
+
+
+.panel-icon {
+  width: 52px;
+  height: 52px;
+
+  min-width: 52px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 15px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(244, 114, 182, 0.15),
+      rgba(167, 139, 250, 0.15)
+    );
+
+  border:
+    1px solid rgba(244, 114, 182, 0.15);
+
+  box-shadow:
+    0 8px 25px rgba(139, 92, 246, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+
+  font-size: 22px;
+}
+
+
+.panel-header span {
+  display: block;
+
+  margin-bottom: 4px;
+
+  color: #aaa2b8;
+
+  font-size: 8px;
 
   font-weight: 700;
 
   letter-spacing: 2px;
-
-  box-shadow:
-    0 0 20px rgba(139, 92, 246, 0.05);
 }
 
 
-/* ==========================================
-   HEADING
-========================================== */
+.panel-header h2 {
+  margin: 0;
 
-.contact-heading h1 {
-  margin: 0 0 13px;
+  color: #faf8fd;
 
-  font-size: 54px;
+  font-size: 22px;
 
-  line-height: 1.05;
+  line-height: 1.2;
 
-  font-weight: 800;
-
-  letter-spacing: -1.8px;
-
-  color: #faf9ff;
+  letter-spacing: -0.45px;
 }
 
 
-.contact-heading h1 span {
-  display: inline-block;
-
-  background:
-    linear-gradient(
-      135deg,
-      #f9a8d4,
-      #c4b5fd
-    );
-
-  -webkit-background-clip: text;
-
-  -webkit-text-fill-color: transparent;
-
-  filter:
-    drop-shadow(
-      0 0 10px
-      rgba(244, 114, 182, 0.18)
-    );
-
-  animation:
-    clapFloat 2.5s ease-in-out infinite;
-}
-
-
-@keyframes clapFloat {
-
-  0%,
-  100% {
-    transform: translateY(0) rotate(0deg);
-  }
-
-  50% {
-    transform: translateY(-5px) rotate(-4deg);
-  }
-}
-
-
-/* ==========================================
-   DESCRIPTION
-========================================== */
-
-.contact-heading p {
-  max-width: 600px;
-
-  margin: 0 0 30px;
-
-  color: #9792a8;
-
-  font-size: 15px;
-
-  line-height: 1.7;
-}
-
-
-/* ==========================================
+/* =========================================================
    FORM
-========================================== */
+   ========================================================= */
 
-.contact-form {
-  width: 100%;
+.form-row {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1fr) minmax(0, 1fr);
+
+  gap: 14px;
 }
 
-
-/* ==========================================
-   FORM GROUP
-========================================== */
 
 .form-group {
   margin-bottom: 15px;
@@ -249,59 +722,55 @@
 
   margin-bottom: 7px;
 
-  color: #eeecf4;
+  color: #e8e4ed;
 
-  font-size: 13px;
+  font-size: 11px;
 
   font-weight: 600;
 }
 
 
 .optional {
-  margin-left: 7px;
+  margin-left: 6px;
 
-  color: #6f687d;
+  color: #6d6678;
 
-  font-size: 10px;
+  font-size: 9px;
 
   font-weight: 400;
 }
 
 
-/* ==========================================
-   INPUTS
-========================================== */
+/* =========================================================
+   GLASS INPUTS
+   ========================================================= */
 
 .form-group input,
 .form-group textarea {
   width: 100%;
 
-  padding: 13px 15px;
-
   border-radius: 12px;
 
   border:
-    1px solid
-    rgba(255, 255, 255, 0.075);
-
-  background:
-    linear-gradient(
-      135deg,
-      rgba(25, 21, 38, 0.78),
-      rgba(18, 18, 29, 0.72)
-    );
-
-  color: #ffffff;
+    1px solid rgba(255, 255, 255, 0.075);
 
   outline: none;
 
+  background:
+    rgba(7, 10, 18, 0.62);
+
+  color: #ffffff;
+
+  padding: 12px 14px;
+
+  font-size: 12px;
+
+  line-height: 1.5;
+
   font-family: inherit;
 
-  font-size: 14px;
-
-  backdrop-filter: blur(14px);
-
-  -webkit-backdrop-filter: blur(14px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.018);
 
   transition:
     border-color 0.25s ease,
@@ -312,201 +781,441 @@
 
 
 .form-group input {
-  height: 49px;
+  height: 45px;
 }
 
 
 .form-group textarea {
-  min-height: 110px;
+  min-height: 100px;
 
   resize: vertical;
 }
 
 
-/* PLACEHOLDER */
-
 .form-group input::placeholder,
 .form-group textarea::placeholder {
-  color: #686277;
+  color: #625b70;
 }
 
 
-/* INPUT HOVER */
+/* Input hover */
 
 .form-group input:hover,
 .form-group textarea:hover {
   border-color:
-    rgba(196, 181, 253, 0.20);
+    rgba(196, 181, 253, 0.16);
+
+  background:
+    rgba(10, 13, 23, 0.72);
 }
 
 
-/* INPUT FOCUS */
+/* Input focus */
 
 .form-group input:focus,
 .form-group textarea:focus {
   background:
-    linear-gradient(
-      135deg,
-      rgba(31, 25, 47, 0.90),
-      rgba(20, 19, 32, 0.90)
-    );
+    rgba(17, 14, 29, 0.90);
 
   border-color:
-    rgba(244, 114, 182, 0.48);
+    rgba(244, 114, 182, 0.42);
 
   box-shadow:
-    0 0 0 3px
-    rgba(244, 114, 182, 0.055),
-
-    0 0 24px
-    rgba(139, 92, 246, 0.08);
+    0 0 0 3px rgba(244, 114, 182, 0.055),
+    0 0 25px rgba(139, 92, 246, 0.08);
 }
 
 
-/* ==========================================
-   BUTTONS
-========================================== */
+/* =========================================================
+   MOVIRA BUTTON
+   ========================================================= */
 
-.contact-buttons {
-  display: grid;
+.panel-submit,
+.email-button {
+  background:
+    linear-gradient(
+      135deg,
+      #ec70b0 0%,
+      #a879f5 100%
+    );
 
-  grid-template-columns: 1fr 1fr;
-
-  gap: 12px;
-
-  margin-top: 20px;
-}
-
-
-.contact-buttons button {
-  height: 50px;
-
-  border-radius: 12px;
-
-  padding: 0 15px;
-
-  font-family: inherit;
-
-  font-size: 13px;
-
-  font-weight: 700;
-
-  cursor: pointer;
+  box-shadow:
+    0 10px 28px rgba(196, 82, 153, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.16);
 
   transition:
     transform 0.25s ease,
     box-shadow 0.25s ease,
-    background 0.25s ease,
-    border-color 0.25s ease;
+    filter 0.25s ease;
 }
 
 
-/* ==========================================
-   SEND MESSAGE
-========================================== */
+.panel-submit {
+  width: 100%;
 
-.send-message-btn {
+  height: 47px;
+
+  margin-top: 3px;
+
   border: none;
+
+  border-radius: 12px;
 
   color: #ffffff;
 
-  background:
-    linear-gradient(
-      135deg,
-      #f472b6 0%,
-      #e879a9 40%,
-      #a78bfa 100%
-    );
+  font-size: 12px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+
+.panel-submit:hover,
+.email-button:hover {
+  transform:
+    translateY(-2px);
+
+  filter:
+    brightness(1.05);
 
   box-shadow:
-    0 8px 24px
-    rgba(244, 114, 182, 0.16);
+    0 15px 36px rgba(196, 82, 153, 0.26),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
 }
 
 
-.send-message-btn:hover {
-  transform: translateY(-3px);
-
-  background:
-    linear-gradient(
-      135deg,
-      #fb7cba,
-      #b197fc
-    );
-
-  box-shadow:
-    0 12px 30px
-    rgba(244, 114, 182, 0.25);
+.panel-submit:active,
+.email-button:active {
+  transform:
+    translateY(0);
 }
 
 
-/* ==========================================
-   CALLBACK
-========================================== */
-
-.callback-btn {
-  border:
-    1px solid
-    rgba(196, 181, 253, 0.20) !important;
-
-  color: #f4f1f8;
-
-  background:
-    rgba(255, 255, 255, 0.035);
-
-  backdrop-filter: blur(10px);
-
-  -webkit-backdrop-filter: blur(10px);
-}
-
-
-.callback-btn:hover {
-  transform: translateY(-3px);
-
-  background:
-    rgba(244, 114, 182, 0.065);
-
-  border-color:
-    rgba(244, 114, 182, 0.48) !important;
-
-  box-shadow:
-    0 8px 25px
-    rgba(244, 114, 182, 0.09);
-}
-
-
-/* ==========================================
-   DISABLED
-========================================== */
-
-.contact-buttons button:disabled {
+.panel-submit:disabled {
   opacity: 0.55;
 
   cursor: not-allowed;
 
   transform: none;
+
+  filter: none;
 }
 
 
-/* ==========================================
-   SUCCESS / ERROR
-========================================== */
+/* =========================================================
+   DESCRIPTION
+   ========================================================= */
 
-.contact-success,
-.contact-error {
-  padding: 11px 15px;
+.panel-description {
+  margin: -5px 0 20px;
+
+  color: #8b8497;
+
+  font-size: 12px;
+
+  line-height: 1.6;
+}
+
+
+/* =========================================================
+   EMAIL PANEL
+   ========================================================= */
+
+.email-panel {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  min-height: 455px;
+
+  text-align: center;
+}
+
+
+/* =========================================================
+   EMAIL ICON
+   ========================================================= */
+
+.email-glow {
+  width: 82px;
+  height: 82px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 18px;
+
+  border-radius: 25px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(244, 114, 182, 0.16),
+      rgba(167, 139, 250, 0.17)
+    );
+
+  border:
+    1px solid rgba(244, 114, 182, 0.18);
+
+  box-shadow:
+    0 0 40px rgba(244, 114, 182, 0.09),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+
+  font-size: 33px;
+
+  animation:
+    emailFloat 3s ease-in-out infinite;
+}
+
+
+@keyframes emailFloat {
+  0%,
+  100% {
+    transform:
+      translateY(0);
+  }
+
+  50% {
+    transform:
+      translateY(-6px);
+  }
+}
+
+
+/* =========================================================
+   EMAIL CONTENT
+   ========================================================= */
+
+.email-label {
+  margin-bottom: 8px;
+
+  color: #b8afc4;
+
+  font-size: 9px;
+
+  font-weight: 700;
+
+  letter-spacing: 2px;
+}
+
+
+.email-panel h2 {
+  margin: 0 0 12px;
+
+  color: #faf9ff;
+
+  font-size: 31px;
+
+  line-height: 1.12;
+
+  letter-spacing: -1px;
+}
+
+
+.email-panel h2 span {
+  display: block;
+
+  background:
+    linear-gradient(
+      90deg,
+      #f9a8d4,
+      #c4b5fd
+    );
+
+  -webkit-background-clip: text;
+
+  background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+}
+
+
+.email-panel > p {
+  max-width: 420px;
+
+  margin: 0 0 22px;
+
+  color: #918a9e;
+
+  font-size: 12px;
+
+  line-height: 1.65;
+}
+
+
+/* =========================================================
+   OFFICIAL EMAIL CARD
+   ========================================================= */
+
+.official-email {
+  width: 100%;
+
+  max-width: 390px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 14px;
 
   margin-bottom: 16px;
 
-  border-radius: 10px;
+  border-radius: 15px;
 
-  font-size: 13px;
+  background:
+    rgba(255, 255, 255, 0.028);
+
+  border:
+    1px solid rgba(196, 181, 253, 0.10);
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.025);
+
+  text-align: left;
+
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease;
+}
+
+
+.official-email:hover {
+  transform:
+    translateY(-2px);
+
+  border-color:
+    rgba(244, 114, 182, 0.20);
+}
+
+
+.official-email > span {
+  width: 42px;
+  height: 42px;
+
+  min-width: 42px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 12px;
+
+  background:
+    rgba(244, 114, 182, 0.075);
+
+  font-size: 18px;
+}
+
+
+.official-email small {
+  display: block;
+
+  margin-bottom: 3px;
+
+  color: #726b7e;
+
+  font-size: 8px;
+
+  font-weight: 700;
+
+  letter-spacing: 1.4px;
+}
+
+
+.official-email strong {
+  color: #e8e3ed;
+
+  font-size: 12px;
+
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+
+/* =========================================================
+   EMAIL BUTTON
+   ========================================================= */
+
+.email-button {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  min-width: 165px;
+
+  height: 45px;
+
+  padding: 0 22px;
+
+  border-radius: 12px;
+
+  color: #ffffff;
+
+  text-decoration: none;
+
+  font-size: 12px;
+
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   EMAIL FOOTER
+   ========================================================= */
+
+.email-footer {
+  display: flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  margin-top: 22px;
+
+  color: #6f687a;
+
+  font-size: 10px;
+}
+
+
+.email-footer p {
+  margin: 0;
+}
+
+
+.email-footer span {
+  font-size: 16px;
+}
+
+
+/* =========================================================
+   SUCCESS / ERROR
+   ========================================================= */
+
+.contact-success,
+.contact-error {
+  width: 100%;
+
+  padding: 10px 13px;
+
+  margin-bottom: 12px;
+
+  border-radius: 11px;
+
+  font-size: 11px;
 
   font-weight: 600;
-
-  backdrop-filter: blur(10px);
-
-  -webkit-backdrop-filter: blur(10px);
 }
 
 
@@ -517,8 +1226,7 @@
     rgba(34, 197, 94, 0.07);
 
   border:
-    1px solid
-    rgba(74, 222, 128, 0.24);
+    1px solid rgba(74, 222, 128, 0.20);
 }
 
 
@@ -529,658 +1237,416 @@
     rgba(244, 63, 94, 0.07);
 
   border:
-    1px solid
-    rgba(251, 113, 133, 0.24);
+    1px solid rgba(251, 113, 133, 0.20);
 }
 
 
-/* ==========================================
-   RIGHT SIDE
-========================================== */
+/* =========================================================
+   KEYBOARD ACCESSIBILITY
+   ========================================================= */
 
-.contact-right {
-  width: 100%;
+.contact-option:focus-visible,
+.panel-submit:focus-visible,
+.email-button:focus-visible,
+.form-group input:focus-visible,
+.form-group textarea:focus-visible {
+  outline:
+    2px solid rgba(244, 114, 182, 0.75);
 
-  display: flex;
-
-  justify-content: center;
+  outline-offset: 3px;
 }
 
 
-/* ==========================================
-   ABOUT CARD
-========================================== */
-
-.about-card {
-  position: relative;
-
-  width: 100%;
-
-  max-width: 540px;
-
-  padding: 30px;
-
-  border-radius: 24px;
-
-  background:
-    linear-gradient(
-      145deg,
-      rgba(29, 25, 45, 0.92),
-      rgba(14, 16, 27, 0.96)
-    );
-
-  border:
-    1px solid
-    rgba(196, 181, 253, 0.14);
-
-  box-shadow:
-    0 25px 65px
-    rgba(0, 0, 0, 0.38),
-
-    0 0 35px
-    rgba(139, 92, 246, 0.05);
-
-  backdrop-filter: blur(20px);
-
-  -webkit-backdrop-filter: blur(20px);
-
-  overflow: hidden;
-
-  transition:
-    transform 0.3s ease,
-    border-color 0.3s ease,
-    box-shadow 0.3s ease;
-}
-
-
-.about-card:hover {
-  transform: translateY(-4px);
-
-  border-color:
-    rgba(244, 114, 182, 0.22);
-
-  box-shadow:
-    0 30px 75px
-    rgba(0, 0, 0, 0.42),
-
-    0 0 35px
-    rgba(244, 114, 182, 0.06);
-}
-
-
-/* ==========================================
-   CARD PINK GLOW
-========================================== */
-
-.about-card::before {
-  content: "";
-
-  position: absolute;
-
-  width: 240px;
-  height: 240px;
-
-  top: -130px;
-  right: -90px;
-
-  border-radius: 50%;
-
-  background: #f472b6;
-
-  opacity: 0.10;
-
-  filter: blur(80px);
-
-  pointer-events: none;
-}
-
-
-/* ==========================================
-   CARD PURPLE GLOW
-========================================== */
-
-.about-card::after {
-  content: "";
-
-  position: absolute;
-
-  width: 220px;
-  height: 220px;
-
-  bottom: -130px;
-  left: -100px;
-
-  border-radius: 50%;
-
-  background: #8b5cf6;
-
-  opacity: 0.10;
-
-  filter: blur(80px);
-
-  pointer-events: none;
-}
-
-
-/* ==========================================
-   ABOUT HEADER
-========================================== */
-
-.about-header {
-  position: relative;
-
-  z-index: 2;
-
-  display: flex;
-
-  align-items: center;
-
-  gap: 15px;
-}
-
-
-/* ==========================================
-   ABOUT ICON
-========================================== */
-
-.about-icon {
-  width: 60px;
-  height: 60px;
-
-  flex-shrink: 0;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  border-radius: 17px;
-
-  background:
-    linear-gradient(
-      135deg,
-      rgba(244, 114, 182, 0.14),
-      rgba(167, 139, 250, 0.15)
-    );
-
-  border:
-    1px solid
-    rgba(244, 114, 182, 0.20);
-
-  font-size: 27px;
-
-  box-shadow:
-    0 0 22px
-    rgba(244, 114, 182, 0.07);
-}
-
-
-/* ==========================================
-   ABOUT LABEL
-========================================== */
-
-.about-label {
-  display: block;
-
-  margin-bottom: 3px;
-
-  color: #9b93aa;
-
-  font-size: 10px;
-
-  font-weight: 600;
-
-  letter-spacing: 2.5px;
-}
-
-
-/* ==========================================
-   ABOUT TITLE
-========================================== */
-
-.about-header h2 {
-  margin: 0;
-
-  color: #ffffff;
-
-  font-size: 30px;
-
-  line-height: 1.1;
-
-  font-weight: 800;
-}
-
-
-/* ==========================================
-   ABOUT LINE
-========================================== */
-
-.about-line {
-  height: 1px;
-
-  margin: 23px 0;
-
-  background:
-    linear-gradient(
-      90deg,
-      rgba(244, 114, 182, 0.38),
-      rgba(167, 139, 250, 0.18),
-      transparent
-    );
-}
-
-
-/* ==========================================
-   DESCRIPTION
-========================================== */
-
-.about-description {
-  position: relative;
-
-  z-index: 2;
-
-  margin: 0 0 24px;
-
-  color: #9d98aa;
-
-  font-size: 14px;
-
-  line-height: 1.75;
-}
-
-
-/* ==========================================
-   FEATURES
-========================================== */
-
-.movira-features {
-  position: relative;
-
-  z-index: 2;
-
-  display: flex;
-
-  flex-direction: column;
-
-  gap: 12px;
-}
-
-
-.feature-item {
-  display: flex;
-
-  align-items: center;
-
-  gap: 13px;
-
-  padding: 7px 8px;
-
-  border-radius: 13px;
-
-  transition:
-    background 0.25s ease,
-    transform 0.25s ease;
-}
-
-
-.feature-item:hover {
-  background:
-    rgba(244, 114, 182, 0.045);
-
-  transform: translateX(4px);
-}
-
-
-/* ==========================================
-   FEATURE ICON
-========================================== */
-
-.feature-icon {
-  width: 42px;
-  height: 42px;
-
-  min-width: 42px;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  border-radius: 12px;
-
-  background:
-    linear-gradient(
-      135deg,
-      rgba(167, 139, 250, 0.12),
-      rgba(244, 114, 182, 0.08)
-    );
-
-  border:
-    1px solid
-    rgba(196, 181, 253, 0.12);
-
-  font-size: 18px;
-}
-
-
-.feature-item h4 {
-  margin: 0 0 3px;
-
-  color: #f1eef6;
-
-  font-size: 14px;
-
-  font-weight: 700;
-}
-
-
-.feature-item p {
-  margin: 0;
-
-  color: #777187;
-
-  font-size: 12px;
-
-  line-height: 1.4;
-}
-
-
-/* ==========================================
-   CONTACT INFO BOX
-========================================== */
-
-.contact-info-box {
-  position: relative;
-
-  z-index: 2;
-
-  margin-top: 24px;
-
-  padding: 15px 17px;
-
-  border-radius: 15px;
-
-  background:
-    rgba(7, 9, 16, 0.42);
-
-  border:
-    1px solid
-    rgba(196, 181, 253, 0.10);
-
-  backdrop-filter: blur(12px);
-
-  -webkit-backdrop-filter: blur(12px);
-}
-
-
-/* ==========================================
-   INFO ITEM
-========================================== */
-
-.info-item {
-  display: flex;
-
-  align-items: center;
-
-  gap: 12px;
-
-  padding: 9px 0;
-}
-
-
-.info-item + .info-item {
-  border-top:
-    1px solid
-    rgba(255, 255, 255, 0.055);
-}
-
-
-/* ==========================================
-   INFO ICON
-========================================== */
-
-.info-icon {
-  width: 38px;
-  height: 38px;
-
-  min-width: 38px;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  border-radius: 10px;
-
-  background:
-    rgba(244, 114, 182, 0.07);
-
-  border:
-    1px solid
-    rgba(244, 114, 182, 0.10);
-
-  font-size: 15px;
-}
-
-
-/* ==========================================
-   INFO TEXT
-========================================== */
-
-.info-item span {
-  display: block;
-
-  margin-bottom: 2px;
-
-  color: #696478;
-
-  font-size: 10px;
-
-  letter-spacing: 0.7px;
-
-  text-transform: uppercase;
-}
-
-
-.info-item strong {
-  display: block;
-
-  color: #e9e6ee;
-
-  font-size: 13px;
-
-  font-weight: 600;
-
-  word-break: break-word;
-}
-
-
-/* ==========================================
-   FOOTER
-========================================== */
-
-.about-footer {
-  position: relative;
-
-  z-index: 2;
-
-  display: flex;
-
-  align-items: center;
-
-  gap: 9px;
-
-  margin-top: 20px;
-}
-
-
-.about-footer span {
-  font-size: 20px;
-
-  filter:
-    drop-shadow(
-      0 0 8px
-      rgba(244, 114, 182, 0.35)
-    );
-}
-
-
-.about-footer p {
-  margin: 0;
-
-  color: #777187;
-
-  font-size: 12px;
-
-  line-height: 1.5;
-}
-
-
-/* ==========================================
-   RESPONSIVE - 1050
-========================================== */
-
-@media (max-width: 1050px) {
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
 
   .contact-container {
     grid-template-columns: 1fr;
-
-    gap: 45px;
   }
 
-  .contact-left {
-    padding-top: 0;
+  .contact-options {
+    display: grid;
+
+    grid-template-columns:
+      repeat(3, 1fr);
+
+    gap: 6px;
   }
 
-  .contact-right {
-    justify-content: flex-start;
+  .contact-option {
+    min-height: 105px;
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    justify-content: center;
   }
 
-  .about-card {
-    max-width: 650px;
-  }
-}
-
-
-/* ==========================================
-   RESPONSIVE - 768
-========================================== */
-
-@media (max-width: 768px) {
-
-  .contact-page {
-    padding: 40px 25px 55px;
+  .option-arrow {
+    display: none;
   }
 
-  .contact-heading h1 {
-    font-size: 44px;
-  }
-
-  .contact-heading p {
-    font-size: 14px;
-  }
-
-  .contact-buttons {
-    grid-template-columns: 1fr;
-  }
-
-  .about-card {
-    padding: 25px;
+  .contact-mini-card {
+    grid-column: 1 / -1;
   }
 }
 
 
-/* ==========================================
-   RESPONSIVE - 600
-========================================== */
+/* =========================================================
+   MOBILE
+   ========================================================= */
 
 @media (max-width: 600px) {
 
   .contact-page {
-    padding: 30px 18px 45px;
+    min-height: 100vh;
+
+    padding:
+      35px 15px 50px;
   }
+
+
+  .contact-heading {
+    margin-bottom: 27px;
+  }
+
 
   .contact-heading h1 {
-    font-size: 37px;
+    font-size: 36px;
+
+    letter-spacing: -1.5px;
   }
+
 
   .contact-heading p {
-    font-size: 13px;
+    font-size: 12px;
   }
 
-  .contact-small-title {
-    font-size: 9px;
 
-    letter-spacing: 1.8px;
+  .contact-options {
+    display: flex;
+
+    flex-direction: column;
+
+    padding: 8px;
   }
 
-  .about-card {
-    padding: 21px;
+
+  .contact-option {
+    min-height: 70px;
+
+    flex-direction: row;
+
+    align-items: center;
+
+    padding: 11px 12px;
+  }
+
+
+  .option-arrow {
+    display: block;
+  }
+
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+
+  .contact-panel,
+  .email-panel {
+    padding: 22px 18px;
 
     border-radius: 20px;
   }
 
-  .about-icon {
-    width: 54px;
-    height: 54px;
 
-    font-size: 24px;
+  .panel-header {
+    align-items: flex-start;
   }
 
-  .about-header h2 {
-    font-size: 26px;
+
+  .email-panel {
+    min-height: 410px;
   }
 
-  .about-description {
-    font-size: 13px;
 
-    line-height: 1.65;
+  .panel-header h2 {
+    font-size: 20px;
   }
 
-  .feature-item p {
+
+  .email-panel h2 {
+    font-size: 28px;
+  }
+
+
+  .official-email strong {
     font-size: 11px;
   }
-
-  .info-item strong {
-    font-size: 12px;
-  }
 }
 
 
-/* ==========================================
-   VERY SMALL MOBILE
-========================================== */
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
 
-@media (max-width: 400px) {
-
-  .contact-page {
-    padding-left: 14px;
-    padding-right: 14px;
-  }
+@media (max-width: 420px) {
 
   .contact-heading h1 {
-    font-size: 33px;
+    font-size: 32px;
   }
 
-  .about-card {
-    padding: 18px;
+
+  .contact-small-title {
+    font-size: 8px;
   }
 
-  .about-header {
-    gap: 11px;
+
+  .contact-option {
+    min-height: 68px;
   }
 
-  .about-icon {
-    width: 50px;
-    height: 50px;
 
-    font-size: 22px;
+  .option-icon {
+    width: 42px;
+    height: 42px;
+
+    min-width: 42px;
   }
 
-  .about-header h2 {
-    font-size: 23px;
+
+  .option-text h3 {
+    font-size: 13px;
+  }
+
+
+  .option-text p {
+    font-size: 9px;
+  }
+
+
+  .panel-icon {
+    width: 48px;
+    height: 48px;
+
+    min-width: 48px;
+  }
+
+
+  .panel-header h2 {
+    font-size: 19px;
+  }
+
+
+  .email-panel h2 {
+    font-size: 25px;
   }
 }
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+
+    transition-duration: 0.01ms !important;
+  }
+}
+
+ /* =========================
+    ANIMATION ONLY
+ ========================= */
+
+ /* Page */
+ .trending-page,
+ .top-rated-page,
+ .coming-soon-page {
+   animation: pageIn 0.6s ease both;
+ }
+
+ @keyframes pageIn {
+   from {
+     opacity: 0;
+   }
+
+   to {
+     opacity: 1;
+   }
+ }
+
+
+ /* Header */
+ .trending-header,
+ .top-rated-header,
+ .coming-soon-header {
+   animation: headerIn 0.7s ease both;
+ }
+
+ @keyframes headerIn {
+   from {
+     opacity: 0;
+     transform: translateY(-20px);
+   }
+
+   to {
+     opacity: 1;
+     transform: translateY(0);
+   }
+ }
+
+
+ /* Filter */
+ .trending-filter-area,
+ .top-rated-filter-area,
+ .coming-soon-filter-area {
+   animation: filterIn 0.6s ease 0.15s both;
+ }
+
+ @keyframes filterIn {
+   from {
+     opacity: 0;
+     transform: translateY(15px);
+   }
+
+   to {
+     opacity: 1;
+     transform: translateY(0);
+   }
+ }
+
+
+ /* Movie cards */
+ .trending-page .movie-grid > *,
+ .top-rated-page .movie-grid > *,
+ .coming-soon-page .movie-grid > * {
+   animation: cardIn 0.5s ease both;
+ }
+
+ @keyframes cardIn {
+   from {
+     opacity: 0;
+     transform: translateY(20px);
+   }
+
+   to {
+     opacity: 1;
+     transform: translateY(0);
+   }
+ }
+
+
+ /* Card stagger */
+ .movie-grid > *:nth-child(1) {
+   animation-delay: 0.05s;
+ }
+
+ .movie-grid > *:nth-child(2) {
+   animation-delay: 0.10s;
+ }
+
+ .movie-grid > *:nth-child(3) {
+   animation-delay: 0.15s;
+ }
+
+ .movie-grid > *:nth-child(4) {
+   animation-delay: 0.20s;
+ }
+
+ .movie-grid > *:nth-child(5) {
+   animation-delay: 0.25s;
+ }
+
+ .movie-grid > *:nth-child(6) {
+   animation-delay: 0.30s;
+ }
+
+ .movie-grid > *:nth-child(7) {
+   animation-delay: 0.35s;
+ }
+
+ .movie-grid > *:nth-child(8) {
+   animation-delay: 0.40s;
+ }
+
+ .movie-grid > *:nth-child(9) {
+   animation-delay: 0.45s;
+ }
+
+ .movie-grid > *:nth-child(10) {
+   animation-delay: 0.50s;
+ }
+
+
+ /* Movie hover */
+ .trending-page .movie-grid > *,
+ .top-rated-page .movie-grid > *,
+ .coming-soon-page .movie-grid > * {
+   transition: transform 0.3s ease;
+ }
+
+ .trending-page .movie-grid > *:hover,
+ .top-rated-page .movie-grid > *:hover,
+ .coming-soon-page .movie-grid > *:hover {
+   transform: translateY(-6px);
+ }
+
+
+ /* Poster hover */
+ .trending-page .movie-grid img,
+ .top-rated-page .movie-grid img,
+ .coming-soon-page .movie-grid img {
+   transition: transform 0.4s ease;
+ }
+
+ .trending-page .movie-grid > *:hover img,
+ .top-rated-page .movie-grid > *:hover img,
+ .coming-soon-page .movie-grid > *:hover img {
+   transform: scale(1.05);
+ }
+
+
+ /* Movie count */
+ .trending-page .movie-count,
+ .top-rated-page .movie-count,
+ .coming-soon-page .movie-count {
+   animation: countIn 0.6s ease 0.2s both;
+ }
+
+ @keyframes countIn {
+   from {
+     opacity: 0;
+     transform: scale(0.9);
+   }
+
+   to {
+     opacity: 1;
+     transform: scale(1);
+   }
+ }
+
+
+ /* Loading */
+ .loading-spinner,
+ .coming-loading-spinner {
+   animation: spin 0.8s linear infinite;
+ }
+
+ @keyframes spin {
+   to {
+     transform: rotate(360deg);
+   }
+ }

@@ -6,7 +6,7 @@ import "./index.css";
 import "./styles/global.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <BrowserRouter>
+  <BrowserRouter basename="/movie-recommendation-system">
     <App />
   </BrowserRouter>
 );

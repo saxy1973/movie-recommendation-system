@@ -1,7 +1,9 @@
+import moviraLogo from "../../assets/logos/movira-logo.png";
+
 const Logo = () => {
   return (
     <div className="logo">
-      <img src="/src/assets/logos/movira-logo.png" alt="Movira" />
+      <img src={moviraLogo} alt="Movira" />
     </div>
   );
 };

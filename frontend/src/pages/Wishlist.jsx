@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import api from "../services/api";
-import MovieCard from "../features/movies/MovieCard";
 import "./Wishlist.css";
 import MovieGrid from "../features/movies/MovieGrid";
 
@@ -11,7 +10,13 @@ const Wishlist = () => {
   useEffect(() => {
     const fetchWishlist = async () => {
       try {
-        const storedUser = localStorage.getItem("user");
+        // ==========================================
+        // GET CURRENT USER
+        // ==========================================
+
+        const storedUser =
+          localStorage.getItem("user") ||
+          sessionStorage.getItem("user");
 
         if (!storedUser) {
           setLoading(false);
@@ -20,18 +25,45 @@ const Wishlist = () => {
 
         const user = JSON.parse(storedUser);
 
-        // Get wishlist from MongoDB
-        const response = await api.get(
-          `/wishlist/${user.id}`
-        );
+        const userId = user.id || user._id;
 
-        if (!response.data.success) {
+        if (!userId) {
+          console.error("User ID not found");
+          setLoading(false);
           return;
         }
 
-        const wishlistItems = response.data.wishlist;
+        // ==========================================
+        // GET WISHLIST FROM MONGODB
+        // ==========================================
 
-        // Get complete movie details from TMDB through our backend
+        const response = await api.get(
+          `/wishlist/${userId}`
+        );
+
+        console.log("Wishlist Response:", response.data);
+
+        if (!response.data.success) {
+          setMovies([]);
+          return;
+        }
+
+        const wishlistItems =
+          response.data.wishlist || [];
+
+        // ==========================================
+        // NO WISHLIST ITEMS
+        // ==========================================
+
+        if (wishlistItems.length === 0) {
+          setMovies([]);
+          return;
+        }
+
+        // ==========================================
+        // GET COMPLETE MOVIE DETAILS
+        // ==========================================
+
         const movieDetails = await Promise.all(
           wishlistItems.map(async (item) => {
             try {
@@ -39,7 +71,30 @@ const Wishlist = () => {
                 `/movie/${item.movieId}`
               );
 
+              console.log(
+                `Movie ${item.movieId} Response:`,
+                movieResponse.data
+              );
+
+              /*
+                Handle both possible backend responses:
+
+                {
+                  success: true,
+                  movie: {...}
+                }
+
+                OR
+
+                {...movie data...}
+              */
+
+              if (movieResponse.data?.movie) {
+                return movieResponse.data.movie;
+              }
+
               return movieResponse.data;
+
             } catch (error) {
               console.error(
                 `Movie ${item.movieId} Error:`,
@@ -51,13 +106,21 @@ const Wishlist = () => {
           })
         );
 
-        setMovies(movieDetails.filter(Boolean));
+        // ==========================================
+        // REMOVE FAILED MOVIES
+        // ==========================================
+
+        setMovies(
+          movieDetails.filter(Boolean)
+        );
 
       } catch (error) {
         console.error(
           "Fetch Wishlist Error:",
           error
         );
+
+        setMovies([]);
       } finally {
         setLoading(false);
       }
@@ -66,38 +129,67 @@ const Wishlist = () => {
     fetchWishlist();
   }, []);
 
+  // ==========================================
+  // LOADING
+  // ==========================================
+
   if (loading) {
     return (
       <div className="wishlist-page">
-        <h1>My Wishlist</h1>
-        <p>Loading your wishlist...</p>
+        <h1>
+  My <span>Wishlist</span>
+</h1>
+
+        <p>
+          Loading your wishlist...
+        </p>
+
       </div>
     );
   }
 
+  // ==========================================
+  // PAGE
+  // ==========================================
+
   return (
     <div className="wishlist-page">
+<div className="wishlist-header">
 
-      <div className="wishlist-header">
-        <h1>My Wishlist</h1>
+  <h1>
+    My <span>Wishlist</span>
+  </h1>
 
-        <p>
-          Movies you saved for later
-        </p>
-      </div>
+  <p>
+    Movies you saved for later
+  </p>
+
+</div>
 
       {movies.length === 0 ? (
-        <div className="empty-wishlist">
-          <div className="empty-icon">♡</div>
 
-          <h2>Your Wishlist is Empty</h2>
+        <div className="empty-wishlist">
+
+          <div className="empty-icon">
+            ♡
+          </div>
+
+          <h2>
+            Your Wishlist is Empty
+          </h2>
 
           <p>
             Save movies you want to watch later.
           </p>
+
         </div>
+
       ) : (
-       <MovieGrid movies={movies} />
+
+        <MovieGrid
+          movies={movies}
+        />
+
       )}
 
     </div>

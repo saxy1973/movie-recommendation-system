@@ -8,7 +8,7 @@ const Theaters = () => {
   const [error, setError] = useState("");
 
   return (
-    <main className="theaters-page">
+    <main className="theaters-page theaters-landing-page">
 
       <TheaterHero
         setLoading={setLoading}

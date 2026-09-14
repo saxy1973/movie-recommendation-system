@@ -7,19 +7,44 @@ const WishlistButton = ({ movieId }) => {
   const [loading, setLoading] = useState(false);
 
   // ==========================================
-  // Check whether movie is already wishlisted
+  // GET CURRENT USER
+  // ==========================================
+  const getStoredUser = () => {
+    const storedUser =
+      localStorage.getItem("user") ||
+      sessionStorage.getItem("user");
+
+    if (!storedUser) {
+      return null;
+    }
+
+    try {
+      return JSON.parse(storedUser);
+    } catch (error) {
+      console.error("User Parse Error:", error);
+      return null;
+    }
+  };
+
+  // ==========================================
+  // CHECK WHETHER MOVIE IS ALREADY WISHLISTED
   // ==========================================
   useEffect(() => {
     const checkWishlist = async () => {
       try {
-        const storedUser = localStorage.getItem("user");
+        const user = getStoredUser();
 
-        if (!storedUser) return;
+        if (!user) return;
 
-        const user = JSON.parse(storedUser);
+        const userId = user.id || user._id;
+
+        if (!userId) {
+          console.error("User ID not found");
+          return;
+        }
 
         const response = await api.get(
-          `/wishlist/${user.id}`
+          `/wishlist/${userId}`
         );
 
         if (response.data.success) {
@@ -41,9 +66,8 @@ const WishlistButton = ({ movieId }) => {
     checkWishlist();
   }, [movieId]);
 
-
   // ==========================================
-  // Add / Remove movie from wishlist
+  // ADD / REMOVE MOVIE FROM WISHLIST
   // ==========================================
   const handleWishlist = async (e) => {
     e.preventDefault();
@@ -51,24 +75,29 @@ const WishlistButton = ({ movieId }) => {
 
     if (loading) return;
 
-    const storedUser = localStorage.getItem("user");
+    const user = getStoredUser();
 
     // User is not logged in
-    if (!storedUser) {
+    if (!user) {
       alert("Please login to use wishlist");
       return;
     }
 
-    try {
-      const user = JSON.parse(storedUser);
+    const userId = user.id || user._id;
 
+    if (!userId) {
+      alert("User information not found. Please login again.");
+      return;
+    }
+
+    try {
       setLoading(true);
 
       const response = await api.post(
         "/wishlist/toggle",
         {
-          userId: user.id,
-          movieId: movieId,
+          userId,
+          movieId,
         }
       );
 
@@ -77,7 +106,6 @@ const WishlistButton = ({ movieId }) => {
           response.data.isWishlisted
         );
       }
-
     } catch (error) {
       console.error(
         "Wishlist Error:",
@@ -86,27 +114,30 @@ const WishlistButton = ({ movieId }) => {
 
       alert(
         error.response?.data?.message ||
-        "Something went wrong"
+          "Something went wrong"
       );
-
     } finally {
       setLoading(false);
     }
   };
 
-
   // ==========================================
-  // Bookmark UI
+  // BOOKMARK UI
   // ==========================================
   return (
     <button
       type="button"
-     className={`wishlist-icon ${
-  isWishlisted ? "wishlisted" : ""
-}`}
+      className={`wishlist-icon ${
+        isWishlisted ? "wishlisted" : ""
+      }`}
       onClick={handleWishlist}
       disabled={loading}
       title={
+        isWishlisted
+          ? "Remove from Wishlist"
+          : "Add to Wishlist"
+      }
+      aria-label={
         isWishlisted
           ? "Remove from Wishlist"
           : "Add to Wishlist"
@@ -115,6 +146,7 @@ const WishlistButton = ({ movieId }) => {
       <svg
         viewBox="0 0 24 24"
         className="bookmark-svg"
+        aria-hidden="true"
       >
         <path
           d="

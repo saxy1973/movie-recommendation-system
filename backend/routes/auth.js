@@ -166,6 +166,46 @@ router.post("/login", async (req, res) => {
 });
 
 // =====================================================
+// GET USER PROFILE
+// =====================================================
+
+router.get("/profile/:id", async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id)
+      .select("firstName lastName dob email");
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      user: {
+        id: user._id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        dob: user.dob,
+        email: user.email,
+      },
+    });
+
+  } catch (error) {
+    console.error(
+      "Get Profile Error:",
+      error.message
+    );
+
+    res.status(500).json({
+      success: false,
+      message: "Unable to fetch profile",
+    });
+  }
+});
+
+// =====================================================
 // UPDATE PROFILE
 // =====================================================
 
@@ -297,6 +337,88 @@ router.post(
     }
   }
 );
+// =====================================================
+// CHANGE PASSWORD
+// =====================================================
+
+router.put("/change-password/:id", async (req, res) => {
+  try {
+    const { password } = req.body;
+
+    // ---------------------------------------------
+    // VALIDATE PASSWORD
+    // ---------------------------------------------
+
+    if (!password) {
+      return res.status(400).json({
+        success: false,
+        message: "New password is required",
+      });
+    }
+
+    // Same password rules as SIGNUP
+    const passwordRegex =
+      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
+
+    if (!passwordRegex.test(password)) {
+      return res.status(400).json({
+        success: false,
+        message:
+          "Password must contain at least 8 characters, 1 number and 1 special character",
+      });
+    }
+
+    // ---------------------------------------------
+    // FIND USER
+    // ---------------------------------------------
+
+    const user = await User.findById(req.params.id);
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+
+    // ---------------------------------------------
+    // HASH NEW PASSWORD
+    // ---------------------------------------------
+
+    const hashedPassword = await bcrypt.hash(
+      password,
+      10
+    );
+
+    // ---------------------------------------------
+    // UPDATE PASSWORD
+    // ---------------------------------------------
+
+    user.password = hashedPassword;
+
+    await user.save();
+
+    // ---------------------------------------------
+    // SUCCESS RESPONSE
+    // ---------------------------------------------
+
+    return res.status(200).json({
+      success: true,
+      message: "Password changed successfully",
+    });
+
+  } catch (error) {
+    console.error(
+      "Change Password Error:",
+      error.message
+    );
+
+    return res.status(500).json({
+      success: false,
+      message: "Unable to change password",
+    });
+  }
+});
 
 // =====================================================
 // GET RECENTLY VIEWED

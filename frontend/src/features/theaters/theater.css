@@ -2,13 +2,28 @@
    PAGE
 =========================== */
 /* Theater page scrollbar hide */
+/* ===========================
+   PAGE
+=========================== */
 .theaters-page {
     height: 100vh;
+    min-height: 100vh;
     overflow: hidden;
+
+    background: #0b0f19;
+    padding: 25px 0 50px;
+    box-sizing: border-box;
 }
+
 .theaters-page::-webkit-scrollbar {
-  display: none;
+    display: none;
 }
+
+.theaters-page {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
 .theaters-page{
      scrollbar-width: none;
   -ms-overflow-style: none;
@@ -16,6 +31,15 @@
     background:#0b0f19;
     padding:25px 0 50px;
 }
+
+.theaters-landing-page {
+    overflow: hidden;
+}
+
+.theaters-page:not(.theaters-landing-page) {
+    overflow-y: auto;
+}
+
 .theaters-container{
     width:90%;
     max-width:1400px;

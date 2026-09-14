@@ -1,5 +1,5 @@
 /* =========================================
-   LOGIN PAGE
+   MOVIRA LOGIN — PREMIUM CINEMATIC
 ========================================= */
 
 .login-page {
@@ -8,10 +8,60 @@
 
   display: flex;
 
-  background: #05070b;
+  position: relative;
+
+  background:
+    radial-gradient(
+      circle at 75% 50%,
+      rgba(124, 58, 237, 0.08),
+      transparent 35%
+    ),
+    #05070b;
+
   color: #fff;
 
   overflow: hidden;
+}
+
+
+/* =========================================
+   CINEMATIC AMBIENT GLOW
+========================================= */
+
+.login-page::before {
+  content: "";
+
+  position: absolute;
+  width: 500px;
+  height: 500px;
+
+  top: -250px;
+  right: -150px;
+
+  background: radial-gradient(
+    circle,
+    rgba(255, 63, 104, 0.12),
+    rgba(124, 58, 237, 0.08),
+    transparent 70%
+  );
+
+  filter: blur(40px);
+
+  pointer-events: none;
+
+  animation: ambientGlow 8s ease-in-out infinite alternate;
+}
+
+@keyframes ambientGlow {
+  from {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.6;
+  }
+
+  to {
+    transform: translate(-80px, 100px) scale(1.25);
+    opacity: 1;
+  }
 }
 
 
@@ -42,12 +92,51 @@
   object-fit: cover;
   object-position: center;
 
-  transform: scale(1.02);
+  transform: scale(1.05);
+
+  animation: cinematicZoom 18s ease-in-out infinite alternate;
+}
+
+@keyframes cinematicZoom {
+  from {
+    transform: scale(1.04);
+  }
+
+  to {
+    transform: scale(1.11);
+  }
 }
 
 
 /* =========================================
-   RIGHT SIDE FADE / BLUR
+   IMAGE CINEMATIC COLOR
+========================================= */
+
+.login-image::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 1;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(124, 58, 237, 0.18),
+      transparent 35%,
+      rgba(255, 63, 104, 0.12)
+    );
+
+  pointer-events: none;
+
+  mix-blend-mode: screen;
+}
+
+
+/* =========================================
+   RIGHT SIDE FADE
 ========================================= */
 
 .login-image::after {
@@ -58,15 +147,15 @@
   top: 0;
   right: 0;
 
-  width: 30%;
+  width: 35%;
   height: 100%;
 
   background: linear-gradient(
     to right,
     transparent 0%,
     rgba(5, 7, 11, 0.15) 20%,
-    rgba(5, 7, 11, 0.45) 45%,
-    rgba(5, 7, 11, 0.8) 75%,
+    rgba(5, 7, 11, 0.48) 45%,
+    rgba(5, 7, 11, 0.82) 75%,
     #05070b 100%
   );
 
@@ -91,6 +180,20 @@
   padding: 45px 60px;
 
   max-width: 650px;
+
+  animation: overlayReveal 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes overlayReveal {
+  from {
+    opacity: 0;
+    transform: translateY(35px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .image-overlay h1 {
@@ -103,6 +206,8 @@
   font-weight: 700;
 
   color: #fff;
+
+  letter-spacing: -1px;
 }
 
 .image-overlay p {
@@ -131,9 +236,57 @@
   align-items: center;
   justify-content: center;
 
+  position: relative;
+
   background: #05070b;
 
   overflow-y: auto;
+
+  z-index: 4;
+}
+
+
+/* =========================================
+   FORM SECTION AMBIENT LIGHT
+========================================= */
+
+.login-form-section::before {
+  content: "";
+
+  position: absolute;
+
+  width: 420px;
+  height: 420px;
+
+  left: 15%;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  background: radial-gradient(
+    circle,
+    rgba(124, 58, 237, 0.10),
+    rgba(255, 63, 104, 0.04),
+    transparent 70%
+  );
+
+  filter: blur(35px);
+
+  pointer-events: none;
+
+  animation: formGlow 7s ease-in-out infinite alternate;
+}
+
+@keyframes formGlow {
+  from {
+    opacity: 0.4;
+    transform: translateY(-50%) scale(0.9);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(-50%) scale(1.15);
+  }
 }
 
 
@@ -149,30 +302,205 @@
   padding: 30px 45px;
 
   box-sizing: border-box;
+
+  position: relative;
+
+  z-index: 5;
+
+  animation: loginReveal 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes loginReveal {
+  from {
+    opacity: 0;
+    transform: translateX(35px);
+    filter: blur(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+    filter: blur(0);
+  }
 }
 
 
 /* =========================================
    LOGO
 ========================================= */
+/* =========================================
+   MOVIRA — CINEMATIC BRAND LOGO
+========================================= */
 
 .movira-logo {
   margin-bottom: 25px;
 
   font-size: 32px;
+  font-weight: 800;
 
-  font-weight: 700;
+  letter-spacing: 5px;
 
-  letter-spacing: 4px;
+  width: fit-content;
 
-  color: #fff;
+  position: relative;
+
+  /* Purple → Pink cinematic gradient */
+  background: linear-gradient(
+    100deg,
+    #a855f7 0%,
+    #c026d3 45%,
+    #ec008c 100%
+  );
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+
+  filter:
+    drop-shadow(0 0 8px rgba(168, 85, 247, 0.22))
+    drop-shadow(0 0 18px rgba(236, 0, 140, 0.10));
+
+  animation:
+    moviraLogoReveal 1s
+    cubic-bezier(0.22, 1, 0.36, 1)
+    both;
 }
+
+
+/* =========================================
+   LOGO ENTRANCE
+========================================= */
+
+@keyframes moviraLogoReveal {
+
+  0% {
+    opacity: 0;
+
+    transform:
+      translateY(-12px)
+      scale(0.96);
+
+    letter-spacing: 10px;
+
+    filter:
+      blur(6px)
+      drop-shadow(0 0 0 transparent);
+  }
+
+  100% {
+    opacity: 1;
+
+    transform:
+      translateY(0)
+      scale(1);
+
+    letter-spacing: 5px;
+
+    filter:
+      blur(0)
+      drop-shadow(0 0 8px rgba(168, 85, 247, 0.22))
+      drop-shadow(0 0 18px rgba(236, 0, 140, 0.10));
+  }
+}
+
+
+/* =========================================
+   PINK ACCENT
+========================================= */
 
 .movira-logo span {
-  color: #ff3f68;
+
+  background: linear-gradient(
+    100deg,
+    #c026d3,
+    #ec008c,
+    #ff2d75
+  );
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+
+  filter:
+    drop-shadow(0 0 7px rgba(236, 0, 140, 0.35));
+
+  animation: moviraPulse 3.5s ease-in-out infinite alternate;
 }
 
 
+@keyframes moviraPulse {
+
+  0% {
+    filter:
+      drop-shadow(0 0 5px rgba(168, 85, 247, 0.25));
+  }
+
+  100% {
+    filter:
+      drop-shadow(0 0 10px rgba(236, 0, 140, 0.45))
+      drop-shadow(0 0 20px rgba(168, 85, 247, 0.18));
+  }
+}
+
+
+/* =========================================
+   CINEMATIC LIGHT SWEEP
+========================================= */
+
+.movira-logo::after {
+
+  content: "";
+
+  position: absolute;
+
+  top: -5px;
+  left: -35px;
+
+  width: 25px;
+  height: 120%;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.5),
+    transparent
+  );
+
+  transform: skewX(-20deg);
+
+  opacity: 0;
+
+  pointer-events: none;
+
+  animation:
+    moviraSweep 5s
+    ease-in-out
+    1.5s
+    infinite;
+}
+
+
+@keyframes moviraSweep {
+
+  0% {
+    left: -35px;
+    opacity: 0;
+  }
+
+  8% {
+    opacity: 0.8;
+  }
+
+  22% {
+    left: 115%;
+    opacity: 0;
+  }
+
+  100% {
+    left: 115%;
+    opacity: 0;
+  }
+}
 /* =========================================
    HEADING
 ========================================= */
@@ -187,6 +515,8 @@
   font-weight: 700;
 
   color: #fff;
+
+  animation: textReveal 0.8s ease-out 0.12s both;
 }
 
 .login-subtitle {
@@ -197,6 +527,20 @@
   font-size: 14px;
 
   line-height: 1.4;
+
+  animation: textReveal 0.8s ease-out 0.2s both;
+}
+
+@keyframes textReveal {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 
@@ -206,6 +550,20 @@
 
 .input-group {
   margin-bottom: 17px;
+
+  animation: inputReveal 0.7s ease-out both;
+}
+
+.input-group:nth-child(1) {
+  animation-delay: 0.25s;
+}
+
+.input-group:nth-child(2) {
+  animation-delay: 0.32s;
+}
+
+.input-group:nth-child(3) {
+  animation-delay: 0.39s;
 }
 
 .input-group label {
@@ -218,6 +576,24 @@
   font-weight: 500;
 
   color: #fff;
+
+  transition: color 0.25s ease;
+}
+
+.input-group:focus-within label {
+  color: #d8b4fe;
+}
+
+@keyframes inputReveal {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 
@@ -233,7 +609,7 @@
 
   padding: 0 15px;
 
-  background: #11151c;
+  background: rgba(17, 21, 28, 0.9);
 
   border: 1px solid #292e37;
 
@@ -244,17 +620,234 @@
   color: #fff;
 
   font-size: 14px;
+
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    background 0.3s ease,
+    transform 0.25s ease;
 }
 
 .input-group input::placeholder {
   color: #737b89;
+
+  transition: opacity 0.25s ease;
 }
 
 .input-group input:focus {
-  border-color: #ff3f68;
+  border-color: #a855f7;
+
+  background: rgba(20, 22, 32, 0.95);
 
   box-shadow:
-    0 0 0 2px rgba(255, 63, 104, 0.1);
+    0 0 0 2px rgba(168, 85, 247, 0.10),
+    0 0 18px rgba(124, 58, 237, 0.12),
+    0 0 35px rgba(255, 63, 104, 0.05);
+
+  transform: translateY(-1px);
+}
+
+.input-group input:focus::placeholder {
+  opacity: 0.45;
+}
+
+
+/* =========================================
+   PASSWORD WRAPPER
+========================================= */
+
+.password-wrapper {
+  position: relative;
+
+  width: 100%;
+}
+
+.password-wrapper input {
+  width: 100%;
+
+  padding-right: 55px;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================
+   PASSWORD TOGGLE
+========================================= */
+
+.password-toggle {
+  position: absolute;
+
+  right: 16px;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  width: 30px;
+  height: 30px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+  margin: 0;
+
+  background: transparent;
+
+  border: none;
+
+  color: white;
+
+  cursor: pointer;
+
+  border-radius: 50%;
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease;
+}
+
+.password-toggle:hover {
+  background: rgba(168, 85, 247, 0.10);
+
+  transform: translateY(-50%) scale(1.08);
+}
+
+.eye-icon {
+  width: 22px;
+  height: 22px;
+
+  color: white;
+
+  display: block;
+
+  transition:
+    color 0.25s ease,
+    filter 0.25s ease;
+}
+
+.password-toggle:hover .eye-icon {
+  color: #d8b4fe;
+
+  filter: drop-shadow(
+    0 0 6px rgba(168, 85, 247, 0.5)
+  );
+}
+
+
+/* =========================================
+   STAY SIGNED IN
+========================================= */
+
+.stay-signed-in {
+  margin: 16px 0 22px;
+
+  animation: textReveal 0.7s ease-out 0.5s both;
+}
+
+.stay-signed-in label {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  color: #b8bdc7;
+
+  font-size: 14px;
+
+  cursor: pointer;
+
+  user-select: none;
+
+  transition: color 0.25s ease;
+}
+
+
+/* CHECKBOX */
+
+.stay-signed-in input {
+  appearance: none;
+
+  width: 18px;
+  height: 18px;
+
+  border: 2px solid #555b66;
+
+  border-radius: 5px;
+
+  background: transparent;
+
+  cursor: pointer;
+
+  position: relative;
+
+  transition:
+    all 0.25s ease;
+}
+
+
+/* CHECKED */
+
+.stay-signed-in input:checked {
+  background: linear-gradient(
+    135deg,
+    #7c3aed,
+    #ff3f68
+  );
+
+  border-color: #a855f7;
+
+  box-shadow:
+    0 0 12px rgba(168, 85, 247, 0.25);
+}
+
+
+/* CHECK MARK */
+
+.stay-signed-in input:checked::after {
+  content: "✓";
+
+  position: absolute;
+
+  left: 3px;
+  top: -2px;
+
+  color: white;
+
+  font-size: 14px;
+
+  font-weight: bold;
+
+  animation: checkPop 0.25s ease-out;
+}
+
+@keyframes checkPop {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+
+/* HOVER */
+
+.stay-signed-in input:hover {
+  border-color: #a855f7;
+
+  box-shadow:
+    0 0 10px rgba(168, 85, 247, 0.15);
+}
+
+.stay-signed-in label:hover span {
+  color: white;
 }
 
 
@@ -272,7 +865,16 @@
 
   border-radius: 8px;
 
-  background: #ff3f68;
+  position: relative;
+
+  overflow: hidden;
+
+  background: linear-gradient(
+    135deg,
+    #7c3aed 0%,
+    #a855f7 45%,
+    #ff3f68 100%
+  );
 
   color: #fff;
 
@@ -282,13 +884,75 @@
 
   cursor: pointer;
 
-  transition: 0.2s;
+  box-shadow:
+    0 8px 25px rgba(124, 58, 237, 0.18),
+    0 4px 15px rgba(255, 63, 104, 0.10);
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    filter 0.3s ease;
+
+  animation: buttonReveal 0.8s ease-out 0.55s both;
 }
 
-.login-button:hover {
-  background: #ff2856;
+@keyframes buttonReveal {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
 
-  transform: translateY(-1px);
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* BUTTON SHINE */
+
+.login-button::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: -120%;
+
+  width: 80%;
+  height: 100%;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.25),
+    transparent
+  );
+
+  transform: skewX(-20deg);
+
+  transition: left 0.7s ease;
+}
+
+.login-button:hover::before {
+  left: 130%;
+}
+
+
+/* BUTTON HOVER */
+
+.login-button:hover {
+  filter: brightness(1.08);
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 12px 35px rgba(124, 58, 237, 0.28),
+    0 8px 25px rgba(255, 63, 104, 0.18);
+}
+
+.login-button:active {
+  transform: translateY(0) scale(0.985);
 }
 
 
@@ -304,20 +968,71 @@
   font-size: 13px;
 
   color: #9299a5;
+
+  animation: textReveal 0.7s ease-out 0.65s both;
 }
 
 .signup-text span {
   margin-left: 6px;
 
-  color: #ff3f68;
+  color: #d8b4fe;
 
   font-weight: 600;
 
   cursor: pointer;
+
+  transition:
+    color 0.25s ease,
+    text-shadow 0.25s ease;
 }
 
 .signup-text span:hover {
+  color: #ff3f68;
+
   text-decoration: underline;
+
+  text-shadow:
+    0 0 10px rgba(255, 63, 104, 0.35);
+}
+
+
+/* =========================================
+   PASSWORD HINT
+========================================= */
+
+.password-hint {
+  display: block;
+
+  margin-top: 5px;
+
+  font-size: 10px;
+
+  line-height: 1.3;
+
+  color: #737b89;
+
+  transition: color 0.25s ease;
+}
+
+.input-group:focus-within .password-hint {
+  color: #9f7aea;
+}
+
+
+/* =========================================
+   SIGNUP NAME ROW
+========================================= */
+
+.name-row {
+  display: flex;
+
+  gap: 15px;
+
+  width: 100%;
+}
+
+.name-row .input-group {
+  width: 50%;
 }
 
 
@@ -373,6 +1088,24 @@
 
     padding: 30px;
   }
+
+  .login-form-section::before {
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+  }
+
+  @keyframes formGlow {
+    from {
+      opacity: 0.3;
+      transform: translate(-50%, -50%) scale(0.9);
+    }
+
+    to {
+      opacity: 0.8;
+      transform: translate(-50%, -50%) scale(1.15);
+    }
+  }
 }
 
 
@@ -401,43 +1134,6 @@
   .login-button {
     height: 52px;
   }
-}
-
-
-/* =========================================
-   SIGNUP FORM SUPPORT
-========================================= */
-
-.name-row {
-  display: flex;
-
-  gap: 15px;
-
-  width: 100%;
-}
-
-.name-row .input-group {
-  width: 50%;
-}
-
-.password-hint {
-  display: block;
-
-  margin-top: 5px;
-
-  font-size: 10px;
-
-  line-height: 1.3;
-
-  color: #737b89;
-}
-
-
-/* =========================================
-   SIGNUP RESPONSIVE
-========================================= */
-
-@media (max-width: 768px) {
 
   .name-row {
     flex-direction: column;
@@ -448,109 +1144,23 @@
   .name-row .input-group {
     width: 100%;
   }
-
 }
 
-.password-wrapper {
-  position: relative;
-  width: 100%;
-}
 
-.password-wrapper input {
-  width: 100%;
-  padding-right: 55px;
-  box-sizing: border-box;
-}
+/* =========================================
+   REDUCED MOTION
+========================================= */
 
-.password-toggle {
-  position: absolute;
-  right: 16px;
-  top: 50%;
-  transform: translateY(-50%);
+@media (prefers-reduced-motion: reduce) {
 
-  width: 30px;
-  height: 30px;
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    scroll-behavior: auto !important;
 
-  padding: 0;
-  margin: 0;
-
-  background: transparent;
-  border: none;
-
-  color: white;
-  cursor: pointer;
-}
-
-.password-toggle:hover {
-  background: transparent;
-}
-
-.eye-icon {
-  width: 22px;
-  height: 22px;
-  color: white;
-  display: block;
-}
-
-.stay-signed-in {
-  margin: 16px 0 22px;
-}
-
-.stay-signed-in label {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-
-  color: #b8bdc7;
-  font-size: 14px;
-  cursor: pointer;
-  user-select: none;
-}
-
-/* Checkbox */
-.stay-signed-in input {
-  appearance: none;
-  width: 18px;
-  height: 18px;
-
-  border: 2px solid #555b66;
-  border-radius: 5px;
-
-  background: transparent;
-  cursor: pointer;
-
-  position: relative;
-  transition: all 0.2s ease;
-}
-
-/* Checked */
-.stay-signed-in input:checked {
-  background: #ff3d68;
-  border-color: #ff3d68;
-}
-
-/* Check mark */
-.stay-signed-in input:checked::after {
-  content: "✓";
-
-  position: absolute;
-  left: 3px;
-  top: -2px;
-
-  color: white;
-  font-size: 14px;
-  font-weight: bold;
-}
-
-/* Hover */
-.stay-signed-in input:hover {
-  border-color: #ff3d68;
-}
-
-.stay-signed-in label:hover span {
-  color: white;
+    transition-duration: 0.01ms !important;
+  }
 }
